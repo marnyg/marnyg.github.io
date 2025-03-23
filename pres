@@ -7,14 +7,12 @@ style: |
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
+  .columns3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: rem;
+  }
 
----
-
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-  // mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' });
-  mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
-</script>
 ---
 
 # Cloud Cost Optimization 
@@ -117,11 +115,11 @@ Plus it changes all the time.
 
 ---
  
- <img src="./image(2).png" width="900px" style="">
+ <img src="./image(2).png" width="900px">
 
 ---
  
- <img src="./image.png" width="900px" style="">
+ <img src="./image.png" width="900px">
 
 ---
 
@@ -228,43 +226,22 @@ My preferred way to think about this is to break down your workload into a Direc
 
 ---
 
-# Example: Simple Data Processing DAG
 
-<div class="mermaid">
-graph TD
-    A[Data Ingestion] -->|Raw Data| B[Data Validation]
-    A -->|Metadata| C[Schema Validation]
-    B --> D[Data Transformation]
-    C --> D
-    D --> E[Data Enrichment]
-    E --> F[Data Storage]
-    E --> G[Data Analysis]
-    G --> H[Reporting]
+<div class="columns3">
+  <div>
 
-    classDef criticalPath fill:#f96,stroke:#333,stroke-width:2px;
-    class A,B,D,E,G,H criticalPath;
-</div>
+    Example: Simple Data Processing DAG
+<img src="./dag1.svg" style="background-color:rgba(228, 228, 228, 0.4);">
+  </div>
 
----
+  <div> </div>
 
-# Example: Microservice Architecture DAG
+  <div>
 
-<div class="mermaid" style="height: 100px;">
-graph TD
-    A[API Gateway] --> B[Auth Service]
-    A --> C[Product Service]
-    B --> D[User Service]
-    C --> E[Inventory Service]
-    C --> F[Pricing Service]
-    E --> G[Warehouse Service]
-    F --> H[Billing Service]
-    G --> I[Shipping Service]
-    
-    classDef highCost fill:#f96,stroke:#333,stroke-width:2px;
-    class E,F,G highCost;
-    
-    classDef bottleneck fill:#f66,stroke:#333,stroke-width:3px;
-    class F bottleneck;
+    Example: Microservice Architecture DAG
+<img src="./dag2.svg" style="background-color:rgba(228, 228, 228, 0.4);">
+  </div>
+
 </div>
 
 ---
@@ -342,48 +319,13 @@ graph TD
 ---
 
 # Example: Cost Optimization with DAG Analysis
-
-<div class="mermaid">
-graph TD
-    A[Raw Data Storage] -->|$0.05/GB-month| B[Data Processing]
-    B -->|$0.10/CPU-hour| C[Result Storage]
-    C -->|$0.02/GB-month| D[Analytics]
-    D -->|$0.15/CPU-hour| E[Visualization]
-    
-    classDef storage fill:#9cf,stroke:#333,stroke-width:2px;
-    classDef compute fill:#f96,stroke:#333,stroke-width:2px;
-    
-    class A,C storage;
-    class B,D,E compute;
-    
-    classDef costDriver fill:#f66,stroke:#333,stroke-width:3px;
-    class B costDriver;
+<div style="display: flex; height: 500px; justify-content: center;">
+  <img src="./dag3.svg" style="background-color:rgba(228, 228, 228, 0.4);">
 </div>
 
 ---
 
-# How to normalize the chaos to something understandable
-
-We can break this down into manageable components:
-
-1. Workload Requirements
-   - CPU intensity (compute bound vs. I/O bound)
-   - Memory needs (working set size, caching requirements)
-   - I/O patterns (random vs. sequential, read vs. write heavy)
-   
-2. Cost Efficiency Metrics
-   - Cost per compute unit ($/vCPU-hour)
-   - Performance per dollar (ops/$)
-   - Resource utilization (average vs. peak usage)
-
-3. Performance Profiles
-   - Benchmark results across instance families
-   - Historical performance data from production
-   - Workload patterns (diurnal, weekly, seasonal)
-
----
-
-# Fundamental concepts
+# Core concepts
 
 <div class="columns" style="font-size: 20px;">
   <div>
@@ -447,69 +389,13 @@ We can break this down into manageable components:
   - Cascading system failures
   - Recovery resource needs
   - Business reputation damage
-
-  ## Partner Ecosystem
-  - AMD: Optimized instance performance
-  - AWS: Cloud cost explorer
-  - RedHat: Enterprise optimization tools
-  - AWS MAP: Migration Acceleration Program
-  - CloudHealth: Cost management platform
-
   </div>  
 </div>
 
----
-
-# Workload Types
-- Batch jobs
-- Long-running services
-  - Constant load
-  - Spiky load
 
 ---
-
-
-# Smart Instance Selection Strategy
-
-1. Analyze Workload Requirements:
-   - CPU utilization patterns
-   - Memory consumption
-   - I/O requirements
-   - Peak vs average usage
-
-2. Match with Instance Types:
-   - Use performance profiles
-   - Consider cost-performance ratio
-   - Account for scaling needs
-
-3. Continuous Optimization:
-   - Monitor actual usage
-   - Adjust based on metrics
-   - Regular review and refinement
-
 ---
-
-# Telemetry-Driven Optimization
-
-## Core Metrics:
-- CPU
-- Memory
-- I/O
-
-## Technology Stack:
-- OpenTelemetry
-- Prometheus
-- Cloud specific metrics
-- DataDog
-- etc
-
-Benefits of Good Telemetry:
-- Real-time resource usage insights
-- Trend analysis
-- Capacity planning
-- Cost allocation
-- Performance bottleneck identification
-
+---
 ---
 <div class="mermaid">
 graph TD
@@ -538,7 +424,6 @@ graph TD;
 </div>
 
 ---
-
 
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
