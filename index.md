@@ -19,6 +19,8 @@ style: |
 ###  Marius Nygård 
 Platform Engineer/DevOps Engineer @Crayon Consulting
 
+<!-- HTML comment recognizes as a presenter note per pages. -->
+<!-- You may place multiple comments in a single page. -->
 ---
 
 # Goal 
@@ -304,7 +306,6 @@ My preferred way to think about this is to break down your workload into a Direc
   - Operational overhead
   - Reliability requirements
   - Data transfer costs
-  - Maintenance windows
 
   ## Long-term Strategies
   - Regular instance type evaluation
@@ -319,6 +320,9 @@ My preferred way to think about this is to break down your workload into a Direc
 ---
 
 # Example: Cost Optimization with DAG Analysis
+This becomes a longest path problem, which for a DAG can be solved with shortest path algorithms
+need single unit of cost for each node (f(time, instance cost,num instances)->cost or f(data transfer)->cost)
+
 <div style="display: flex; height: 500px; justify-content: center;">
   <img src="./dag3.svg" style="background-color:rgba(228, 228, 228, 0.4);">
 </div>
