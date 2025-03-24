@@ -12,6 +12,20 @@ style: |
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: rem;
   }
+  .section-title {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .slide-number {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+    opacity: 0.7;
+  }
 
 ---
 
@@ -19,36 +33,43 @@ style: |
 ###  Marius Nygård 
 Platform Engineer/DevOps Engineer @Crayon Consulting
 
+<div class="slide-number">1</div>
+
 <!-- HTML comment recognizes as a presenter note per pages. -->
 <!-- You may place multiple comments in a single page. -->
 ---
 
-# Goal 
-Given that we have a lot of expensive workloads in the cloud, how can we think about cost optimization and what are the main levers we can utilize?
-
-This talk will focus on the following:
-- Finding good metrics and thinking throuhg how to optimize for them
-- How to gain insights into how different instance types perform for different workloads
-- How to use telemetry to get insights into our workloads
-  - And spesificly what metrics are the most relevant for choosing the right instance
-
----
-
 # Problem Context
-Some assumptions/prerequisites for that make this type of optimization relevant:
 
-- You have the ability to change the instance type of your workloads
-  - Auto scaling groups (or equivalent in other cloud providers)
-  - Kubernetes workloads
-  - Managed workloads (Azure Container Apps, App Service, etc)
-  - Big Data workloads (Spark, Dask, etc)
-- HA workloads if uptime is critical
-  - Makes experimentation and metrics possible 
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## The Cloud Cost Challenge
+  - Cloud spending continues to grow at 20%+ annually
+  - 30% of cloud spend is wasted on average
+  - Instance selection directly impacts both performance and cost
+  - Optimization requires deep understanding of workload patterns
+
+  </div>
+  <div>
+
+  ## Prerequisites for Optimization
+  - Ability to change instance types:
+    - Auto scaling groups
+    - Kubernetes workloads
+    - Managed services
+  - HA workloads enabling experimentation
+  - Access to telemetry data
+
+  </div>  
+</div>
+
+<div class="slide-number">2</div>
 
 ---
 
 # Why Is picking the right instance type a problem?
-Just to get an idea of the of the problem from a developer perspective:
+Just to get an idea of the problem from a developer perspective:
 <div class="columns">
   <div>
 
@@ -73,9 +94,46 @@ And all of this assumes you already have a good idea of what you need.
 And your workload might change character over time.
 Plus it changes all the time.
 
+<div class="slide-number">3</div>
+
 ---
  
 <video style="object-fit: cover;" src="./Screen Recording 2025-03-22 at 18.18.52.mov" width="500px"  controls></video>
+
+<div class="slide-number">4</div>
+
+---
+
+# Goal 
+Given that we have a lot of expensive workloads in the cloud, how can we think about cost optimization and what are the main levers we can utilize?
+
+This talk will focus on the following:
+- Finding good metrics and thinking through how to optimize for them
+- How to gain insights into how different instance types perform for different workloads
+- How to use telemetry to get insights into our workloads
+  - And specifically what metrics are the most relevant for choosing the right instance
+
+<div class="slide-number">5</div>
+
+---
+
+# Agenda
+
+1. Understanding Cost Profiles: Metrics that matter
+2. Workload Analysis: Using DAGs to identify bottlenecks
+3. Evaluation Methods: Building a performance database
+4. Case Study: Crayon/AMD optimization project
+5. Actionable Takeaways: Steps you can implement today
+
+<div class="slide-number">6</div>
+
+---
+
+<div class="section-title">
+  <h1>Section 1: Understanding Cost Profiles</h1>
+</div>
+
+<div class="slide-number">7</div>
 
 ---
 
@@ -101,7 +159,7 @@ Plus it changes all the time.
 
   ## Load Pattern Variables  
   - Constant load: Steady, predictable but inefficient
-  - Durnal patterns: Daily/weekly cycles
+  - Diurnal patterns: Daily/weekly cycles
   - Spiky traffic: Hard to provision efficiently
   - Seasonal variations: Holiday traffic
 
@@ -114,14 +172,19 @@ Plus it changes all the time.
   </div>  
 </div>
 
+<div class="slide-number">8</div>
 
 ---
  
- <img src="./image(2).png" width="900px">
+<img src="./image(2).png" width="900px">
+
+<div class="slide-number">9</div>
 
 ---
  
- <img src="./image.png" width="900px">
+<img src="./image.png" width="900px">
+
+<div class="slide-number">10</div>
 
 ---
 
@@ -160,59 +223,55 @@ Plus it changes all the time.
   </div>  
 </div>
 
+<div class="slide-number">11</div>
+
 ---
 
-<h2> How to learn about the performance of different instance types </h2>
-
+# Core concepts
 
 <div class="columns" style="font-size: 20px;">
   <div>
 
-  ## Performance Database
-  - Built database of workload performance profiles
-  - Covers major cloud providers and instance types
-  - Normalized performance metrics
-  - Historical performance tracking
+  ## Cost Components
+  - Compute: Time × hourly instance cost
+  - Network: Ingress/egress traffic charges
+  - Storage: Capacity and operation costs
+  - Managed services: Usage-based pricing
+
+  ## Proxy Metrics
+  - Transaction throughput rate
+  - Requests processed per second
+  - Data processed per dollar
+  - Time-to-completion for batch jobs
 
   </div>
   <div>
 
-  ## Key Profiling Components
-  - Micro-benchmarks per CPU type
-  - Time-to-completion measurements
-  - Throughput per time unit
-  - Cost efficiency conversion
+  ## Hidden Costs
+  - Developer time for optimization
+  - Operational complexity
+  - Troubleshooting overhead
+  - Cloud architecture expertise
+  - Application refactoring
+
+  ## Price Variability
+  - Reserved: 30-60% discount with commitment
+  - Spot: 70-90% discount with availability risk
+  - On-demand: Premium for flexibility
+  - Regional price differences: up to 40%
 
   </div>  
 </div>
+
+<div class="slide-number">12</div>
 
 ---
 
-# Performance Evaluation Methods
-
-<div class="columns" style="font-size: 20px;">
-  <div>
-
-  ## Benchmark Suite Examples
-  - SPECcpu: CPU-intensive workloads
-  - FFmpeg: Video transcoding performance
-  - Nginx: Web server throughput
-  - Redis: In-memory data store
-
-  </div>
-  <div>
-
-  ## Instance Categories
-  - Compute-optimized
-  - Memory-optimized
-  - General purpose
-  - GPU/specialized compute
-  - ARM vs. x86 architecture
-
-  </div>  
+<div class="section-title">
+  <h1>Section 2: Workload Analysis with DAGs</h1>
 </div>
 
-We essentialy need to learn what is the best performance per dollar for each instance category
+<div class="slide-number">13</div>
 
 ---
 
@@ -226,8 +285,9 @@ My preferred way to think about this is to break down your workload into a Direc
 - Critical path represents the longest sequence that determines overall completion time
 - And by adding a time metric to each node you get a overview of where the cost is
 
----
+<div class="slide-number">14</div>
 
+---
 
 <div class="columns3">
   <div>
@@ -245,6 +305,40 @@ My preferred way to think about this is to break down your workload into a Direc
   </div>
 
 </div>
+
+<div class="slide-number">15</div>
+
+---
+
+# Example: Cost Optimization with DAG Analysis
+This becomes a longest path problem, which for a DAG can be solved with shortest path algorithms
+need single unit of cost for each node (f(time, instance cost,num instances)->cost or f(data transfer)->cost)
+
+<div class="slide-number">16</div>
+
+---
+
+# How to convert storage and CPU nodes to cost?
+<div class="columns">
+<div class="mermaid"> 
+graph TD 
+    Storage[Storage] --> CPU[CPU]
+    CPU[CPU] --> Network[Network]
+    Network[Network] --> GPU[GPU]
+    GPU[GPU] --> Storage[Storage]
+</div>
+<div class="mermaid"> 
+graph TD 
+    Storage[100GB] --> CPU[m5.large 10 minutes]
+    CPU --> Network[100MB/s]
+    Network --> GPU[p4d.24xlarge, 10 minutes]
+    GPU --> Storage[100GB]
+</div>
+<div style="display: flex; height: 400px; justify-content: center;">
+  <img src="./dag3.svg" style="background-color:rgba(228, 228, 228, 0.4);">
+</div>
+
+<div class="slide-number">17</div>
 
 ---
 
@@ -277,6 +371,8 @@ My preferred way to think about this is to break down your workload into a Direc
 
   </div>  
 </div>
+
+<div class="slide-number">18</div>
 
 ---
 
@@ -317,53 +413,7 @@ My preferred way to think about this is to break down your workload into a Direc
   </div>  
 </div>
 
----
-
-# Example: Cost Optimization with DAG Analysis
-This becomes a longest path problem, which for a DAG can be solved with shortest path algorithms
-need single unit of cost for each node (f(time, instance cost,num instances)->cost or f(data transfer)->cost)
-
-<div style="display: flex; height: 500px; justify-content: center;">
-  <img src="./dag3.svg" style="background-color:rgba(228, 228, 228, 0.4);">
-</div>
-
----
-
-# Core concepts
-
-<div class="columns" style="font-size: 20px;">
-  <div>
-
-  ## Cost Components
-  - Compute: Time × hourly instance cost
-  - Network: Ingress/egress traffic charges
-  - Storage: Capacity and operation costs
-  - Managed services: Usage-based pricing
-
-  ## Proxy Metrics
-  - Transaction throughput rate
-  - Requests processed per second
-  - Data processed per dollar
-  - Time-to-completion for batch jobs
-
-  </div>
-  <div>
-
-  ## Hidden Costs
-  - Developer time for optimization
-  - Operational complexity
-  - Troubleshooting overhead
-  - Cloud architecture expertise
-  - Application refactoring
-
-  ## Price Variability
-  - Reserved: 30-60% discount with commitment
-  - Spot: 70-90% discount with availability risk
-  - On-demand: Premium for flexibility
-  - Regional price differences: up to 40%
-
-  </div>  
-</div>
+<div class="slide-number">19</div>
 
 ---
 
@@ -396,36 +446,179 @@ need single unit of cost for each node (f(time, instance cost,num instances)->co
   </div>  
 </div>
 
+<div class="slide-number">20</div>
 
 ---
----
----
----
-<div class="mermaid">
-graph TD
-    A[Introduction] --> B[Problem Statement]
-    B --> C[Background/Context]
-    C --> D[Main Points]
-    D --> D1[Key Point 1]
-    D --> D2[Key Point 2]
-    D --> D3[Key Point 3]
-    D1 --> E[Analysis/Discussion]
-    D2 --> E
-    D3 --> E
-    E --> F[Conclusions]
-    F --> G[Q&A/Next Steps]
-  </div>
 
-
----
-# mermaid
-<div class="mermaid ">
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+<div class="section-title">
+  <h1>Section 3: Building a Performance Database</h1>
 </div>
+
+<div class="slide-number">21</div>
+
+---
+
+<h2> How to learn about the performance of different instance types </h2>
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Performance Database
+  - Built database of workload performance profiles
+  - Covers major cloud providers and instance types
+  - Normalized performance metrics
+  - Historical performance tracking
+
+  </div>
+  <div>
+
+  ## Key Profiling Components
+  - Micro-benchmarks per CPU type
+  - Time-to-completion measurements
+  - Throughput per time unit
+  - Cost efficiency conversion
+
+  </div>  
+</div>
+
+<div class="slide-number">22</div>
+
+---
+
+# Performance Evaluation Methods
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Benchmark Suite Examples
+  - SPECcpu: CPU-intensive workloads
+  - FFmpeg: Video transcoding performance
+  - Nginx: Web server throughput
+  - Redis: In-memory data store
+
+  </div>
+  <div>
+
+  ## Instance Categories
+  - Compute-optimized
+  - Memory-optimized
+  - General purpose
+  - GPU/specialized compute
+  - ARM vs. x86 architecture
+
+  </div>  
+</div>
+
+We essentially need to learn what is the best performance per dollar for each instance category
+
+<div class="slide-number">23</div>
+
+---
+
+<div class="section-title">
+  <h1>Section 4: Case Study</h1>
+</div>
+
+<div class="slide-number">24</div>
+
+---
+
+# The Crayon-AMD Optimization Project
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Project Background
+  - Partnership between Crayon and AMD
+  - Goal: Give third party verification of AMD performance claims
+  - Goal: Build up a performance database for all instances types
+  - Focus on enterprise and cloud-native applications
+
+  ## Technical Approach
+  - Performance benchmarking across instance families
+  - Workload profiling and classification
+  - Migration path development
+  - Cost-benefit analysis framework
+
+  </div>
+  <div>
+
+  ## Partner Ecosystem
+  - AWS (MA program integration)
+  - Red Hat (OpenShift optimization)
+  - VMware (Hybrid cloud scenarios)
+  - Looking into integrating with AWS MAP and others
+
+  </div>  
+</div>
+
+<div class="slide-number">25</div>
+
+---
+
+<div class="section-title">
+  <h1>Section 5: Actionable Takeaways</h1>
+</div>
+
+<div class="slide-number">26</div>
+
+---
+
+# Actionable Takeaways
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Immediate Steps
+  - Build up a DAG analysis for your workloads
+  - Implement basic telemetry if missing
+  - Create performance/cost baselines
+  - Identify quick-win instance changes
+  - Use spot instances if you have the ability to do so
+
+  </div>
+  <div>
+
+  ## Longer-term Actions
+  - Build performance database for your workloads
+  - Map workloads to optimal instance families
+  - Implement auto-scaling policies based on telemetry
+  - Develop cost allocation framework
+  - Iterate on this so that you are adjusting as the environment changes
+
+  </div>  
+</div>
+
+<div class="slide-number">27</div>
+
+---
+
+# Summary: Key Principles of Cloud Cost Optimization
+
+- **Measure what matters**: Time × cost is your ultimate metric
+- **Map your workloads**: DAG analysis reveals optimization opportunities
+- **Profile performance**: Build instance type performance database
+- **Target the critical path**: Focus on highest-impact components first
+- **Balance efficiency and reliability**: Strategic overprovisioning where needed
+- **Iterate continuously**: Cloud offerings and workloads change constantly
+
+<div class="slide-number">28</div>
+
+---
+
+# Thank You!
+
+Marius Nygård  
+Platform Engineer/DevOps Engineer @Crayon Consulting
+//TODO: add real email and linkedin
+Contact: [marius.nygard@crayon.com](mailto:marius.nygard@crayon.com)  
+LinkedIn: [linkedin.com/in/mariusnygard](https://linkedin.com/in/mariusnygard)
+
+<div style="text-align: center; margin-top: 2rem;">
+  <h3>Questions?</h3>
+</div>
+
+<div class="slide-number">29</div>
 
 ---
 
@@ -434,7 +627,3 @@ graph TD;
   // mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' });
   mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
 </script>
-
-#TODO:
-- add something about price variability between reseved/spot/on-demand
-- i should add in some namedropping of partners (Amd, Redhat, Aws, AWS map integration, etc)

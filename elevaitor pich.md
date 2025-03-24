@@ -25,12 +25,21 @@ Jeg skal snakke om hvordan vi kan ta smarte, datadrevne beslutninger for kostnad
 
 Ved å samle inn detaljerte data om hvordan systemene våre faktisk brukes i skyen, kan vi ta smartere beslutninger om hvilke ressurser et system trenger. Hvis vi har telemetri og ytelsesmålinger, kan vi bygge opp nøyaktige profiler av arbeidslastene våre. Dette gjør at vi kan velge de mest kostnadseffektive skyinstansene og dermed spare betydelige summer uten å gå på kompromiss med ytelsen.
 
-Ved å samle inn detaljerte data om hvordan systemene våre faktisk brukes i skyen, kan vi ta smartere beslutninger om hvilke ressurser et system trenger. Hvis du har telemetri og ytelsesmålinger, kan vi bygge opp nøyaktige profiler av arbeidslastene våre. Det gjør at du kan velge skyinstanser som er skalert til nøyaktig hva applikasjonen trenger, uten å betale for unødvendige ressurser.
+Ved å samle inn detaljerte data om hvordan systemene våre faktisk brukes i skyen, kan vi ta smartere beslutninger om hvilke ressurser et system trenger. Hvis du har telemetri og ytelsesmålinger, kan vi bygge opp nøyaktige profiler av arbeidslastene våre. Jeg skal vise deg hvilke metriker du bør se på, og hvordan du kan bruke disse til å velge billigere instanser nyaktig skalert til hva applikasjonen trenger.
+
+ 
 
 
-
-samle data -> sytemet faktisk brukes -> smarte beslutninger
+samle data -> sytemet faktisk brukes -> smarte beslutninger om instanser
 har du god telemetri -> bygge profile av arbeidslasten -> velg riktig instanser
 velg riktig instanser -> nyaktig skalert -> sparer penger
 
+
+
+
+
+ Hvis du har telemetri og ytelsesmålinger, kan vi bygge opp nøyaktige profiler av arbeidslastene våre. Jeg skal vise deg hvilke metriker du bør se på, og hvordan du kan bruke disse til å velge billigere instanser nyaktig skalert til hva applikasjonen trenger.
+
+har du god telemetri -> bygge profile av arbeidslasten -> velg riktig instanser
+jeg skal vise metrikker du bør se på -> velg riktig instanser -> nyaktig skalert -> sparer penger
 
