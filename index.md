@@ -297,21 +297,91 @@ My preferred way to think about this is to break down your workload into a Direc
 <!-- Connect to cost -->
 ---
 
-<div class="columns3">
-  <div>
+<div class="columns">
+  <!-- <div> -->
+
+<!-- <img src="./dag1.svg" style="background-color:rgba(228, 228, 228, 0.4);"> -->
+  <!-- </div> -->
+
+<div>
 
     Example: Simple Data Processing DAG
-<img src="./dag1.svg" style="background-color:rgba(228, 228, 228, 0.4);">
+
+  <div class="language-dot">
+digraph data_pipeline {
+  bgcolor="transparent";
+  
+  // Node styles
+  node [fontcolor="#e6e6e6", fontname="Arial", shape="box", style="rounded,filled"];
+  edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial"];
+
+    // Data pipeline nodes
+  A [label="Data Ingestion", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  B [label="Data Validation", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  C [label="Schema Validation", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  D [label="Data Transformation", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  E [label="Data Enrichment", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  F [label="Data Storage", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  G [label="Data Analysis", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  H [label="Reporting", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  
+  // Edges with labels
+  A -> B [label="Raw Data"];
+  A -> C [label="Metadata"];
+  B -> D;
+  C -> D;
+  D -> E;
+  E -> F;
+  E -> G;
+  G -> H;
+}
+</div>
+</div>
+
+<div>
+
+    Example: Microservice Architecture DAG
+
+<div class="language-dot">
+digraph microservice_architecture {
+  bgcolor="transparent";
+  
+  // Node styles
+  node [fontcolor="#e6e6e6", fontname="Arial", shape="box", style="rounded,filled"];
+  edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial"];
+  
+  // Service nodes
+  A [label="API Gateway", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  B [label="Auth Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  C [label="Product Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  D [label="User Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  E [label="Inventory Service", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  F [label="Pricing Service", fillcolor="#ff6666", color="#333333", style="filled,rounded", penwidth=3];
+  G [label="Warehouse Service", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  H [label="Billing Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  I [label="Shipping Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  
+  // Edges
+  A -> B;
+  A -> C;
+  B -> D;
+  C -> E;
+  C -> F;
+  E -> G;
+  F -> H;
+  G -> I;
+}
+</div>
+
   </div>
 
-  <div> </div>
-
-  <div>
+  <!-- <div>
 
     Example: Microservice Architecture DAG
 <img src="./dag2.svg" style="background-color:rgba(228, 228, 228, 0.4);">
-  </div>
+  </div> -->
 
+</div>
 </div>
 
 <!-- Compare DAG examples -->
@@ -356,6 +426,36 @@ graph TD
 <!-- Compare abstract concrete -->
 <!-- Show practical application -->
 <!-- Note visual representation -->
+---
+
+<div class="language-dot">
+digraph workload_cost {
+  bgcolor="transparent";
+  
+  // Node styles
+  node [fontcolor="#e6e6e6", fontname="Arial", shape="box", style="rounded,filled"];
+  edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial"];
+  
+  // Storage nodes (blue)
+  A [label="Raw Data Storage\n$0.05/GB-month", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  C [label="Result Storage\n$0.02/GB-month", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  
+  // Compute nodes (orange)
+  B [label="Data Processing\n$0.10/CPU-hour", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+  D [label="Analytics\n$0.15/CPU-hour", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+  E [label="Visualization", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+  
+  // Cost driver node (red)
+  B [label="Data Processing\n$0.10/CPU-hour", fillcolor="#ff6666", color="#333333", style="filled,rounded", penwidth=3];
+  
+  // Edges with transfer speed
+  A -> B [label="10 GiB/s transfer speed"];
+  B -> C [label="10 GiB/s transfer speed"];
+  C -> D [label="10 GiB/s transfer speed"];
+  D -> E [label="10 GiB/s transfer speed"];
+}
+</div>
+
 ---
 
 # Optimizing Based on DAG Analysis
@@ -643,8 +743,8 @@ We essentially need to learn what is the best performance per dollar for each in
 Marius Nygård  
 Platform Engineer/DevOps Engineer @Crayon Consulting
 //TODO: add real email and linkedin
-Contact: [marius.nygard@crayon.com](mailto:marius.nygard@crayon.com)  
-LinkedIn: [linkedin.com/in/mariusnygard](https://linkedin.com/in/mariusnygard)
+Contact: [Marius.Nygard@inmeta.no](mailto:Marius.Nygard@inmeta.no)  
+LinkedIn: [linkedin.com/in/marius-nygård-a7b615193](https://www.linkedin.com/in/marius-nyg%C3%A5rd-a7b615193/)
 
 <div style="text-align: center; margin-top: 2rem;">
   <h3>Questions?</h3>
@@ -655,8 +755,52 @@ LinkedIn: [linkedin.com/in/mariusnygard](https://linkedin.com/in/mariusnygard)
 <!-- Share contact info -->
 ---
 
+<!-- <div style="background-color: #ffffff;"> -->
+<div class="language-dot">
+digraph graphname {
+  bgcolor="transparent";  // Makes graph background transparent to show div background
+
+  node [
+    fontcolor = "#e6e6e6",
+    style = filled,
+    color = "#e6e6e6",
+    fillcolor = "#333333"
+  ]
+
+  edge [
+    color = "#e6e6e6",
+    fontcolor = "#e6e6e6"
+  ]
+
+  a -> b [label="link 1" color="#ffffff"];
+  b -> c [label="link 2" color="#ffffff"];
+  a -> c [label="link 3", color="#ffffff" style="dashed"];
+}
+</div>
+<!-- </div> -->
+
+---
+
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
   // mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'dark' });
   mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@5.16.0/dist/d3.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hpcc-js/wasm@0.3.14/dist/index.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-graphviz@3.1.0/build/d3-graphviz.min.js" crossorigin="anonymous"></script>
+<script>
+    function d3ize(elem) {
+      var par = elem.parentElement;
+      d3.select(par).append('div').graphviz()
+        .zoom(false)
+        .fit(true)
+        .renderDot(elem.innerText);
+      d3.select(elem).style('display', 'none');
+    }
+    var dotelems = document.querySelectorAll('.language-dot');
+    for (let elem of dotelems) {
+      d3ize(elem);
+    }
 </script>
