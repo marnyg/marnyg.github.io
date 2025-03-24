@@ -19,13 +19,6 @@ style: |
     align-items: center;
     height: 100%;
   }
-  .slide-number {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 12px;
-    opacity: 0.7;
-  }
 
 ---
 
@@ -33,10 +26,9 @@ style: |
 ###  Marius Nygård 
 Platform Engineer/DevOps Engineer @Crayon Consulting
 
-<div class="slide-number">1</div>
-
-<!-- HTML comment recognizes as a presenter note per pages. -->
-<!-- You may place multiple comments in a single page. -->
+<!-- Introduce myself -->
+<!-- Explain topic importance -->
+<!-- Set audience expectations -->
 ---
 
 # Problem Context
@@ -44,11 +36,10 @@ Platform Engineer/DevOps Engineer @Crayon Consulting
 <div class="columns" style="font-size: 20px;">
   <div>
 
-  ## The Cloud Cost Challenge
-  - Cloud spending continues to grow at 20%+ annually
-  - 30% of cloud spend is wasted on average
+  ## The Cloud Context 
   - Instance selection directly impacts both performance and cost
   - Optimization requires deep understanding of workload patterns
+  - Choosing the right instance type is a challenge
 
   </div>
   <div>
@@ -64,8 +55,10 @@ Platform Engineer/DevOps Engineer @Crayon Consulting
   </div>  
 </div>
 
-<div class="slide-number">2</div>
-
+<!-- Highlight spending growth -->
+<!-- Emphasize waste percentage -->
+<!-- Link performance-cost relationship -->
+<!-- List optimization requirements -->
 ---
 
 # Why Is picking the right instance type a problem?
@@ -84,24 +77,26 @@ Just to get an idea of the problem from a developer perspective:
   - Different pricing models (reserved/spot/on-demand)
   - Regional price variations
   - Regional instance availability
+  - This all changes all the time
 
   </div>  
 </div>
 
-<br>
  
-And all of this assumes you already have a good idea of what you need.
-And your workload might change character over time.
-Plus it changes all the time.
+And all of this assumes you already understand your workload performance profile and can choose the right instance type.
+And your workload might also change character over time.
 
-<div class="slide-number">3</div>
-
+<!-- Stress overwhelming choices -->
+<!-- Mention constant change -->
+<!-- Note workload complexity -->
+<!-- Developer perspective challenge -->
 ---
  
 <video style="object-fit: cover;" src="./Screen Recording 2025-03-22 at 18.18.52.mov" width="500px"  controls></video>
 
-<div class="slide-number">4</div>
-
+<!-- Explain video context -->
+<!-- Show real-world example -->
+<!-- Highlight key moments -->
 ---
 
 # Goal 
@@ -110,11 +105,12 @@ Given that we have a lot of expensive workloads in the cloud, how can we think a
 This talk will focus on the following:
 - Finding good metrics and thinking through how to optimize for them
 - How to gain insights into how different instance types perform for different workloads
-- How to use telemetry to get insights into our workloads
-  - And specifically what metrics are the most relevant for choosing the right instance
+- How to get a calculate a concrete cost for your workloads, and how to start optimizing them
 
-<div class="slide-number">5</div>
-
+<!-- Define optimization objective -->
+<!-- Preview metrics approach -->
+<!-- Mention telemetry importance -->
+<!-- Instance performance insights -->
 ---
 
 # Agenda
@@ -125,16 +121,18 @@ This talk will focus on the following:
 4. Case Study: Crayon/AMD optimization project
 5. Actionable Takeaways: Steps you can implement today
 
-<div class="slide-number">6</div>
-
+<!-- Preview content structure -->
+<!-- Highlight practical applications -->
+<!-- Note case study -->
+<!-- Mention actionable takeaways -->
 ---
 
 <div class="section-title">
   <h1>Section 1: Understanding Cost Profiles</h1>
 </div>
 
-<div class="slide-number">7</div>
-
+<!-- Transition to metrics -->
+<!-- Set section context -->
 ---
 
 <h2> Why is understanding the cost profile of your workload difficult?  </h2>
@@ -172,20 +170,24 @@ This talk will focus on the following:
   </div>  
 </div>
 
-<div class="slide-number">8</div>
-
+<!-- Explain metric limitations -->
+<!-- Compare workload types -->
+<!-- Describe load patterns -->
+<!-- Highlight key focus areas -->
 ---
  
 <img src="./image(2).png" width="900px">
 
-<div class="slide-number">9</div>
-
+<!-- Explain graph meaning -->
+<!-- Point out key trends -->
+<!-- Relate to metrics -->
 ---
  
 <img src="./image.png" width="900px">
 
-<div class="slide-number">10</div>
-
+<!-- Explain visualization significance -->
+<!-- Connect to previous slide -->
+<!-- Highlight key patterns -->
 ---
 
 # How to turn this into a tractable problem?
@@ -223,8 +225,10 @@ This talk will focus on the following:
   </div>  
 </div>
 
-<div class="slide-number">11</div>
-
+<!-- Emphasize money metric -->
+<!-- Explain time-cost relationship -->
+<!-- Describe utilization importance -->
+<!-- Detail performance profiling -->
 ---
 
 # Core concepts
@@ -258,21 +262,23 @@ This talk will focus on the following:
   - Reserved: 30-60% discount with commitment
   - Spot: 70-90% discount with availability risk
   - On-demand: Premium for flexibility
-  - Regional price differences: up to 40%
+  - Regional differences: Both price and availability
 
   </div>  
 </div>
 
-<div class="slide-number">12</div>
-
+<!-- Break down cost components -->
+<!-- Explain proxy metrics -->
+<!-- Highlight hidden costs -->
+<!-- Compare pricing models -->
 ---
 
 <div class="section-title">
   <h1>Section 2: Workload Analysis with DAGs</h1>
 </div>
 
-<div class="slide-number">13</div>
-
+<!-- Transition to DAGs -->
+<!-- Explain section focus -->
 ---
 
 # Understanding Your Workload DAG
@@ -285,8 +291,10 @@ My preferred way to think about this is to break down your workload into a Direc
 - Critical path represents the longest sequence that determines overall completion time
 - And by adding a time metric to each node you get a overview of where the cost is
 
-<div class="slide-number">14</div>
-
+<!-- Define DAG concept -->
+<!-- Explain node representation -->
+<!-- Describe critical path -->
+<!-- Connect to cost -->
 ---
 
 <div class="columns3">
@@ -306,16 +314,22 @@ My preferred way to think about this is to break down your workload into a Direc
 
 </div>
 
-<div class="slide-number">15</div>
-
+<!-- Compare DAG examples -->
+<!-- Point out differences -->
+<!-- Relate to workloads -->
 ---
 
 # Example: Cost Optimization with DAG Analysis
 This becomes a longest path problem, which for a DAG can be solved with shortest path algorithms
 need single unit of cost for each node (f(time, instance cost,num instances)->cost or f(data transfer)->cost)
 
-<div class="slide-number">16</div>
+//TODO: make this more clear
+//TODO: add better examples
 
+<!-- Explain longest path -->
+<!-- Connect to algorithms -->
+<!-- Simplify cost function -->
+<!-- Note improvement needed -->
 ---
 
 # How to convert storage and CPU nodes to cost?
@@ -335,11 +349,13 @@ graph TD
     GPU --> Storage[100GB]
 </div>
 <div style="display: flex; height: 400px; justify-content: center;">
-  <img src="./dag3.svg" style="background-color:rgba(228, 228, 228, 0.4);">
+  <img src="./dag3.svg" style="background-color:rgba(228, 228, 228, 0.67);">
 </div>
 
-<div class="slide-number">17</div>
-
+<!-- Explain cost conversion -->
+<!-- Compare abstract concrete -->
+<!-- Show practical application -->
+<!-- Note visual representation -->
 ---
 
 # Optimizing Based on DAG Analysis
@@ -372,8 +388,10 @@ graph TD
   </div>  
 </div>
 
-<div class="slide-number">18</div>
-
+<!-- Focus on slowest parts -->
+<!-- Match instance to workload -->
+<!-- Consider scaling options -->
+<!-- Suggest practical improvements -->
 ---
 
 # How to think about cost optimization
@@ -413,8 +431,10 @@ graph TD
   </div>  
 </div>
 
-<div class="slide-number">19</div>
-
+<!-- Stress end-to-end view -->
+<!-- Target critical path -->
+<!-- Consider real-world constraints -->
+<!-- Plan long-term approach -->
 ---
 
 # Over provisioning is not inherently bad
@@ -446,16 +466,18 @@ graph TD
   </div>  
 </div>
 
-<div class="slide-number">20</div>
-
+<!-- Defend strategic overprovisioning -->
+<!-- Identify critical components -->
+<!-- Highlight underprovisioning risks -->
+<!-- Balance business needs -->
 ---
 
 <div class="section-title">
   <h1>Section 3: Building a Performance Database</h1>
 </div>
 
-<div class="slide-number">21</div>
-
+<!-- Transition to benchmarking -->
+<!-- Set database context -->
 ---
 
 <h2> How to learn about the performance of different instance types </h2>
@@ -481,8 +503,10 @@ graph TD
   </div>  
 </div>
 
-<div class="slide-number">22</div>
-
+<!-- Explain database concept -->
+<!-- Note performance profiles -->
+<!-- Describe benchmark approach -->
+<!-- Mention historical tracking -->
 ---
 
 # Performance Evaluation Methods
@@ -511,16 +535,18 @@ graph TD
 
 We essentially need to learn what is the best performance per dollar for each instance category
 
-<div class="slide-number">23</div>
-
+<!-- Detail benchmark tools -->
+<!-- Compare instance categories -->
+<!-- Emphasize performance/dollar metric -->
+<!-- Relate to workloads -->
 ---
 
 <div class="section-title">
   <h1>Section 4: Case Study</h1>
 </div>
 
-<div class="slide-number">24</div>
-
+<!-- Transition to case -->
+<!-- Real-world application -->
 ---
 
 # The Crayon-AMD Optimization Project
@@ -552,16 +578,18 @@ We essentially need to learn what is the best performance per dollar for each in
   </div>  
 </div>
 
-<div class="slide-number">25</div>
-
+<!-- Describe AMD partnership -->
+<!-- Explain benchmark goals -->
+<!-- Highlight technical approach -->
+<!-- Mention partner ecosystem -->
 ---
 
 <div class="section-title">
   <h1>Section 5: Actionable Takeaways</h1>
 </div>
 
-<div class="slide-number">26</div>
-
+<!-- Transition to takeaways -->
+<!-- Focus on actions -->
 ---
 
 # Actionable Takeaways
@@ -589,8 +617,10 @@ We essentially need to learn what is the best performance per dollar for each in
   </div>  
 </div>
 
-<div class="slide-number">27</div>
-
+<!-- List immediate actions -->
+<!-- Suggest quick wins -->
+<!-- Outline longer-term strategy -->
+<!-- Emphasize continuous improvement -->
 ---
 
 # Summary: Key Principles of Cloud Cost Optimization
@@ -602,8 +632,10 @@ We essentially need to learn what is the best performance per dollar for each in
 - **Balance efficiency and reliability**: Strategic overprovisioning where needed
 - **Iterate continuously**: Cloud offerings and workloads change constantly
 
-<div class="slide-number">28</div>
-
+<!-- Reinforce key principles -->
+<!-- Emphasize measurement importance -->
+<!-- Stress critical path -->
+<!-- Remind about iteration -->
 ---
 
 # Thank You!
@@ -618,8 +650,9 @@ LinkedIn: [linkedin.com/in/mariusnygard](https://linkedin.com/in/mariusnygard)
   <h3>Questions?</h3>
 </div>
 
-<div class="slide-number">29</div>
-
+<!-- Thank audience -->
+<!-- Invite questions -->
+<!-- Share contact info -->
 ---
 
 <script type="module">
