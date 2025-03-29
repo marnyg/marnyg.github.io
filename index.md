@@ -61,43 +61,6 @@ Platform Engineer/DevOps Engineer @Crayon Consulting
 <!-- List optimization requirements -->
 ---
 
-# Why Is picking the right instance type a problem?
-Just to get an idea of the problem from a developer perspective:
-<div class="columns">
-  <div>
-
-  - Multiple cloud providers
-  - Hundreds of instance types
-  - Different CPU generations
-  - Various memory configurations
-
-  </div>
-  <div>
-
-  - Different pricing models (reserved/spot/on-demand)
-  - Regional price variations
-  - Regional instance availability
-  - This all changes all the time
-
-  </div>  
-</div>
-
- 
-And all of this assumes you already understand your workload performance profile and can choose the right instance type.
-And your workload might also change character over time.
-
-<!-- Stress overwhelming choices -->
-<!-- Mention constant change -->
-<!-- Note workload complexity -->
-<!-- Developer perspective challenge -->
----
- 
-<video style="object-fit: cover;" src="./Screen Recording 2025-03-22 at 18.18.52.mov" width="500px"  controls></video>
-
-<!-- Explain video context -->
-<!-- Show real-world example -->
-<!-- Highlight key moments -->
----
 
 # Goal 
 Given that we have a lot of expensive workloads in the cloud, how can we think about cost optimization and what are the main levers we can utilize?
@@ -115,10 +78,10 @@ This talk will focus on the following:
 
 # Agenda
 
-1. Understanding Cost Profiles: Metrics that matter
-2. Workload Analysis: Using DAGs to identify bottlenecks
-3. Evaluation Methods: Building a performance database
-4. Case Study: Crayon/AMD optimization project
+1. What leveres can we pull to save cost & how we measure success
+2. Building knowledge about instance types performance/cost profiles
+3. Workload profiling based on metrics
+4. End-to-end analysis with DAGs
 5. Actionable Takeaways: Steps you can implement today
 
 <!-- Preview content structure -->
@@ -127,12 +90,395 @@ This talk will focus on the following:
 <!-- Mention actionable takeaways -->
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="section-title">
-  <h1>Section 1: Understanding Cost Profiles</h1>
+  <div>
+  <h1>What leveres can we pull?</h1>
+  <h1>How do we measure success?</h1>
+  </div>
 </div>
+
 
 <!-- Transition to metrics -->
 <!-- Set section context -->
+---
+
+# What leveres can we pull?
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Instance Selection
+  - Choose instance types optimized for workload patterns
+  - Consider compute-optimized vs memory-optimized
+  - Evaluate ARM vs x86 architectures
+  - Match instance family to workload characteristics
+
+  ## Pricing Models
+  - Reserved instances: 30-60% discount with commitment
+  - Spot instances: 70-90% discount with availability risk
+  - On-demand: Premium for flexibility
+  - Regional price variations
+
+  </div>
+  <div>
+
+  ## Resource Optimization
+  - Right-size instances based on metrics
+  - Implement auto-scaling policies
+  - Optimize storage tiers
+  - Manage network costs
+  - Leverage managed services
+
+  </div>
+</div>
+
+---
+
+# Over provisioning is not inherently bad
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Balancing Tradeoffs
+  - Robustness vs. efficiency
+  - Performance predictability 
+  - Buffer for unexpected spikes
+  - Insurance against cascading failures
+
+  ## Strategic Overprovisioning
+  - Critical system components
+  - Hard-to-scale bottlenecks
+  - Customer-facing services
+  - Data consistency components
+
+  </div>
+  <div>
+
+  ## Cost of Underprovisioning
+  - Lost transactions
+  - Customer experience impact
+  - Cascading system failures
+  - Recovery resource needs
+  - Business reputation damage
+  </div>  
+</div>
+
+<!-- Defend strategic overprovisioning -->
+<!-- Identify critical components -->
+<!-- Highlight underprovisioning risks -->
+<!-- Balance business needs -->
+---
+
+
+# How do we measure success?
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Primary Metrics
+  - Money spend ($\text{num instances} \times \text{price} \times \text{time}$)
+  - CPU/Memory utilization of the system
+  - Overall cost reduction percentage
+
+  ## Possible Proxy Metrics
+  - Time spent waiting on IO
+  - Data processed per dollar
+  - Transaction throughput rate
+
+  </div>
+  <div>
+
+  ## Hidden Costs
+  - Developer time for optimization
+  - Operational complexity
+  - Troubleshooting overhead
+  - Cloud architecture expertise
+  - Application refactoring
+  </div>
+</div>
+
+Key point: We need to convert these metrics into cost and make that the target
+
+
+<!-- Break down cost components -->
+<!-- Explain proxy metrics -->
+<!-- Highlight hidden costs -->
+<!-- Compare pricing models -->
+---
+
+# The Crayon-AMD Optimization Project
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Project Background
+  - Partnership between Crayon and AMD
+  - Goal: Give third party verification of AMD performance claims
+  - Goal: Build up a performance database for all instances types
+  - Focus on enterprise and cloud-native applications
+
+  ## What we hope to offer
+  - Want to become the independent performance expert
+  - Performance benchmarking across instance families
+  - Workload profiling and classification
+  - Migration path development
+  - Cost-benefit analysis framework
+
+  </div>
+  <div>
+
+  ## We hope to build a ecosystem, allready talking with:
+  - AMD (performance verification)
+  - AWS (MA program integration)
+  - Red Hat (OpenShift optimization)
+  - VMware (Hybrid cloud scenarios)
+  - Looking into integrating closer with Azure and Google Cloud
+
+  </div>  
+</div>
+
+<!-- Describe AMD partnership -->
+<!-- Explain benchmark goals -->
+<!-- Highlight technical approach -->
+<!-- Mention partner ecosystem -->
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-title">
+  <h1>Picking the right instance type</h1>
+</div>
+
+
+
+
+---
+
+# Why is it hard?
+<div class="columns" style="font-size: 22px;">
+  <div>
+
+   ## How to choose:
+  - Multiple cloud providers
+  - Hundreds of instance types
+  - Different CPU generations
+  - Various memory configurations
+  - Different pricing models (reserved/spot/on-demand)
+  - Regional price variations
+  - Regional instance availability
+
+  </div>
+  <div>
+
+  ## Could you do it if you wanted to?
+  - CAN you even change instance types?
+  - Do you know what instance type you want?
+  - Can you shift you'r workloads to a different region or cloud provider?
+  - Are your workloads fault tolerant and can be restarted?
+  - And it changes all the time, so you need to do it again in a few months
+
+  </div>  
+</div>
+
+<!-- Stress overwhelming choices -->
+<!-- Mention constant change -->
+<!-- Note workload complexity -->
+<!-- Developer perspective challenge -->
+---
+ 
+<video style="object-fit: cover;" src="./Screen Recording 2025-03-22 at 18.18.52.mov" width="500px"  controls></video>
+
+<!-- Explain video context -->
+<!-- Show real-world example -->
+<!-- Highlight key moments -->
+---
+
+# What You Need to Know
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Key Questions to Answer
+  - What instance types perform best price/performance wise?
+  - Can you safely iterate and test changes?
+  - What metrics indicate optimal performance?
+  - How do you measure cost vs. performance?
+
+  </div>
+  <div>
+
+  ## Prerequisites
+  - Access to instance type changes
+  - Ability to monitor performance
+  - Understanding of workload patterns
+  - Cost tracking capabilities
+  - Testing environment
+
+  </div>
+</div>
+
+<!-- List key questions -->
+<!-- Outline prerequisites -->
+<!-- Connect to previous content -->
+---
+
+# Building a instance Performance Database
+
+This is the work we are doing with in collaboration with AMD
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Database Components
+  - Instance type performance profiles
+  - Cost per workload type
+  - Covers major cloud providers and instance types
+  - Regional availability data
+  - Pricing model comparisons
+
+  </div>
+  <div>
+
+  ## Benchmarking Approach
+  - Standard workload benchmarks
+  - Microbenchmarking specific workloads
+  - Performance/cost ratios
+  - Instance family comparisons
+  - Architecture-specific testing
+
+  </div>
+</div>
+
+<!-- Emphasize money metric -->
+<!-- Explain time-cost relationship -->
+<!-- Describe utilization importance -->
+<!-- Detail performance profiling -->
+
+---
+
+# In practice that might look like this
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Benchmark Suite Examples
+  - SPECcpu: CPU-intensive workloads
+  - FFmpeg: Video transcoding performance
+  - Nginx: Web server throughput
+  - Redis: In-memory data store
+
+  </div>
+  <div>
+
+  ## Instance Categories
+  - Compute-optimized
+  - Memory-optimized
+  - General purpose
+  - GPU/specialized compute
+  - ARM vs. x86 architecture
+
+  </div>  
+</div>
+
+We essentially need to learn what is the best performance per dollar for each instance category
+
+<!-- Detail benchmark tools -->
+<!-- Compare instance categories -->
+<!-- Emphasize performance/dollar metric -->
+<!-- Relate to workloads -->
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-title">
+  <h1>Workload profiling based on metrics/telemetry</h1>
+</div>
+
+
+
+
+---
+
+# Why Understanding Your Workload Matters
+
+  You can make higher resolution decisions based on your spesific use case
+
+<div class="columns" style="font-size: 20px;">
+  <div>
+
+  ## Telemetry-Driven Decisions
+  - Metrics reveal actual resource usage patterns
+  - Identify bottlenecks and inefficiencies
+  - Enable data-driven instance selection
+  - Track optimization impact over time
+
+  </div>
+  <div>
+
+  ## Precise Optimization
+  - Right-size instances based on real usage
+  - Match instance types to workload patterns
+  - Optimize scaling policies
+  - Reduce waste without compromising performance
+
+  </div>
+</div>
+
+<!-- Explain telemetry importance -->
+<!-- Highlight optimization benefits -->
+<!-- Connect to business value -->
+<!-- Emphasize data-driven approach -->
 ---
 
 <h2> Why is understanding the cost profile of your workload difficult?  </h2>
@@ -190,98 +536,70 @@ This talk will focus on the following:
 <!-- Highlight key patterns -->
 ---
 
-# How to turn this into a tractable problem?
+# What you actually want to identify
 
 <div class="columns" style="font-size: 20px;">
   <div>
 
-  ## Metric Approach
-  - Our ultimate metric is **money**
-  - We can proxy this with **time**
-  - Finding cost: time × cost per resource unit
-  - Example: $0.05/CPU-hour × 10 hours = $0.50
+  ## The Core Goal
+  - Find the optimal instance type for your specific workload
+  - Identify which resource is your bottleneck (CPU, Memory, I/O, Network)
+  - Understand how much of what you're paying for is actually being used
+  - Convert workload metrics into concrete cost implications
 
-  ## Efficiency Analysis  
-  - Instance utilization metrics reveal waste
-  - Underutilized instances = wasted resources
-  - Overloaded instances = performance issues
-  - Target: optimal resource utilization
-
-  </div>
-  <div>
-
-  ## Performance Profiling
-  - CPU utilization patterns
-  - Memory consumption trends
-  - I/O bottlenecks
-  - Network throughput
+  ## Key Metrics to Track
+  - CPU utilization patterns and efficiency
+  - Memory consumption and allocation
+  - I/O operations and throughput
+  - Network bandwidth and latency
+  - Time-to-completion for critical operations
   
-  ## Cost Evaluation Framework
-  - Current state assessment
-  - Performance-to-cost ratio
-  - Instance rightsizing opportunity
-  - Scaling policy optimization
-
-  </div>  
-</div>
-
-<!-- Emphasize money metric -->
-<!-- Explain time-cost relationship -->
-<!-- Describe utilization importance -->
-<!-- Detail performance profiling -->
----
-
-# Core concepts
-
-<div class="columns" style="font-size: 20px;">
-  <div>
-
-  ## Cost Components
-  - Compute: Time × hourly instance cost
-  - Network: Ingress/egress traffic charges
-  - Storage: Capacity and operation costs
-  - Managed services: Usage-based pricing
-
-  ## Proxy Metrics
-  - Transaction throughput rate
-  - Requests processed per second
-  - Data processed per dollar
-  - Time-to-completion for batch jobs
-
   </div>
   <div>
 
-  ## Hidden Costs
-  - Developer time for optimization
-  - Operational complexity
-  - Troubleshooting overhead
-  - Cloud architecture expertise
-  - Application refactoring
-
-  ## Price Variability
-  - Reserved: 30-60% discount with commitment
-  - Spot: 70-90% discount with availability risk
-  - On-demand: Premium for flexibility
-  - Regional differences: Both price and availability
+  ## Making the Decision
+  - Compare performance across instance families
+  - Calculate cost per unit of work
+  - Evaluate scaling characteristics
+  - Consider reliability requirements
+  - Factor in operational overhead
 
   </div>  
 </div>
 
-<!-- Break down cost components -->
-<!-- Explain proxy metrics -->
-<!-- Highlight hidden costs -->
-<!-- Compare pricing models -->
+<!-- Explain core optimization goal -->
+<!-- Detail key metrics -->
+<!-- Outline decision factors -->
+<!-- Connect to cost implications -->
 ---
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="section-title">
-  <h1>Section 2: Workload Analysis with DAGs</h1>
+  <h1>A more holistic analysis framework using DAGs</h1>
 </div>
 
 <!-- Transition to DAGs -->
 <!-- Explain section focus -->
 ---
 
-# Understanding Your Workload DAG
+# Understanding Your Workloads in a global contex
 
 My preferred way to think about this is to break down your workload into a Directed Acyclic Graph (DAG)
 
@@ -403,58 +721,100 @@ need single unit of cost for each node (f(time, instance cost,num instances)->co
 ---
 
 # How to convert storage and CPU nodes to cost?
-<div class="columns">
-<div class="mermaid"> 
-graph TD 
-    Storage[Storage] --> CPU[CPU]
-    CPU[CPU] --> Network[Network]
-    Network[Network] --> GPU[GPU]
-    GPU[GPU] --> Storage[Storage]
+<div class="language-dot">
+digraph abstract_flow {
+  bgcolor="transparent";
+  rankdir=LR;  // Makes it flow left to right for better space usage
+  
+  // Node styles
+  node [fontcolor="#000000", fontname="Arial", shape="box", style="rounded,filled"];
+  edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial"];
+
+  // Nodes
+  StorageStart [label="Storage", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  StorageEnd [label="Storage", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  CPU [label="CPU", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+  GPU [label="GPU", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+
+  // Edges with data transfer
+  StorageStart -> CPU [label="Data transfer"];
+  CPU -> GPU [label="Data transfer"];
+  GPU -> StorageEnd [label="Data transfer"];
+}
 </div>
-<div class="mermaid"> 
-graph TD 
-    Storage[100GB] --> CPU[m5.large 10 minutes]
-    CPU --> Network[100MB/s]
-    Network --> GPU[p4d.24xlarge, 10 minutes]
-    GPU --> Storage[100GB]
+
+<div class="language-dot">
+digraph concrete_flow {
+  bgcolor="transparent";
+  rankdir=LR;  // Makes it flow left to right for better space usage
+  
+  // Node styles
+  node [fontcolor="#000000", fontname="Arial", shape="box", style="rounded,filled"];
+  edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial"];
+
+  // Nodes
+  StorageStart [label="10GB", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  StorageEnd [label="12GB", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  CPU [label="m5.large\n10 minutes", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+  GPU [label="p4d.24xlarge\n10 minutes", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+
+  // Edges with transfer speeds
+  StorageStart -> CPU [label="10GB transfer\n100MB/s"];
+  CPU -> GPU [label="10GB transfer\n100MB/s"];
+  GPU -> StorageEnd [label="12GB transfer\n100MB/s"];
+}
 </div>
-<div style="display: flex; height: 400px; justify-content: center;">
-  <img src="./dag3.svg" style="background-color:rgba(228, 228, 228, 0.67);">
+<div class="language-dot">
+
+digraph concrete_flow {
+  bgcolor="transparent";
+  size="10,10";  // Makes the graph smaller
+  rankdir=LR;  // Makes it flow left to right for better space usage
+  
+  // Node styles
+  node [fontcolor="#000000", fontname="Arial", shape="box", style="rounded,filled", width=1.5, height=0.8]; 
+  edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial", fontsize=10]; 
+
+  // Nodes with cost calculations
+  StorageStart [label="100GB\n$5/month\n($0.05/GB)", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  StorageEnd [label="12GB\n$0.60/month\n($0.05/GB)", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  CPU [label="m5.large\n10 minutes\n$0.10/hour\n$0.017 total", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+  GPU [label="p4d.24xlarge\n10 minutes\n$32.77/hour\n$5.46 total", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+
+  // Edges with transfer costs
+  StorageStart -> CPU [label="Data transfer\n$0.09/GB"];
+  CPU -> GPU [label="Data transfer\n$0.09/GB"];
+  GPU -> StorageEnd [label="Result transfer\n$0.09/GB"];
+}
+</div>
+<div class="language-dot">
+
+digraph concrete_flow {
+  bgcolor="transparent";
+  size="10,10";  // Makes the graph smaller
+  rankdir=LR;  // Makes it flow left to right for better space usage
+  
+  // Node styles
+  node [fontcolor="#000000", fontname="Arial", shape="box", style="rounded,filled", width=1.5, height=0.8]; 
+  edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial", fontsize=10]; 
+
+  // Nodes with cost calculations
+  StorageStart [label="$5.00", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  StorageEnd [label="$0.60", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  CPU [label="$0.017", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+  GPU [label="$5.46", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+
+  // Edges with actual transfer costs
+  StorageStart -> CPU [label="$0.90"];
+  CPU -> GPU [label="$0.90"];
+  GPU -> StorageEnd [label="$0.90"];
+}
 </div>
 
 <!-- Explain cost conversion -->
 <!-- Compare abstract concrete -->
 <!-- Show practical application -->
 <!-- Note visual representation -->
----
-
-<div class="language-dot">
-digraph workload_cost {
-  bgcolor="transparent";
-  
-  // Node styles
-  node [fontcolor="#e6e6e6", fontname="Arial", shape="box", style="rounded,filled"];
-  edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial"];
-  
-  // Storage nodes (blue)
-  A [label="Raw Data Storage\n$0.05/GB-month", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
-  C [label="Result Storage\n$0.02/GB-month", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
-  
-  // Compute nodes (orange)
-  B [label="Data Processing\n$0.10/CPU-hour", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
-  D [label="Analytics\n$0.15/CPU-hour", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
-  E [label="Visualization", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
-  
-  // Cost driver node (red)
-  B [label="Data Processing\n$0.10/CPU-hour", fillcolor="#ff6666", color="#333333", style="filled,rounded", penwidth=3];
-  
-  // Edges with transfer speed
-  A -> B [label="10 GiB/s transfer speed"];
-  B -> C [label="10 GiB/s transfer speed"];
-  C -> D [label="10 GiB/s transfer speed"];
-  D -> E [label="10 GiB/s transfer speed"];
-}
-</div>
 
 ---
 
@@ -505,13 +865,6 @@ digraph workload_cost {
   - Measure time at each DAG node
   - Identify bottlenecks in the workflow
 
-  ## Optimization Principles
-  - Focus on critical path components
-  - Balance instance cost vs. performance
-  - Consider scaling characteristics
-  - Account for regional variations
-  - Evaluate reserved/spot opportunities
-
   </div>
   <div>
 
@@ -520,13 +873,7 @@ digraph workload_cost {
   - Operational overhead
   - Reliability requirements
   - Data transfer costs
-
-  ## Long-term Strategies
-  - Regular instance type evaluation
-  - Workload-specific benchmarking
-  - Reserved instances for stable loads
-  - Spot instances for flexible workloads
-  - Architecture evolution planning
+  - Regional price variations
 
   </div>  
 </div>
@@ -537,212 +884,53 @@ digraph workload_cost {
 <!-- Plan long-term approach -->
 ---
 
-# Over provisioning is not inherently bad
+# Summary & Actionable Takeaways
 
 <div class="columns" style="font-size: 20px;">
   <div>
 
-  ## Balancing Tradeoffs
-  - Robustness vs. efficiency
-  - Performance predictability 
-  - Buffer for unexpected spikes
-  - Insurance against cascading failures
-
-  ## Strategic Overprovisioning
-  - Critical system components
-  - Hard-to-scale bottlenecks
-  - Customer-facing services
-  - Data consistency components
+  ## Key Principles
+  - **Measure what matters**: Time × cost is your ultimate metric
+  - **Map your workloads**: DAG analysis reveals optimization opportunities
+  - **Profile performance**: Build instance type performance database
+  - **Target the critical path**: Focus on highest-impact components first
+  - **Balance efficiency and reliability**: Strategic overprovisioning where needed
+  - **Iterate continuously**: Cloud offerings and workloads change constantly
 
   </div>
   <div>
 
-  ## Cost of Underprovisioning
-  - Lost transactions
-  - Customer experience impact
-  - Cascading system failures
-  - Recovery resource needs
-  - Business reputation damage
-  </div>  
-</div>
-
-<!-- Defend strategic overprovisioning -->
-<!-- Identify critical components -->
-<!-- Highlight underprovisioning risks -->
-<!-- Balance business needs -->
----
-
-<div class="section-title">
-  <h1>Section 3: Building a Performance Database</h1>
-</div>
-
-<!-- Transition to benchmarking -->
-<!-- Set database context -->
----
-
-<h2> How to learn about the performance of different instance types </h2>
-
-<div class="columns" style="font-size: 20px;">
-  <div>
-
-  ## Performance Database
-  - Built database of workload performance profiles
-  - Covers major cloud providers and instance types
-  - Normalized performance metrics
-  - Historical performance tracking
-
-  </div>
-  <div>
-
-  ## Key Profiling Components
-  - Micro-benchmarks per CPU type
-  - Time-to-completion measurements
-  - Throughput per time unit
-  - Cost efficiency conversion
-
-  </div>  
-</div>
-
-<!-- Explain database concept -->
-<!-- Note performance profiles -->
-<!-- Describe benchmark approach -->
-<!-- Mention historical tracking -->
----
-
-# Performance Evaluation Methods
-
-<div class="columns" style="font-size: 20px;">
-  <div>
-
-  ## Benchmark Suite Examples
-  - SPECcpu: CPU-intensive workloads
-  - FFmpeg: Video transcoding performance
-  - Nginx: Web server throughput
-  - Redis: In-memory data store
-
-  </div>
-  <div>
-
-  ## Instance Categories
-  - Compute-optimized
-  - Memory-optimized
-  - General purpose
-  - GPU/specialized compute
-  - ARM vs. x86 architecture
-
-  </div>  
-</div>
-
-We essentially need to learn what is the best performance per dollar for each instance category
-
-<!-- Detail benchmark tools -->
-<!-- Compare instance categories -->
-<!-- Emphasize performance/dollar metric -->
-<!-- Relate to workloads -->
----
-
-<div class="section-title">
-  <h1>Section 4: Case Study</h1>
-</div>
-
-<!-- Transition to case -->
-<!-- Real-world application -->
----
-
-# The Crayon-AMD Optimization Project
-
-<div class="columns" style="font-size: 20px;">
-  <div>
-
-  ## Project Background
-  - Partnership between Crayon and AMD
-  - Goal: Give third party verification of AMD performance claims
-  - Goal: Build up a performance database for all instances types
-  - Focus on enterprise and cloud-native applications
-
-  ## Technical Approach
-  - Performance benchmarking across instance families
-  - Workload profiling and classification
-  - Migration path development
-  - Cost-benefit analysis framework
-
-  </div>
-  <div>
-
-  ## Partner Ecosystem
-  - AWS (MA program integration)
-  - Red Hat (OpenShift optimization)
-  - VMware (Hybrid cloud scenarios)
-  - Looking into integrating with AWS MAP and others
-
-  </div>  
-</div>
-
-<!-- Describe AMD partnership -->
-<!-- Explain benchmark goals -->
-<!-- Highlight technical approach -->
-<!-- Mention partner ecosystem -->
----
-
-<div class="section-title">
-  <h1>Section 5: Actionable Takeaways</h1>
-</div>
-
-<!-- Transition to takeaways -->
-<!-- Focus on actions -->
----
-
-# Actionable Takeaways
-
-<div class="columns" style="font-size: 20px;">
-  <div>
-
-  ## Immediate Steps
+  ### Immediate Actions
   - Build up a DAG analysis for your workloads
   - Implement basic telemetry if missing
   - Create performance/cost baselines
   - Identify quick-win instance changes
   - Use spot instances if you have the ability to do so
 
-  </div>
-  <div>
-
-  ## Longer-term Actions
+  ### Longer-term Strategy
   - Build performance database for your workloads
   - Map workloads to optimal instance families
-  - Implement auto-scaling policies based on telemetry
   - Develop cost allocation framework
-  - Iterate on this so that you are adjusting as the environment changes
+  - Regular instance type evaluation and benchmarking
 
   </div>  
 </div>
 
+<!-- Reinforce key principles -->
+<!-- Emphasize measurement importance -->
+<!-- Stress critical path -->
+<!-- Remind about iteration -->
 <!-- List immediate actions -->
 <!-- Suggest quick wins -->
 <!-- Outline longer-term strategy -->
 <!-- Emphasize continuous improvement -->
 ---
 
-# Summary: Key Principles of Cloud Cost Optimization
-
-- **Measure what matters**: Time × cost is your ultimate metric
-- **Map your workloads**: DAG analysis reveals optimization opportunities
-- **Profile performance**: Build instance type performance database
-- **Target the critical path**: Focus on highest-impact components first
-- **Balance efficiency and reliability**: Strategic overprovisioning where needed
-- **Iterate continuously**: Cloud offerings and workloads change constantly
-
-<!-- Reinforce key principles -->
-<!-- Emphasize measurement importance -->
-<!-- Stress critical path -->
-<!-- Remind about iteration -->
----
-
 # Thank You!
 
 Marius Nygård  
 Platform Engineer/DevOps Engineer @Crayon Consulting
-//TODO: add real email and linkedin
+
 Contact: [Marius.Nygard@inmeta.no](mailto:Marius.Nygard@inmeta.no)  
 LinkedIn: [linkedin.com/in/marius-nygård-a7b615193](https://www.linkedin.com/in/marius-nyg%C3%A5rd-a7b615193/)
 
