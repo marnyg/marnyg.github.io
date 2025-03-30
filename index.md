@@ -202,7 +202,7 @@ This talk will focus on the following:
   </div>
 </div>
 
-<!-- Time Goal: 8:00 -->
+<!-- Time Goal: 9:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -248,7 +248,7 @@ This talk will focus on the following:
   </div>  
 </div>
 
-<!-- Time Goal: 9:00 -->
+<!-- Time Goal: 10:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -302,7 +302,7 @@ Balance business needs
 
 Key point: We need to convert these metrics into cost and make that the target
 
-<!-- Time Goal: 10:00 -->
+<!-- Time Goal: 12:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -357,7 +357,7 @@ Compare pricing models
   </div>  
 </div>
 
-<!-- Time Goal: 11:00 -->
+<!-- Time Goal: 14:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -406,7 +406,7 @@ Mention partner ecosystem
   <h1>Picking the right instance type</h1>
 </div>
 
-<!-- Time Goal: 12:00 -->
+<!-- Time Goal: 14:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -450,7 +450,7 @@ Mention partner ecosystem
   </div>  
 </div>
 
-<!-- Time Goal: 13:00 -->
+<!-- Time Goal: 16:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -477,7 +477,7 @@ Developer perspective challenge
  
 <video style="object-fit: cover;" src="./Screen Recording 2025-03-22 at 18.18.52.mov" width="500px"  controls></video>
 
-<!-- Time Goal: 14:00 -->
+<!-- Time Goal: 17:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -525,7 +525,7 @@ Highlight key moments
   </div>
 </div>
 
-<!-- Time Goal: 15:00 -->
+<!-- Time Goal: 18:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -569,7 +569,7 @@ This is the work we are doing with in collaboration with AMD
   </div>
 </div>
 
-<!-- Time Goal: 16:00 -->
+<!-- Time Goal: 20:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -621,7 +621,7 @@ Detail performance profiling
 
 We essentially need to learn what is the best performance per dollar for each instance category
 
-<!-- Time Goal: 17:00 -->
+<!-- Time Goal: 22:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -667,7 +667,7 @@ Relate to workloads
   <h1>Workload profiling based on metrics/telemetry</h1>
 </div>
 
-<!-- Time Goal: 18:00 -->
+<!-- Time Goal: 22:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -710,7 +710,7 @@ Relate to workloads
   </div>
 </div>
 
-<!-- Time Goal: 19:00 -->
+<!-- Time Goal: 24:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -763,7 +763,7 @@ Relate to workloads
   </div>  
 </div>
 
-<!-- Time Goal: 20:00 -->
+<!-- Time Goal: 26:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -790,7 +790,7 @@ Highlight key focus areas
  
 <img src="./image(2).png" width="900px">
 
-<!-- Time Goal: 21:00 -->
+<!-- Time Goal: 27:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -816,7 +816,7 @@ Relate to metrics
  
 <img src="./image.png" width="900px">
 
-<!-- Time Goal: 22:00 -->
+<!-- Time Goal: 28:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -870,7 +870,7 @@ Highlight key patterns -->
   </div>  
 </div>
 
-<!-- Time Goal: 23:00 -->
+<!-- Time Goal: 30:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -917,7 +917,7 @@ Connect to cost implications
   <h1>A more holistic analysis framework using DAGs</h1>
 </div>
 
-<!-- Time Goal: 24:00 -->
+<!-- Time Goal: 30:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -946,7 +946,7 @@ My preferred way to think about this is to break down your workload into a Direc
 - Critical path represents the longest sequence that determines overall completion time
 - And by adding a time metric to each node you get a overview of where the cost is
 
-<!-- Time Goal: 25:00 -->
+<!-- Time Goal: 31:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -1049,7 +1049,7 @@ digraph microservice_architecture {
 </div>
 </div>
 
-<!-- Time Goal: 26:00 -->
+<!-- Time Goal: 32:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -1106,7 +1106,7 @@ Relate to workloads
   </div>
 </div>
 
-<!-- Time Goal: 27:00 -->
+<!-- Time Goal: 33:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -1222,7 +1222,7 @@ digraph concrete_flow {
 }
 </div>
 
-<!-- Time Goal: 28:00 -->
+<!-- Time Goal: 35:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -1271,7 +1271,7 @@ digraph concrete_flow {
   </div>  
 </div>
 
-<!-- Time Goal: 29:00 -->
+<!-- Time Goal: 36:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -1314,7 +1314,7 @@ digraph concrete_flow {
   </div>  
 </div>
 
-<!-- Time Goal: 30:00 -->
+<!-- Time Goal: 38:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -1356,7 +1356,7 @@ digraph concrete_flow {
   <h1>Summary & Actionable Takeaways</h1>
 </div>
 
-<!-- Time Goal: 31:00 -->
+<!-- Time Goal: 38:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -1403,7 +1403,7 @@ digraph concrete_flow {
   </div>  
 </div>
 
-<!-- Time Goal: 32:00 -->
+<!-- Time Goal: 38:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -1444,7 +1444,7 @@ digraph concrete_flow {
   LinkedIn: [linkedin.com/in/marius-nygård-a7b615193](https://www.linkedin.com/in/marius-nyg%C3%A5rd-a7b615193/)
 </div>
 
-<!-- Time Goal: 33:00 -->
+<!-- Time Goal: 39:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
@@ -1460,7 +1460,7 @@ digraph concrete_flow {
 ---
 # Questions?
 
-<!-- Time Goal: 34:00 -->
+<!-- Time Goal: 40:00 -->
 <!-- 
 .  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
