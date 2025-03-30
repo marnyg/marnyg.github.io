@@ -10,7 +10,7 @@ style: |
   .columns3 {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: rem;
+    gap: 1rem;
   }
   .section-title {
     text-align: center;
@@ -26,9 +26,20 @@ style: |
 ###  Marius Nygård 
 Platform Engineer/DevOps Engineer @Crayon Consulting
 
-<!-- Introduce myself -->
-<!-- Explain topic importance -->
-<!-- Set audience expectations -->
+<!-- Time Goal: 1:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+..      -> intro
+..      problem context
+..      goal
+..      agenda
+
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
 ---
 
 # Problem Context
@@ -55,12 +66,21 @@ Platform Engineer/DevOps Engineer @Crayon Consulting
   </div>  
 </div>
 
-<!-- Highlight spending growth -->
-<!-- Emphasize waste percentage -->
-<!-- Link performance-cost relationship -->
-<!-- List optimization requirements -->
----
+<!-- Time Goal: 3:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+..      intro
+..      -> problem context
+..      goal
+..      agenda
 
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+---
 
 # Goal 
 Given that we have a lot of expensive workloads in the cloud, how can we think about cost optimization and what are the main levers we can utilize?
@@ -70,24 +90,44 @@ This talk will focus on the following:
 - How to gain insights into how different instance types perform for different workloads
 - How to get a calculate a concrete cost for your workloads, and how to start optimizing them
 
-<!-- Define optimization objective -->
-<!-- Preview metrics approach -->
-<!-- Mention telemetry importance -->
-<!-- Instance performance insights -->
+<!-- Time Goal: 5:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+..      intro
+..      problem context
+..      -> goal
+..      agenda
+
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
 ---
 
 # Agenda
 
-1. What leveres can we pull to save cost & how we measure success
+1. What levers can we pull to save cost & how we measure success
 2. Building knowledge about instance types performance/cost profiles
 3. Workload profiling based on metrics
 4. End-to-end analysis with DAGs
 5. Actionable Takeaways: Steps you can implement today
 
-<!-- Preview content structure -->
-<!-- Highlight practical applications -->
-<!-- Note case study -->
-<!-- Mention actionable takeaways -->
+<!-- Time Goal: 7:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+..      intro
+..      problem context
+..      goal
+..      -> agenda
+
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
 ---
 
 
@@ -110,17 +150,29 @@ This talk will focus on the following:
 
 <div class="section-title">
   <div>
-  <h1>What leveres can we pull?</h1>
+  <h1>What levers can we pull?</h1>
   <h1>How do we measure success?</h1>
   </div>
 </div>
 
+<!-- Time Goal: 7:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+..      -> section intro
+..      what levers
+..      overprovisioning
+..      measure success
+..      crayon-amd project
 
-<!-- Transition to metrics -->
-<!-- Set section context -->
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
 ---
 
-# What leveres can we pull?
+# What levers can we pull?
 
 <div class="columns" style="font-size: 20px;">
   <div>
@@ -150,9 +202,24 @@ This talk will focus on the following:
   </div>
 </div>
 
+<!-- Time Goal: 8:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+..      section intro
+..      -> what levers
+..      overprovisioning
+..      measure success
+..      crayon-amd project
+
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
 ---
 
-# Over provisioning is not inherently bad
+# Overprovisioning is not inherently bad
 
 <div class="columns" style="font-size: 20px;">
   <div>
@@ -181,12 +248,30 @@ This talk will focus on the following:
   </div>  
 </div>
 
-<!-- Defend strategic overprovisioning -->
-<!-- Identify critical components -->
-<!-- Highlight underprovisioning risks -->
-<!-- Balance business needs -->
----
+<!-- Time Goal: 9:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+..      section intro
+..      what levers
+..      -> overprovisioning
+..      measure success
+..      crayon-amd project
 
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+
+<!-- 
+--------------------------------
+Defend strategic overprovisioning
+Identify critical components
+Highlight underprovisioning risks
+Balance business needs
+-->
+---
 
 # How do we measure success?
 
@@ -217,11 +302,28 @@ This talk will focus on the following:
 
 Key point: We need to convert these metrics into cost and make that the target
 
+<!-- Time Goal: 10:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+..      section intro
+..      what levers
+..      overprovisioning
+..      -> measure success
+..      crayon-amd project
 
-<!-- Break down cost components -->
-<!-- Explain proxy metrics -->
-<!-- Highlight hidden costs -->
-<!-- Compare pricing models -->
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!--  
+--------------------------------
+Break down cost components
+Explain proxy metrics
+Highlight hidden costs
+Compare pricing models
+-->
 ---
 
 # The Crayon-AMD Optimization Project
@@ -245,7 +347,7 @@ Key point: We need to convert these metrics into cost and make that the target
   </div>
   <div>
 
-  ## We hope to build a ecosystem, allready talking with:
+  ## We hope to build a ecosystem, already talking with:
   - AMD (performance verification)
   - AWS (MA program integration)
   - Red Hat (OpenShift optimization)
@@ -255,10 +357,28 @@ Key point: We need to convert these metrics into cost and make that the target
   </div>  
 </div>
 
-<!-- Describe AMD partnership -->
-<!-- Explain benchmark goals -->
-<!-- Highlight technical approach -->
-<!-- Mention partner ecosystem -->
+<!-- Time Goal: 11:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+..      section intro
+..      what levers
+..      overprovisioning
+..      measure success
+..      -> crayon-amd project
+
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!--
+--------------------------------
+Describe AMD partnership
+Explain benchmark goals
+Highlight technical approach
+Mention partner ecosystem
+-->
 
 ---
 
@@ -286,9 +406,22 @@ Key point: We need to convert these metrics into cost and make that the target
   <h1>Picking the right instance type</h1>
 </div>
 
+<!-- Time Goal: 12:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+..      -> section intro
+..      why hard
+..      video
+..      what you need
+..      performance database
+..      benchmark suite
 
-
-
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
 ---
 
 # Why is it hard?
@@ -310,24 +443,62 @@ Key point: We need to convert these metrics into cost and make that the target
   ## Could you do it if you wanted to?
   - CAN you even change instance types?
   - Do you know what instance type you want?
-  - Can you shift you'r workloads to a different region or cloud provider?
+  - Can you shift your workloads to a different region or cloud provider?
   - Are your workloads fault tolerant and can be restarted?
   - And it changes all the time, so you need to do it again in a few months
 
   </div>  
 </div>
 
-<!-- Stress overwhelming choices -->
-<!-- Mention constant change -->
-<!-- Note workload complexity -->
-<!-- Developer perspective challenge -->
+<!-- Time Goal: 13:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+..      section intro
+..      -> why hard
+..      video
+..      what you need
+..      performance database
+..      benchmark suite
+
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!--
+--------------------------------
+Stress overwhelming choices
+Mention constant change
+Note workload complexity
+Developer perspective challenge
+-->
 ---
  
 <video style="object-fit: cover;" src="./Screen Recording 2025-03-22 at 18.18.52.mov" width="500px"  controls></video>
 
-<!-- Explain video context -->
-<!-- Show real-world example -->
-<!-- Highlight key moments -->
+<!-- Time Goal: 14:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+..      section intro
+..      why hard
+..      -> video
+..      what you need
+..      performance database
+..      benchmark suite
+
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!--
+--------------------------------
+Explain video context
+Show real-world example
+Highlight key moments
+-->
 ---
 
 # What You Need to Know
@@ -336,7 +507,7 @@ Key point: We need to convert these metrics into cost and make that the target
   <div>
 
   ## Key Questions to Answer
-  - What instance types perform best price/performance wise?
+  - What instance types perform best price/performance-wise?
   - Can you safely iterate and test changes?
   - What metrics indicate optimal performance?
   - How do you measure cost vs. performance?
@@ -354,12 +525,25 @@ Key point: We need to convert these metrics into cost and make that the target
   </div>
 </div>
 
-<!-- List key questions -->
-<!-- Outline prerequisites -->
-<!-- Connect to previous content -->
+<!-- Time Goal: 15:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+..      section intro
+..      why hard
+..      video
+..      -> what you need
+..      performance database
+..      benchmark suite
+
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
 ---
 
-# Building a instance Performance Database
+# Building an instance Performance Database
 
 This is the work we are doing with in collaboration with AMD
 <div class="columns" style="font-size: 20px;">
@@ -385,10 +569,29 @@ This is the work we are doing with in collaboration with AMD
   </div>
 </div>
 
-<!-- Emphasize money metric -->
-<!-- Explain time-cost relationship -->
-<!-- Describe utilization importance -->
-<!-- Detail performance profiling -->
+<!-- Time Goal: 16:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+..      section intro
+..      why hard
+..      video
+..      what you need
+..      -> performance database
+..      benchmark suite
+
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!--   
+--------------------------------
+Emphasize money metric
+Explain time-cost relationship
+Describe utilization importance
+Detail performance profiling
+-->
 
 ---
 
@@ -418,10 +621,29 @@ This is the work we are doing with in collaboration with AMD
 
 We essentially need to learn what is the best performance per dollar for each instance category
 
-<!-- Detail benchmark tools -->
-<!-- Compare instance categories -->
-<!-- Emphasize performance/dollar metric -->
-<!-- Relate to workloads -->
+<!-- Time Goal: 17:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+..      section intro
+..      why hard
+..      video
+..      what you need
+..      performance database
+..      -> benchmark suite
+
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!--
+--------------------------------
+Detail benchmark tools
+Compare instance categories
+Emphasize performance/dollar metric
+Relate to workloads
+-->
 
 ---
 
@@ -445,14 +667,27 @@ We essentially need to learn what is the best performance per dollar for each in
   <h1>Workload profiling based on metrics/telemetry</h1>
 </div>
 
+<!-- Time Goal: 18:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+..      -> section intro
+..      why understanding matters
+..      cost profile challenges
+..      image1
+..      image2
+..      what to identify
 
-
-
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
 ---
 
 # Why Understanding Your Workload Matters
 
-  You can make higher resolution decisions based on your spesific use case
+  You can make higher resolution decisions based on your specific use case
 
 <div class="columns" style="font-size: 20px;">
   <div>
@@ -475,10 +710,22 @@ We essentially need to learn what is the best performance per dollar for each in
   </div>
 </div>
 
-<!-- Explain telemetry importance -->
-<!-- Highlight optimization benefits -->
-<!-- Connect to business value -->
-<!-- Emphasize data-driven approach -->
+<!-- Time Goal: 19:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+..      section intro
+..      -> why understanding matters
+..      cost profile challenges
+..      image1
+..      image2
+..      what to identify
+
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
 ---
 
 <h2> Why is understanding the cost profile of your workload difficult?  </h2>
@@ -516,24 +763,80 @@ We essentially need to learn what is the best performance per dollar for each in
   </div>  
 </div>
 
-<!-- Explain metric limitations -->
-<!-- Compare workload types -->
-<!-- Describe load patterns -->
-<!-- Highlight key focus areas -->
+<!-- Time Goal: 20:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+..      section intro
+..      why understanding matters
+..      -> cost profile challenges
+..      image1
+..      image2
+..      what to identify
+
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!--
+--------------------------------
+Explain metric limitations 
+Compare workload types 
+Describe load patterns 
+Highlight key focus areas 
+-->
 ---
  
 <img src="./image(2).png" width="900px">
 
-<!-- Explain graph meaning -->
-<!-- Point out key trends -->
-<!-- Relate to metrics -->
+<!-- Time Goal: 21:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+..      section intro
+..      why understanding matters
+..      cost profile challenges
+..      -> image1
+..      image2
+..      what to identify
+
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!-- 
+--------------------------------
+Explain graph meaning 
+Point out key trends 
+Relate to metrics 
+-->
 ---
  
 <img src="./image.png" width="900px">
 
-<!-- Explain visualization significance -->
-<!-- Connect to previous slide -->
-<!-- Highlight key patterns -->
+<!-- Time Goal: 22:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+..      section intro
+..      why understanding matters
+..      cost profile challenges
+..      image1
+..      -> image2
+..      what to identify
+
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!-- 
+--------------------------------
+Explain visualization significance 
+Connect to previous slide 
+Highlight key patterns -->
 ---
 
 # What you actually want to identify
@@ -567,10 +870,29 @@ We essentially need to learn what is the best performance per dollar for each in
   </div>  
 </div>
 
-<!-- Explain core optimization goal -->
-<!-- Detail key metrics -->
-<!-- Outline decision factors -->
-<!-- Connect to cost implications -->
+<!-- Time Goal: 23:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+..      section intro
+..      why understanding matters
+..      cost profile challenges
+..      image1
+..      image2
+..      -> what to identify
+
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+-->
+<!-- 
+--------------------------------
+Explain core optimization goal
+Detail key metrics
+Outline decision factors
+Connect to cost implications
+-->
 ---
 
 
@@ -595,11 +917,26 @@ We essentially need to learn what is the best performance per dollar for each in
   <h1>A more holistic analysis framework using DAGs</h1>
 </div>
 
-<!-- Transition to DAGs -->
-<!-- Explain section focus -->
+<!-- Time Goal: 24:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+..      -> section intro
+..      understanding workloads
+..      example dag
+..      cost calculation
+..      example calculation
+..      optimization based on DAG
+..      cost optimization thinking
+
+.  at 38:00 Summary
+-->
 ---
 
-# Understanding Your Workloads in a global contex
+# Understanding Your Workloads in a global context
 
 My preferred way to think about this is to break down your workload into a Directed Acyclic Graph (DAG)
 
@@ -609,17 +946,33 @@ My preferred way to think about this is to break down your workload into a Direc
 - Critical path represents the longest sequence that determines overall completion time
 - And by adding a time metric to each node you get a overview of where the cost is
 
-<!-- Define DAG concept -->
-<!-- Explain node representation -->
-<!-- Describe critical path -->
-<!-- Connect to cost -->
+<!-- Time Goal: 25:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+..      section intro
+..      -> understanding workloads
+..      example dag
+..      cost calculation
+..      example calculation
+..      optimization based on DAG
+..      cost optimization thinking
+
+.  at 38:00 Summary
+-->
+<!-- 
+--------------------------------
+Define DAG concept
+Explain node representation
+Describe critical path
+Connect to cost
+-->
 ---
 
 <div class="columns">
-  <!-- <div> -->
-
-<!-- <img src="./dag1.svg" style="background-color:rgba(228, 228, 228, 0.4);"> -->
-  <!-- </div> -->
 
 <div>
 
@@ -693,31 +1046,89 @@ digraph microservice_architecture {
 
   </div>
 
-  <!-- <div>
-
-    Example: Microservice Architecture DAG
-<img src="./dag2.svg" style="background-color:rgba(228, 228, 228, 0.4);">
-  </div> -->
-
 </div>
 </div>
 
-<!-- Compare DAG examples -->
-<!-- Point out differences -->
-<!-- Relate to workloads -->
+<!-- Time Goal: 26:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+..      section intro
+..      understanding workloads
+..      -> example dag
+..      cost calculation
+..      example calculation
+..      optimization based on DAG
+..      cost optimization thinking
+
+.  at 38:00 Summary
+-->
+<!-- 
+--------------------------------
+Compare DAG examples
+Point out differences
+Relate to workloads
+-->
 ---
 
-# Example: Cost Optimization with DAG Analysis
-This becomes a longest path problem, which for a DAG can be solved with shortest path algorithms
-need single unit of cost for each node (f(time, instance cost,num instances)->cost or f(data transfer)->cost)
+# How to calculate the cost of a DAG?
 
-//TODO: make this more clear
-//TODO: add better examples
+<div class="columns" style="font-size: 20px;">
+  <div>
 
-<!-- Explain longest path -->
-<!-- Connect to algorithms -->
-<!-- Simplify cost function -->
-<!-- Note improvement needed -->
+  ## Cost Calculation Approach
+  - Each node has an associated cost function
+
+  ## Finding the Critical Path
+  - Use shortest path algorithms (e.g., Dijkstra's)
+  - Convert to longest path by negating costs
+  - Critical path shows highest cost path
+  - Helps identify cost bottlenecks
+
+  </div>
+  <div>
+
+  ## Example Cost Functions
+  ```python
+  def compute_node_cost(time, instance_cost, num_instances):
+      return time * instance_cost * num_instances
+
+  def storage_node_cost(storage_size, storage_cost):
+      return storage_size * storage_cost
+
+  def transfer_cost(data_size, transfer_rate):
+      return data_size * transfer_rate
+  ```
+
+  </div>
+</div>
+
+<!-- Time Goal: 27:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+..      section intro
+..      understanding workloads
+..      example dag
+..      -> cost calculation
+..      example calculation
+..      optimization based on DAG
+..      cost optimization thinking
+
+.  at 38:00 Summary
+-->
+<!-- 
+--------------------------------
+Explain cost functions
+Show practical examples
+Connect to optimization
+-->
 ---
 
 # How to convert storage and CPU nodes to cost?
@@ -776,10 +1187,10 @@ digraph concrete_flow {
   edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial", fontsize=10]; 
 
   // Nodes with cost calculations
-  StorageStart [label="100GB\n$5/month\n($0.05/GB)", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
-  StorageEnd [label="12GB\n$0.60/month\n($0.05/GB)", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
-  CPU [label="m5.large\n10 minutes\n$0.10/hour\n$0.017 total", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
-  GPU [label="p4d.24xlarge\n10 minutes\n$32.77/hour\n$5.46 total", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+  StorageStart [label="100GB\n$5/month", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  StorageEnd [label="12GB\n$0.60/month", fillcolor="#99ccff", color="#333333", style="filled,rounded"];
+  CPU [label="m5.large\n10 minutes\n$0.10/hour", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
+  GPU [label="p4d.24xlarge\n10 minutes\n$32.77/hour", fillcolor="#ff9966", color="#333333", style="filled,rounded"];
 
   // Edges with transfer costs
   StorageStart -> CPU [label="Data transfer\n$0.09/GB"];
@@ -811,11 +1222,23 @@ digraph concrete_flow {
 }
 </div>
 
-<!-- Explain cost conversion -->
-<!-- Compare abstract concrete -->
-<!-- Show practical application -->
-<!-- Note visual representation -->
+<!-- Time Goal: 28:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+..      section intro
+..      understanding workloads
+..      example dag
+..      cost calculation
+..      -> example calculation
+..      optimization based on DAG
+..      cost optimization thinking
 
+.  at 38:00 Summary
+-->
 ---
 
 # Optimizing Based on DAG Analysis
@@ -848,10 +1271,23 @@ digraph concrete_flow {
   </div>  
 </div>
 
-<!-- Focus on slowest parts -->
-<!-- Match instance to workload -->
-<!-- Consider scaling options -->
-<!-- Suggest practical improvements -->
+<!-- Time Goal: 29:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+..      section intro
+..      understanding workloads
+..      example dag
+..      cost calculation
+..      example calculation
+..      -> optimization based on DAG
+..      cost optimization thinking
+
+.  at 38:00 Summary
+-->
 ---
 
 # How to think about cost optimization
@@ -878,10 +1314,61 @@ digraph concrete_flow {
   </div>  
 </div>
 
-<!-- Stress end-to-end view -->
-<!-- Target critical path -->
-<!-- Consider real-world constraints -->
-<!-- Plan long-term approach -->
+<!-- Time Goal: 30:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+..      section intro
+..      understanding workloads
+..      example dag
+..      cost calculation
+..      example calculation
+..      optimization based on DAG
+..      -> cost optimization thinking
+
+.  at 38:00 Summary
+-->
+---
+
+     
+
+
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-title">
+  <h1>Summary & Actionable Takeaways</h1>
+</div>
+
+<!-- Time Goal: 31:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+..      -> section intro
+..      summary and actionable takeaways
+..      outro
+..      questions?
+-->
 ---
 
 # Summary & Actionable Takeaways
@@ -916,58 +1403,76 @@ digraph concrete_flow {
   </div>  
 </div>
 
-<!-- Reinforce key principles -->
-<!-- Emphasize measurement importance -->
-<!-- Stress critical path -->
-<!-- Remind about iteration -->
-<!-- List immediate actions -->
-<!-- Suggest quick wins -->
-<!-- Outline longer-term strategy -->
-<!-- Emphasize continuous improvement -->
+<!-- Time Goal: 32:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+..      section intro
+..      -> summary and actionable takeaways
+..      outro
+..      questions?
+-->
 ---
 
 # Thank You!
 
-Marius Nygård  
-Platform Engineer/DevOps Engineer @Crayon Consulting
 
-Contact: [Marius.Nygard@inmeta.no](mailto:Marius.Nygard@inmeta.no)  
-LinkedIn: [linkedin.com/in/marius-nygård-a7b615193](https://www.linkedin.com/in/marius-nyg%C3%A5rd-a7b615193/)
-
-<div style="text-align: center; margin-top: 2rem;">
-  <h3>Questions?</h3>
-</div>
-
-<!-- Thank audience -->
-<!-- Invite questions -->
-<!-- Share contact info -->
----
-
-<!-- <div style="background-color: #ffffff;"> -->
-<div class="language-dot">
-digraph graphname {
-  bgcolor="transparent";  // Makes graph background transparent to show div background
-
-  node [
-    fontcolor = "#e6e6e6",
-    style = filled,
-    color = "#e6e6e6",
-    fillcolor = "#333333"
-  ]
-
-  edge [
-    color = "#e6e6e6",
-    fontcolor = "#e6e6e6"
-  ]
-
-  a -> b [label="link 1" color="#ffffff"];
-  b -> c [label="link 2" color="#ffffff"];
-  a -> c [label="link 3", color="#ffffff" style="dashed"];
+<style>
+.contact-info {
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+  margin-top: 2rem;
+  opacity: 0.8;
 }
-</div>
-<!-- </div> -->
+</style>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="contact-info">
+
+  Marius Nygård - Platform Engineer/DevOps Engineer @Crayon Consulting
+
+  Contact: [Marius.Nygard@inmeta.no](mailto:Marius.Nygard@inmeta.no)  
+  LinkedIn: [linkedin.com/in/marius-nygård-a7b615193](https://www.linkedin.com/in/marius-nyg%C3%A5rd-a7b615193/)
+</div>
+
+<!-- Time Goal: 33:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+..      section intro
+..      summary and actionable takeaways
+..      -> outro
+..      questions?
+-->
 ---
+# Questions?
+
+<!-- Time Goal: 34:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+.  at 38:00 Summary
+..      section intro
+..      summary and actionable takeaways
+..      outro
+..      -> questions?
+-->
 
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
