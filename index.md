@@ -972,15 +972,15 @@ Connect to cost
 -->
 ---
 
-<div class="columns">
+# Example: Simple Data Processing DAG
 
-<div>
+<div style="display: flex; justify-content: center;">
 
-    Example: Simple Data Processing DAG
 
   <div class="language-dot">
 digraph data_pipeline {
   bgcolor="transparent";
+  size="5,5";
   
   // Node styles
   node [fontcolor="#e6e6e6", fontname="Arial", shape="box", style="rounded,filled"];
@@ -1009,38 +1009,128 @@ digraph data_pipeline {
 </div>
 </div>
 
+<!-- Time Goal: 32:00 -->
+<!-- 
+.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+..      section intro
+..      understanding workloads
+..      -> example dag
+..      cost calculation
+..      example calculation
+..      optimization based on DAG
+..      cost optimization thinking
+
+.  at 38:00 Summary
+-->
+<!-- 
+--------------------------------
+Compare DAG examples
+Point out differences
+Relate to workloads
+-->
+---
+
+# Example: Microservice Architecture DAG
 <div>
 
-    Example: Microservice Architecture DAG
-
 <div class="language-dot">
-digraph microservice_architecture {
+digraph complex_microservice_architecture {
   bgcolor="transparent";
+  size="12,12";  // Makes the graph smaller
+
   
   // Node styles
   node [fontcolor="#e6e6e6", fontname="Arial", shape="box", style="rounded,filled"];
   edge [color="#e6e6e6", fontcolor="#e6e6e6", fontname="Arial"];
   
-  // Service nodes
-  A [label="API Gateway", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
-  B [label="Auth Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
-  C [label="Product Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
-  D [label="User Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
-  E [label="Inventory Service", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
-  F [label="Pricing Service", fillcolor="#ff6666", color="#333333", style="filled,rounded", penwidth=3];
-  G [label="Warehouse Service", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
-  H [label="Billing Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
-  I [label="Shipping Service", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  // Service nodes - Frontend cluster
+  A [label="API Gateway\n(c5.large)", fillcolor="#ff9966", color="#e6e6e6", style="filled,rounded"];
+  B [label="Auth Service\n(t3.medium)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  C [label="Product Service\n(m5.large)", fillcolor="#ff9966", color="#e6e6e6", style="filled,rounded"];
+  D [label="User Service\n(m5.large)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  J [label="Search Service\n(r5.xlarge)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
   
-  // Edges
-  A -> B;
-  A -> C;
-  B -> D;
-  C -> E;
-  C -> F;
-  E -> G;
-  F -> H;
-  G -> I;
+  // Service nodes - Business logic tier
+  E [label="Inventory Service\n(c5.2xlarge)", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  F [label="Pricing Service\n(m5.2xlarge)", fillcolor="#333333", color="#333333", style="filled,rounded", penwidth=2];
+  G [label="Warehouse Service\n(r5.large)", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  K [label="Recommendation\n(c5.4xlarge)", fillcolor="#333333", color="#333333", style="filled,rounded", penwidth=2];
+  L [label="Cart Service\n(t3.medium)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  
+  // Service nodes - Backend services
+  H [label="Billing Service\n(m5.xlarge)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  I [label="Shipping Service\n(t3.large)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  M [label="Payment Processor\n(c5.xlarge)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded", penwidth=1];
+  N [label="Notification Service\n(t3.small)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  
+  // Data services
+  O [label="Order Database\n(r5.2xlarge)", fillcolor="#ff9966", color="#333333", style="filled,rounded", penwidth=2];
+  P [label="Product Catalog\n(r5.xlarge)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  Q [label="User Database\n(r5.xlarge)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  R [label="Analytics Service\n(m5.4xlarge)", fillcolor="#333333", color="#333333", style="filled,rounded", penwidth=3];
+  S [label="Cache Cluster\n(r6g.2xlarge)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  T [label="Log Aggregation\n(m5.large)", fillcolor="#333333", color="#e6e6e6", style="filled,rounded"];
+  
+  // Edges - API Gateway connections
+  A -> B [label="Auth"];
+  A -> C [label="Products"];
+  A -> D [label="Users"];
+  A -> J [label="Search"];
+  A -> L [label="Cart"];
+  
+  // Auth service connections
+  B -> D [label="Verify"];
+  B -> Q [label="User data"];
+  
+  // Product service connections
+  C -> E [label="Check stock"];
+  C -> F [label="Get prices"];
+  C -> P [label="Catalog"];
+  C -> S [label="Cache"];
+  C -> K [label="Similar items"];
+  
+  // Business logic connections
+  E -> G [label="Location"];
+  E -> O [label="Orders"];
+  E -> P [label="Products"];
+  F -> M [label="Payments"];
+  F -> H [label="Invoice"];
+  F -> O [label="Orders"];
+  G -> I [label="Ship"];
+  G -> O [label="Order status"];
+  
+  // Backend service connections
+  H -> M [label="Process"];
+  H -> N [label="Send"];
+  I -> N [label="Updates"];
+  L -> O [label="Save"];
+  L -> P [label="Details"];
+  
+  // Data connections
+  J -> P [label="Index"];
+  K -> P [label="Analyze"];
+  K -> R [label="ML models"];
+  M -> O [label="Update"];
+  R -> O [label="Process"];
+  R -> P [label="Analyze"];
+  R -> Q [label="Behavior"];
+  
+  // System services
+  A -> T [label="Logs"];
+  B -> T [label="Logs"];
+  C -> T [label="Logs"];
+  D -> T [label="Logs"];
+  E -> T [label="Logs"];
+  F -> T [label="Logs"];
+  
+  // Additional connections showing complex dependencies
+  D -> S [label="Cache"];
+  J -> S [label="Cache"];
+  K -> S [label="Cache"];
 }
 </div>
 

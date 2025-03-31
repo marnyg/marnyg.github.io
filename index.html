@@ -1245,13 +1245,12 @@ Color palette defined in :root
   height: 100%;
 }
 ;--theme:x0k24wgeerm18ogo0wdavui9sqmmb9dsuy578juxz8;">
-<div class="columns">
-<div>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code>Example: Simple Data Processing DAG
-</code></pre>
+<h1 id="example-simple-data-processing-dag">Example: Simple Data Processing DAG</h1>
+<div style="display: flex; justify-content: center;">
   <div class="language-dot">
 digraph data_pipeline {
   bgcolor="transparent";
+  size="5,5";
 <p>// Node styles<br />
 node [fontcolor=&quot;#e6e6e6&quot;, fontname=&quot;Arial&quot;, shape=&quot;box&quot;, style=&quot;rounded,filled&quot;];<br />
 edge [color=&quot;#e6e6e6&quot;, fontcolor=&quot;#e6e6e6&quot;, fontname=&quot;Arial&quot;];</p>
@@ -1277,41 +1276,131 @@ G -&gt; H;<br />
 }</p>
 </div>
 </div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.columns3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.section-title {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+" data-theme="x0k24wgeerm18ogo0wdavui9sqmmb9dsuy578juxz8" lang="en-US" style="--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.columns3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.section-title {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+;--theme:x0k24wgeerm18ogo0wdavui9sqmmb9dsuy578juxz8;">
+<h1 id="example-microservice-architecture-dag">Example: Microservice Architecture DAG</h1>
 <div>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code>Example: Microservice Architecture DAG
-</code></pre>
 <div class="language-dot">
-digraph microservice_architecture {
+digraph complex_microservice_architecture {
   bgcolor="transparent";
+  size="12,12";  // Makes the graph smaller
 <p>// Node styles<br />
 node [fontcolor=&quot;#e6e6e6&quot;, fontname=&quot;Arial&quot;, shape=&quot;box&quot;, style=&quot;rounded,filled&quot;];<br />
 edge [color=&quot;#e6e6e6&quot;, fontcolor=&quot;#e6e6e6&quot;, fontname=&quot;Arial&quot;];</p>
-<p>// Service nodes<br />
-A [label=&quot;API Gateway&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
-B [label=&quot;Auth Service&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
-C [label=&quot;Product Service&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
-D [label=&quot;User Service&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
-E [label=&quot;Inventory Service&quot;, fillcolor=&quot;#ff9966&quot;, color=&quot;#333333&quot;, style=&quot;filled,rounded&quot;, penwidth=2];<br />
-F [label=&quot;Pricing Service&quot;, fillcolor=&quot;#ff6666&quot;, color=&quot;#333333&quot;, style=&quot;filled,rounded&quot;, penwidth=3];<br />
-G [label=&quot;Warehouse Service&quot;, fillcolor=&quot;#ff9966&quot;, color=&quot;#333333&quot;, style=&quot;filled,rounded&quot;, penwidth=2];<br />
-H [label=&quot;Billing Service&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
-I [label=&quot;Shipping Service&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];</p>
-<p>// Edges<br />
-A -&gt; B;<br />
-A -&gt; C;<br />
-B -&gt; D;<br />
-C -&gt; E;<br />
-C -&gt; F;<br />
-E -&gt; G;<br />
-F -&gt; H;<br />
-G -&gt; I;<br />
+<p>// Service nodes - Frontend cluster<br />
+A [label=&quot;API Gateway\n(c5.large)&quot;, fillcolor=&quot;#ff9966&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
+B [label=&quot;Auth Service\n(t3.medium)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
+C [label=&quot;Product Service\n(m5.large)&quot;, fillcolor=&quot;#ff9966&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
+D [label=&quot;User Service\n(m5.large)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
+J [label=&quot;Search Service\n(r5.xlarge)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];</p>
+<p>// Service nodes - Business logic tier<br />
+E [label=&quot;Inventory Service\n(c5.2xlarge)&quot;, fillcolor=&quot;#ff9966&quot;, color=&quot;#333333&quot;, style=&quot;filled,rounded&quot;, penwidth=2];<br />
+F [label=&quot;Pricing Service\n(m5.2xlarge)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#333333&quot;, style=&quot;filled,rounded&quot;, penwidth=2];<br />
+G [label=&quot;Warehouse Service\n(r5.large)&quot;, fillcolor=&quot;#ff9966&quot;, color=&quot;#333333&quot;, style=&quot;filled,rounded&quot;, penwidth=2];<br />
+K [label=&quot;Recommendation\n(c5.4xlarge)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#333333&quot;, style=&quot;filled,rounded&quot;, penwidth=2];<br />
+L [label=&quot;Cart Service\n(t3.medium)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];</p>
+<p>// Service nodes - Backend services<br />
+H [label=&quot;Billing Service\n(m5.xlarge)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
+I [label=&quot;Shipping Service\n(t3.large)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
+M [label=&quot;Payment Processor\n(c5.xlarge)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;, penwidth=1];<br />
+N [label=&quot;Notification Service\n(t3.small)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];</p>
+<p>// Data services<br />
+O [label=&quot;Order Database\n(r5.2xlarge)&quot;, fillcolor=&quot;#ff9966&quot;, color=&quot;#333333&quot;, style=&quot;filled,rounded&quot;, penwidth=2];<br />
+P [label=&quot;Product Catalog\n(r5.xlarge)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
+Q [label=&quot;User Database\n(r5.xlarge)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
+R [label=&quot;Analytics Service\n(m5.4xlarge)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#333333&quot;, style=&quot;filled,rounded&quot;, penwidth=3];<br />
+S [label=&quot;Cache Cluster\n(r6g.2xlarge)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];<br />
+T [label=&quot;Log Aggregation\n(m5.large)&quot;, fillcolor=&quot;#333333&quot;, color=&quot;#e6e6e6&quot;, style=&quot;filled,rounded&quot;];</p>
+<p>// Edges - API Gateway connections<br />
+A -&gt; B [label=&quot;Auth&quot;];<br />
+A -&gt; C [label=&quot;Products&quot;];<br />
+A -&gt; D [label=&quot;Users&quot;];<br />
+A -&gt; J [label=&quot;Search&quot;];<br />
+A -&gt; L [label=&quot;Cart&quot;];</p>
+<p>// Auth service connections<br />
+B -&gt; D [label=&quot;Verify&quot;];<br />
+B -&gt; Q [label=&quot;User data&quot;];</p>
+<p>// Product service connections<br />
+C -&gt; E [label=&quot;Check stock&quot;];<br />
+C -&gt; F [label=&quot;Get prices&quot;];<br />
+C -&gt; P [label=&quot;Catalog&quot;];<br />
+C -&gt; S [label=&quot;Cache&quot;];<br />
+C -&gt; K [label=&quot;Similar items&quot;];</p>
+<p>// Business logic connections<br />
+E -&gt; G [label=&quot;Location&quot;];<br />
+E -&gt; O [label=&quot;Orders&quot;];<br />
+E -&gt; P [label=&quot;Products&quot;];<br />
+F -&gt; M [label=&quot;Payments&quot;];<br />
+F -&gt; H [label=&quot;Invoice&quot;];<br />
+F -&gt; O [label=&quot;Orders&quot;];<br />
+G -&gt; I [label=&quot;Ship&quot;];<br />
+G -&gt; O [label=&quot;Order status&quot;];</p>
+<p>// Backend service connections<br />
+H -&gt; M [label=&quot;Process&quot;];<br />
+H -&gt; N [label=&quot;Send&quot;];<br />
+I -&gt; N [label=&quot;Updates&quot;];<br />
+L -&gt; O [label=&quot;Save&quot;];<br />
+L -&gt; P [label=&quot;Details&quot;];</p>
+<p>// Data connections<br />
+J -&gt; P [label=&quot;Index&quot;];<br />
+K -&gt; P [label=&quot;Analyze&quot;];<br />
+K -&gt; R [label=&quot;ML models&quot;];<br />
+M -&gt; O [label=&quot;Update&quot;];<br />
+R -&gt; O [label=&quot;Process&quot;];<br />
+R -&gt; P [label=&quot;Analyze&quot;];<br />
+R -&gt; Q [label=&quot;Behavior&quot;];</p>
+<p>// System services<br />
+A -&gt; T [label=&quot;Logs&quot;];<br />
+B -&gt; T [label=&quot;Logs&quot;];<br />
+C -&gt; T [label=&quot;Logs&quot;];<br />
+D -&gt; T [label=&quot;Logs&quot;];<br />
+E -&gt; T [label=&quot;Logs&quot;];<br />
+F -&gt; T [label=&quot;Logs&quot;];</p>
+<p>// Additional connections showing complex dependencies<br />
+D -&gt; S [label=&quot;Cache&quot;];<br />
+J -&gt; S [label=&quot;Cache&quot;];<br />
+K -&gt; S [label=&quot;Cache&quot;];<br />
 }</p>
 </div>
   </div>
 </div>
 </div>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1375,7 +1464,7 @@ G -&gt; I;<br />
   </div>
 </div>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1486,7 +1575,7 @@ GPU -&gt; StorageEnd [label=&quot;$0.90&quot;];<br />
 }</p>
 </div>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1551,7 +1640,7 @@ GPU -&gt; StorageEnd [label=&quot;$0.90&quot;];<br />
   </div>  
 </div>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1609,7 +1698,7 @@ GPU -&gt; StorageEnd [label=&quot;$0.90&quot;];<br />
   </div>  
 </div>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1648,7 +1737,7 @@ GPU -&gt; StorageEnd [label=&quot;$0.90&quot;];<br />
   <h1>Summary & Actionable Takeaways</h1>
 </div>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1715,7 +1804,7 @@ GPU -&gt; StorageEnd [label=&quot;$0.90&quot;];<br />
   </div>  
 </div>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="32" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1762,7 +1851,7 @@ GPU -&gt; StorageEnd [label=&quot;$0.90&quot;];<br />
 LinkedIn: <a href="https://www.linkedin.com/in/marius-nyg%C3%A5rd-a7b615193/">linkedin.com/in/marius-nygård-a7b615193</a></p>
 </div>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="32" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="33" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2148,7 +2237,23 @@ Connect to cost</p></div><div class="bespoke-marp-note" data-index="23" tabindex
 .  at 38:00 Summary</p><p>--------------------------------
 Compare DAG examples
 Point out differences
-Relate to workloads</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>Time Goal: 33:00</p><p>.  at 0:00 Intro/goal/agenda                             
+Relate to workloads</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>Time Goal: 32:00</p><p>.  at 0:00 Intro/goal/agenda                             
+.  at 7:00 Context/what do?/how measure success?         
+.  at 14:00 Instance selection                          
+.  at 22:00 Workload profiling                     
+.  at 30:00 Holistic optimization/ DAG analysis    
+..      section intro
+..      understanding workloads
+..      -&gt; example dag
+..      cost calculation
+..      example calculation
+..      optimization based on DAG
+..      cost optimization thinking
+
+.  at 38:00 Summary</p><p>--------------------------------
+Compare DAG examples
+Point out differences
+Relate to workloads</p></div><div class="bespoke-marp-note" data-index="25" tabindex="0"><p>Time Goal: 33:00</p><p>.  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
 .  at 14:00 Instance selection                          
 .  at 22:00 Workload profiling                     
@@ -2164,7 +2269,7 @@ Relate to workloads</p></div><div class="bespoke-marp-note" data-index="24" tabi
 .  at 38:00 Summary</p><p>--------------------------------
 Explain cost functions
 Show practical examples
-Connect to optimization</p></div><div class="bespoke-marp-note" data-index="25" tabindex="0"><p>Time Goal: 35:00</p><p>.  at 0:00 Intro/goal/agenda                             
+Connect to optimization</p></div><div class="bespoke-marp-note" data-index="26" tabindex="0"><p>Time Goal: 35:00</p><p>.  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
 .  at 14:00 Instance selection                          
 .  at 22:00 Workload profiling                     
@@ -2177,7 +2282,7 @@ Connect to optimization</p></div><div class="bespoke-marp-note" data-index="25" 
 ..      optimization based on DAG
 ..      cost optimization thinking
 
-.  at 38:00 Summary</p></div><div class="bespoke-marp-note" data-index="26" tabindex="0"><p>Time Goal: 36:00</p><p>.  at 0:00 Intro/goal/agenda                             
+.  at 38:00 Summary</p></div><div class="bespoke-marp-note" data-index="27" tabindex="0"><p>Time Goal: 36:00</p><p>.  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
 .  at 14:00 Instance selection                          
 .  at 22:00 Workload profiling                     
@@ -2190,7 +2295,7 @@ Connect to optimization</p></div><div class="bespoke-marp-note" data-index="25" 
 ..      -&gt; optimization based on DAG
 ..      cost optimization thinking
 
-.  at 38:00 Summary</p></div><div class="bespoke-marp-note" data-index="27" tabindex="0"><p>Time Goal: 38:00</p><p>.  at 0:00 Intro/goal/agenda                             
+.  at 38:00 Summary</p></div><div class="bespoke-marp-note" data-index="28" tabindex="0"><p>Time Goal: 38:00</p><p>.  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
 .  at 14:00 Instance selection                          
 .  at 22:00 Workload profiling                     
@@ -2203,7 +2308,7 @@ Connect to optimization</p></div><div class="bespoke-marp-note" data-index="25" 
 ..      optimization based on DAG
 ..      -&gt; cost optimization thinking
 
-.  at 38:00 Summary</p></div><div class="bespoke-marp-note" data-index="28" tabindex="0"><p>Time Goal: 38:00</p><p>.  at 0:00 Intro/goal/agenda                             
+.  at 38:00 Summary</p></div><div class="bespoke-marp-note" data-index="29" tabindex="0"><p>Time Goal: 38:00</p><p>.  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
 .  at 14:00 Instance selection                          
 .  at 22:00 Workload profiling                     
@@ -2212,7 +2317,7 @@ Connect to optimization</p></div><div class="bespoke-marp-note" data-index="25" 
 ..      -&gt; section intro
 ..      summary and actionable takeaways
 ..      outro
-..      questions?</p></div><div class="bespoke-marp-note" data-index="29" tabindex="0"><p>Time Goal: 38:00</p><p>.  at 0:00 Intro/goal/agenda                             
+..      questions?</p></div><div class="bespoke-marp-note" data-index="30" tabindex="0"><p>Time Goal: 38:00</p><p>.  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
 .  at 14:00 Instance selection                          
 .  at 22:00 Workload profiling                     
@@ -2221,7 +2326,7 @@ Connect to optimization</p></div><div class="bespoke-marp-note" data-index="25" 
 ..      section intro
 ..      -&gt; summary and actionable takeaways
 ..      outro
-..      questions?</p></div><div class="bespoke-marp-note" data-index="30" tabindex="0"><p>Time Goal: 39:00</p><p>.  at 0:00 Intro/goal/agenda                             
+..      questions?</p></div><div class="bespoke-marp-note" data-index="31" tabindex="0"><p>Time Goal: 39:00</p><p>.  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
 .  at 14:00 Instance selection                          
 .  at 22:00 Workload profiling                     
@@ -2230,7 +2335,7 @@ Connect to optimization</p></div><div class="bespoke-marp-note" data-index="25" 
 ..      section intro
 ..      summary and actionable takeaways
 ..      -&gt; outro
-..      questions?</p></div><div class="bespoke-marp-note" data-index="31" tabindex="0"><p>Time Goal: 40:00</p><p>.  at 0:00 Intro/goal/agenda                             
+..      questions?</p></div><div class="bespoke-marp-note" data-index="32" tabindex="0"><p>Time Goal: 40:00</p><p>.  at 0:00 Intro/goal/agenda                             
 .  at 7:00 Context/what do?/how measure success?         
 .  at 14:00 Instance selection                          
 .  at 22:00 Workload profiling                     
