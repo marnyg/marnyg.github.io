@@ -84,6 +84,8 @@ The whole flow, no tickets, no waiting, no separate credentials.
 
 This is the "wow" moment — going from local code to deployed app.
 
+> One command. The operator (that Havard just explained) makes this possible.
+
 ---
 
 <!-- _class: demo -->
@@ -98,8 +100,6 @@ This is the "wow" moment — going from local code to deployed app.
    - Kicks off the build pipeline
    - Deploys the app
 4. App is running, accessible, deployed
-
-> One command. The operator (that Havard just explained) makes this possible.
 
 ---
 
