@@ -72,9 +72,33 @@ The whole flow, no tickets, no waiting, no separate credentials.
 2. User installs the Netbird VPN client
 3. User logs in to the VPN
 4. User can access all internal services — Forgejo, ArgoCD, Netbird dashboard — **all with SSO**
-5. User can access `kubectl` for the cluster — also via SSO
+5. User can run `kubectl` against the cluster — same identity, one more command
 
-> That's the entire onboarding. One identity, access to everything.
+> One identity, access to everything. Let's zoom in on that last step.
+
+---
+
+<!-- _class: demo -->
+
+## `kubectl` access — one command
+
+Same identity as Forgejo and ArgoCD. No tokens to copy. No kubeconfig to hand-edit.
+
+---
+
+<!-- _class: demo -->
+
+## `kubectl` — the steps
+
+1. Run: `grove kubeconfig --merge --context-name dev`
+   - Fetches the kubeconfig from the cluster over the VPN
+   - Merges it into your existing `~/.kube/config`
+2. Run `kubectl get ns`
+   - First call opens a browser → Zitadel login → token cached locally
+   - Subsequent calls are instant
+3. The user's Zitadel groups become Kubernetes groups — same RBAC across the whole platform
+
+> Nothing sensitive in shell history. Rotate the password in Zitadel and every kubectl session re-auths.
 
 ---
 
@@ -92,13 +116,13 @@ Two paths — scaffold something new, or bring your own code.
 
 ## New app — from scratch
 
-1. Run the CLI: `platform init my-app`
+1. Run the CLI: `grove init my-app`
 2. CLI templates out a hello world app with everything you need:
    - Working web page
    - Dockerfile
    - CI pipeline config
    - Kubernetes manifests
-3. Run: `platform register`
+3. Run: `grove register`
 4. App is live — hello world running in prod
 
 ---
@@ -108,7 +132,7 @@ Two paths — scaffold something new, or bring your own code.
 ## New app — existing repo
 
 1. Developer already has a local git repo with some code
-2. Run the CLI: `platform register`
+2. Run the CLI: `grove register`
 3. The operator kicks in:
    - Creates repo in Forgejo
    - Registers the app in ArgoCD
