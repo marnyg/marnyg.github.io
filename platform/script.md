@@ -31,9 +31,14 @@ When you are creating a presentation based on this document, make sure to use th
 - User can access Kubectl for cluster via SSO
 
 ### for developers
-- create a new app(local repo first)
--- user creates local git repo
--- use cli -> register app in platform
+- create a new app from scratch
+-- run `platform init my-app` to scaffold a hello world app with Dockerfile, CI config, and k8s manifests
+-- run `platform register` to register the app with the platform
+-- operator creates repo in forgejo, registers in argo, starts build pipeline, deploys app
+
+- create a new app (existing repo)
+-- user already has a local git repo with code
+-- run `platform register` to register the app with the platform
 -- operator creates repo in forgejo, registers in argo, starts build pipeline, deploys app
 
 - push a feature to prod
@@ -83,17 +88,25 @@ The overall arc: start by quickly anchoring the audience on what we've built, th
   5. show kubectl access to the cluster via SSO
 - emphasize: this is the whole onboarding, no tickets, no waiting for access, no separate credentials per service
 
-### 4. Demo: Creating a new app — local repo first (~7 min)
+### 4. Demo: Creating a new app (~8 min)
 - this is the main demo, the "wow" moment
+- two paths to show: scaffold from scratch, or bring your own code
+
+#### 4a. From scratch
+- walk through:
+  1. run `platform init my-app` — scaffolds a hello world app
+  2. show what you get: working web page, Dockerfile, CI pipeline config, kubernetes manifests
+  3. run `platform register` — registers the app with the platform
+  4. operator does its thing: creates repo in forgejo, registers in argocd, kicks off build, deploys
+  5. show the hello world app running in prod
+- this is the "i have nothing and now i have a running app" path
+
+#### 4b. Existing repo
 - walk through:
   1. developer already has a local git repo with some code
-  2. use the cli: `register app in platform`
-  3. show what the operator does behind the scenes:
-     - creates repo in forgejo
-     - registers the app in argocd
-     - kicks off the build pipeline
-     - deploys the app
-  4. show the app actually running, accessible, deployed
+  2. run `platform register`
+  3. same operator flow: forgejo repo, argocd registration, build pipeline, deploy
+  4. show the app running
 - point out how the operator (that Håvard just explained) is what makes this possible
 - this is the realistic flow — most developers already have code before they come to the platform
 
@@ -117,7 +130,7 @@ The overall arc: start by quickly anchoring the audience on what we've built, th
 - if not ready, skip this — its a nice-to-have, not critical to the narrative
 
 ### 7. Wrap up & pitch (~3 min)
-- recap what we just saw: onboarding in minutes, app registered from a single cli command, feature shipped with a git push, everything gitops, everything SSO
+- recap what we just saw: onboarding in minutes, app scaffolded with `platform init`, registered with `platform register`, feature shipped with a git push, everything gitops, everything SSO
 - connect back to BK's pitch: this is what an internal developer platform can do for your teams
 - the pitch: we've built this a few times now, we have a working platform we use as a starting point
 - we're not selling a product — we're selling ourselves as an enabling team
@@ -129,7 +142,7 @@ The overall arc: start by quickly anchoring the audience on what we've built, th
 - intro & context: 2 min
 - platform overview: 3 min
 - demo onboarding: 5 min
-- demo local-repo app: 7 min
+- demo create app (scaffold + existing): 8 min
 - demo push to prod: 5 min
 - (optional PR environments: 3 min)
 - wrap up & pitch: 3 min

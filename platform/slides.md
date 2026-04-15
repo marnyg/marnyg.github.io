@@ -82,18 +82,33 @@ The whole flow, no tickets, no waiting, no separate credentials.
 
 ## Creating a new app
 
-This is the "wow" moment — going from local code to deployed app.
+Two paths — scaffold something new, or bring your own code.
 
-> One command. The operator (that Havard just explained) makes this possible.
+> One command either way. The operator (that Havard just explained) handles the rest.
 
 ---
 
 <!-- _class: demo -->
 
-## New app — the steps
+## New app — from scratch
+
+1. Run the CLI: `platform init my-app`
+2. CLI templates out a hello world app with everything you need:
+   - Working web page
+   - Dockerfile
+   - CI pipeline config
+   - Kubernetes manifests
+3. Run: `platform register`
+4. App is live — hello world running in prod
+
+---
+
+<!-- _class: demo -->
+
+## New app — existing repo
 
 1. Developer already has a local git repo with some code
-2. Run the CLI: `register app in platform`
+2. Run the CLI: `platform register`
 3. The operator kicks in:
    - Creates repo in Forgejo
    - Registers the app in ArgoCD
