@@ -29,4 +29,3 @@ Sleep 2s
 Type "kubectl -n $(basename $DEMO_APP_DIR) rollout status deploy/$(basename $DEMO_APP_DIR) --watch"
 Sleep 300ms
 Enter
-Sleep 20s

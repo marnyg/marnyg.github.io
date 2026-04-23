@@ -6,11 +6,11 @@
 # Run from anywhere: ./tapes/render.sh [name1 name2 ...]
 # With no args, renders every tape.
 #
-# Required env vars:
-#   DEMO_APP_DIR — absolute path to a grove-registered app with a clean
-#                  working tree, on branch main. Used by pr-preview and
-#                  push-to-prod tapes (exported into the vhs shell).
-# Preflight aborts early if prereqs aren't met.
+# App directory handling:
+#   If DEMO_APP_DIR is unset, a fresh path is generated under $(mktemp -d).
+#   grove-register.tape creates the app at that path; pr-preview and
+#   push-to-prod tapes then operate on it. Set DEMO_APP_DIR yourself to reuse
+#   an existing grove-registered app instead of scaffolding a fresh one.
 
 set -euo pipefail
 
@@ -23,14 +23,18 @@ need vhs
 need ffmpeg
 need grove
 
+if [ -z "${DEMO_APP_DIR:-}" ]; then
+  DEMO_PARENT=$(mktemp -d)
+  export DEMO_APP_DIR="$DEMO_PARENT/demo-$(date +%s)"
+  echo "==> DEMO_APP_DIR=$DEMO_APP_DIR (will be populated by grove-register.tape)"
+else
+  echo "==> DEMO_APP_DIR=$DEMO_APP_DIR (using existing)"
+fi
+
 require_demo_app_dir() {
   local need_branch="$1"
-  if [ -z "${DEMO_APP_DIR:-}" ]; then
-    echo "error: DEMO_APP_DIR not set — point it at a grove-registered app" >&2
-    exit 1
-  fi
   if [ ! -d "$DEMO_APP_DIR/.git" ]; then
-    echo "error: $DEMO_APP_DIR is not a git repo" >&2
+    echo "error: $DEMO_APP_DIR is not a git repo — run grove-register tape first or point DEMO_APP_DIR at a registered app" >&2
     exit 1
   fi
   if [ -n "$(git -C "$DEMO_APP_DIR" status --porcelain)" ]; then
@@ -48,7 +52,11 @@ require_demo_app_dir() {
 preflight() {
   case "$1" in
     grove-register)
-      : # mktemp-dir + timestamped app name, no external prereqs
+      mkdir -p "$(dirname "$DEMO_APP_DIR")"
+      if [ -e "$DEMO_APP_DIR" ]; then
+        echo "error: $DEMO_APP_DIR already exists — unset DEMO_APP_DIR or point it elsewhere" >&2
+        exit 1
+      fi
       ;;
     pr-preview)
       require_demo_app_dir main

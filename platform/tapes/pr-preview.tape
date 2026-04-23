@@ -34,4 +34,6 @@ Sleep 1s
 Type "grove pr --title 'friendlier copy'"
 Sleep 300ms
 Enter
-Sleep 12s
+
+Hide
+Type "git checkout main" Enter

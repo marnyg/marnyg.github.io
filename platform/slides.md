@@ -145,7 +145,7 @@ Kubernetes at the core. GitOps everything.
 
 ## `grove register` — recording
 
-<video controls src="demos/grove-register.mp4" style="width:1000px;"></video>
+<video controls src="demos/grove-register.mp4" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -161,7 +161,7 @@ Kubernetes at the core. GitOps everything.
 
 ## PR preview — recording
 
-<video controls src="demos/pr-preview.mp4" style="width:1000px;"></video>
+<video controls src="demos/pr-preview.mp4" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -192,7 +192,7 @@ Once the PR looks good on the preview env:
 
 ## Push to prod — recording
 
-<video controls src="demos/push-to-prod.mp4" style="width:1000px;"></video>
+<video controls src="demos/push-to-prod.mp4" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
