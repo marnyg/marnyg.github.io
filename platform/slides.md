@@ -2,6 +2,7 @@
 marp: true
 theme: platform
 paginate: true
+html: true
 footer: "Internal Developer Platform — Live Demo"
 ---
 
@@ -60,7 +61,7 @@ Kubernetes at the core. GitOps everything.
 
 ## Onboarding a new developer
 
-The whole flow, no tickets, no waiting, no separate credentials.
+![w:1000](diagrams/onboarding.svg)
 
 ---
 
@@ -82,7 +83,7 @@ The whole flow, no tickets, no waiting, no separate credentials.
 
 ## `kubectl` access — one command
 
-Same identity as Forgejo and ArgoCD. No tokens to copy. No kubeconfig to hand-edit.
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/kubectl-auth.svg" style="width:950px;height:432px;"></object>
 
 ---
 
@@ -106,9 +107,7 @@ Same identity as Forgejo and ArgoCD. No tokens to copy. No kubeconfig to hand-ed
 
 ## Creating a new app
 
-Two paths — scaffold something new, or bring your own code.
-
-> One command either way. The operator (that Havard just explained) handles the rest.
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/grove-register.svg" style="width:1000px;height:454px;"></object>
 
 ---
 
@@ -146,7 +145,7 @@ Two paths — scaffold something new, or bring your own code.
 
 ## Pushing a feature to prod
 
-The "normal Tuesday" demo — what day-to-day actually looks like.
+![w:1000](diagrams/push-to-prod.svg)
 
 ---
 
@@ -167,12 +166,7 @@ The "normal Tuesday" demo — what day-to-day actually looks like.
 
 ## PR preview environments
 
-1. Developer creates a branch and opens a PR
-2. Platform automatically spins up a preview environment
-3. Reviewer clicks a link and sees the changes running live
-4. Merge when happy — preview gets cleaned up
-
-> Reviewers can see changes running before they hit main.
+![w:1000](diagrams/pr-preview.svg)
 
 ---
 
@@ -206,3 +200,78 @@ We're selling ourselves as an **enabling team**.
 ## Already started and need help?
 
 ### Let's talk.
+
+<script>
+(() => {
+  const ADVANCE_KEYS = new Set([' ', 'ArrowRight', 'PageDown', 'Enter']);
+  const REWIND_KEYS  = new Set(['ArrowLeft', 'PageUp', 'Backspace']);
+
+  const fragmentsIn = (obj) => {
+    try {
+      const frags = Array.from(obj.contentDocument.querySelectorAll('[data-fragment]'));
+      frags.sort((a, b) =>
+        parseInt(a.getAttribute('data-fragment'), 10) -
+        parseInt(b.getAttribute('data-fragment'), 10));
+      return frags;
+    } catch { return []; }
+  };
+
+  const activeSvgFragments = () => {
+    const slide = document.querySelector('svg.bespoke-marp-active');
+    if (!slide) return [];
+    const objs = Array.from(slide.querySelectorAll('object.fragment-svg'));
+    return objs.flatMap(fragmentsIn);
+  };
+
+  const resetFragments = (obj) => {
+    fragmentsIn(obj).forEach(f => f.classList.remove('shown'));
+  };
+
+  // When an <object> SVG loads, pre-hide its fragments (CSS already does this,
+  // but we also clear any .shown class in case of re-entry).
+  document.querySelectorAll('object.fragment-svg').forEach(obj => {
+    const init = () => resetFragments(obj);
+    if (obj.contentDocument && obj.contentDocument.readyState === 'complete') init();
+    obj.addEventListener('load', init);
+  });
+
+  // Reset fragments in all SVGs whenever the active slide changes.
+  // Bespoke navigates via history.replaceState (no hashchange/popstate),
+  // so we watch for the `bespoke-marp-active` class toggling on slide roots.
+  const slideObserver = new MutationObserver(() => {
+    document.querySelectorAll('object.fragment-svg').forEach(resetFragments);
+  });
+  const startObserving = () => {
+    document.querySelectorAll('svg.bespoke-marp-slide').forEach(slide => {
+      slideObserver.observe(slide, { attributes: true, attributeFilter: ['class'] });
+    });
+  };
+  if (document.readyState !== 'loading') startObserving();
+  else document.addEventListener('DOMContentLoaded', startObserving);
+
+  window.addEventListener('keydown', (e) => {
+    // Ignore when typing into inputs (presenter notes etc)
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+    const frags = activeSvgFragments();
+    if (frags.length === 0) return; // no fragments on current slide — let Marp handle it
+
+    if (ADVANCE_KEYS.has(e.key)) {
+      const next = frags.find(f => !f.classList.contains('shown'));
+      if (next) {
+        next.classList.add('shown');
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    } else if (REWIND_KEYS.has(e.key)) {
+      const shown = frags.filter(f => f.classList.contains('shown'));
+      if (shown.length) {
+        shown[shown.length - 1].classList.remove('shown');
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+  }, true); // capture phase, runs before bespoke
+})();
+</script>

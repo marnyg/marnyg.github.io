@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500"
+     font-family="Inter, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <style>
+      .actor-label { fill: #cdd6f4; font-size: 17px; font-weight: 600; }
+      .sub-label   { fill: #a6adc8; font-size: 12px; }
+      .step-label  { fill: #cdd6f4; font-size: 14px; }
+      .step-sub    { fill: #a6adc8; font-size: 12px; font-style: italic; }
+      .num-badge   { fill: #1e1e2e; font-size: 12px; font-weight: 700; }
+      .note-text   { fill: #a6adc8; font-size: 12px; font-style: italic; }
+      .lifeline    { stroke: #45475a; stroke-width: 1; stroke-dasharray: 4 4; }
+      .state-tag   { fill: #a6adc8; font-size: 12px; font-style: italic; }
+      .legend-title { fill: #cba6f7; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+      .legend-text  { fill: #a6adc8; font-size: 13px; }
+      .box         { fill: #313244; }
+
+      /* Fragments — hidden by default, revealed by host script adding .shown */
+      [data-fragment] { opacity: 0; transition: opacity 0.25s ease; }
+      [data-fragment].shown { opacity: 1; }
+    </style>
+    <marker id="seqArrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <polygon points="0 0, 10 5, 0 10" fill="#cba6f7"/>
+    </marker>
+  </defs>
+
+  <!-- Lane headers -->
+  <g transform="translate(40, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#89b4fa" stroke-width="2"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">Developer</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">shell + browser</text>
+  </g>
+  <g transform="translate(240, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#94e2d5" stroke-width="2"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">grove CLI</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">local binary</text>
+  </g>
+  <g transform="translate(440, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#89dceb" stroke-width="2"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">kubectl</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">+ kubelogin</text>
+  </g>
+  <g transform="translate(660, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#f9e2af" stroke-width="2"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">Zitadel</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">OIDC provider</text>
+  </g>
+  <g transform="translate(880, 20)">
+    <rect width="180" height="50" rx="8" class="box" stroke="#cba6f7" stroke-width="2"/>
+    <text x="90" y="22" class="actor-label" text-anchor="middle">k8s API</text>
+    <text x="90" y="40" class="sub-label"  text-anchor="middle">RBAC via OIDC groups</text>
+  </g>
+
+  <!-- Lifelines -->
+  <line x1="120" y1="70" x2="120" y2="440" class="lifeline"/>
+  <line x1="320" y1="70" x2="320" y2="440" class="lifeline"/>
+  <line x1="520" y1="70" x2="520" y2="440" class="lifeline"/>
+  <line x1="740" y1="70" x2="740" y2="440" class="lifeline"/>
+  <line x1="970" y1="70" x2="970" y2="440" class="lifeline"/>
+
+  <!-- Fragment 1: Step 1 — Developer → grove CLI -->
+  <g data-fragment="1">
+    <path d="M 120 120 L 315 120" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="130" cy="120" r="10" fill="#cba6f7"/>
+    <text x="130" y="124" class="num-badge" text-anchor="middle">1</text>
+    <text x="220" y="110" class="step-label" text-anchor="middle">grove kubeconfig --merge</text>
+    <text x="220" y="136" class="step-sub"   text-anchor="middle">fetches kubeconfig over VPN, merges into ~/.kube/config</text>
+  </g>
+
+  <!-- Fragment 2: Step 2 — Developer → kubectl -->
+  <g data-fragment="2">
+    <path d="M 120 180 L 515 180" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="130" cy="180" r="10" fill="#cba6f7"/>
+    <text x="130" y="184" class="num-badge" text-anchor="middle">2</text>
+    <text x="320" y="170" class="step-label" text-anchor="middle">kubectl get ns</text>
+  </g>
+
+  <!-- Fragment 3: Developer / Platform divider -->
+  <g data-fragment="3">
+    <line x1="20" y1="210" x2="1080" y2="210" stroke="#f9e2af" stroke-width="1.5" stroke-dasharray="10 5"/>
+    <rect x="420" y="197" width="260" height="26" rx="4" fill="#1e1e2e"/>
+    <text x="550" y="216" text-anchor="middle" fill="#f9e2af" font-size="13px" font-weight="600" letter-spacing="0.05em">▲ DEVELOPER  ·  PLATFORM ▼</text>
+  </g>
+
+  <!-- Fragment 4: Step 3 — kubectl → Zitadel -->
+  <g data-fragment="4">
+    <path d="M 520 240 L 735 240" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="530" cy="240" r="10" fill="#cba6f7"/>
+    <text x="530" y="244" class="num-badge" text-anchor="middle">3</text>
+    <text x="628" y="230" class="step-label" text-anchor="middle">browser → OIDC login</text>
+    <text x="628" y="256" class="step-sub"   text-anchor="middle">first call only — opens browser</text>
+  </g>
+
+  <!-- Fragment 5: Step 4 — Zitadel → kubectl -->
+  <g data-fragment="5">
+    <path d="M 740 300 L 525 300" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="730" cy="300" r="10" fill="#cba6f7"/>
+    <text x="730" y="304" class="num-badge" text-anchor="middle">4</text>
+    <text x="628" y="290" class="step-label" text-anchor="middle">id_token (JWT)</text>
+    <text x="628" y="316" class="step-sub"   text-anchor="middle">cached locally — reused next time</text>
+  </g>
+
+  <!-- Fragment 6: Step 5 — kubectl → k8s API -->
+  <g data-fragment="6">
+    <path d="M 520 360 L 965 360" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="530" cy="360" r="10" fill="#cba6f7"/>
+    <text x="530" y="364" class="num-badge" text-anchor="middle">5</text>
+    <text x="745" y="350" class="step-label" text-anchor="middle">GET /namespaces  +  Bearer token</text>
+    <text x="745" y="376" class="step-sub"   text-anchor="middle">API validates JWT against Zitadel, maps groups → RBAC</text>
+  </g>
+
+  <!-- Fragment 7: Step 6 — k8s API → Developer -->
+  <g data-fragment="7">
+    <path d="M 970 420 L 125 420" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="960" cy="420" r="10" fill="#cba6f7"/>
+    <text x="960" y="424" class="num-badge" text-anchor="middle">6</text>
+    <text x="545" y="410" class="step-label" text-anchor="middle">namespaces (only what your Zitadel groups allow)</text>
+  </g>
+
+  <!-- Fragment 8: State tags -->
+  <g data-fragment="8">
+    <text x="120" y="455" class="state-tag" text-anchor="middle">state: ~/.kube/config</text>
+    <text x="520" y="455" class="state-tag" text-anchor="middle">state: token cache</text>
+    <text x="740" y="455" class="state-tag" text-anchor="middle">state: users + groups</text>
+  </g>
+
+  <!-- Context legend (always visible) -->
+  <g transform="translate(30, 485)">
+    <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#cdd6f4" font-weight="600">Actors</tspan> columns   ·   <tspan fill="#cdd6f4" font-weight="600">State</tspan> tags below lifelines   ·   <tspan fill="#cdd6f4" font-weight="600">Surfaces</tspan> CLI commands + one browser redirect</text>
+  </g>
+</svg>

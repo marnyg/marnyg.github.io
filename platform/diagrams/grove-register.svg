@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500"
+     font-family="Inter, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <style>
+      .actor-label { fill: #cdd6f4; font-size: 16px; font-weight: 600; }
+      .sub-label   { fill: #a6adc8; font-size: 11px; }
+      .step-label  { fill: #cdd6f4; font-size: 14px; }
+      .step-sub    { fill: #a6adc8; font-size: 12px; font-style: italic; }
+      .num-badge   { fill: #1e1e2e; font-size: 12px; font-weight: 700; }
+      .lifeline    { stroke: #45475a; stroke-width: 1; stroke-dasharray: 4 4; }
+      .state-tag   { fill: #a6adc8; font-size: 12px; font-style: italic; }
+      .legend-title { fill: #cba6f7; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+      .legend-text  { fill: #a6adc8; font-size: 13px; }
+      .box         { fill: #313244; }
+
+      /* Fragments — hidden by default, revealed by host script adding .shown */
+      [data-fragment] { opacity: 0; transition: opacity 0.25s ease; }
+      [data-fragment].shown { opacity: 1; }
+    </style>
+    <marker id="seqArrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <polygon points="0 0, 10 5, 0 10" fill="#cba6f7"/>
+    </marker>
+  </defs>
+
+  <!-- Lane headers -->
+  <g transform="translate(20, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#89b4fa" stroke-width="2"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">Developer</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">local repo + CLI</text>
+  </g>
+  <g transform="translate(200, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#94e2d5" stroke-width="2"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">grove CLI</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">local binary</text>
+  </g>
+  <g transform="translate(380, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#a6e3a1" stroke-width="2"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">Forgejo</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">git hosting</text>
+  </g>
+  <g transform="translate(560, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#cba6f7" stroke-width="3"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">Operator</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">reconciles App CR</text>
+  </g>
+  <g transform="translate(740, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#fab387" stroke-width="2"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">ArgoCD + Build</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">sync + pipeline</text>
+  </g>
+  <g transform="translate(920, 20)">
+    <rect width="160" height="50" rx="8" class="box" stroke="#89dceb" stroke-width="2"/>
+    <text x="80" y="22" class="actor-label" text-anchor="middle">Cluster</text>
+    <text x="80" y="40" class="sub-label"  text-anchor="middle">pods + ingress</text>
+  </g>
+
+  <!-- Lifelines -->
+  <line x1="100" y1="70"  x2="100"  y2="420" class="lifeline"/>
+  <line x1="280" y1="70"  x2="280"  y2="420" class="lifeline"/>
+  <line x1="460" y1="70"  x2="460"  y2="420" class="lifeline"/>
+  <line x1="640" y1="70"  x2="640"  y2="420" class="lifeline"/>
+  <line x1="820" y1="70"  x2="820"  y2="420" class="lifeline"/>
+  <line x1="1000" y1="70" x2="1000" y2="420" class="lifeline"/>
+
+  <!-- Fragment 1: Step 1 — Dev runs grove register -->
+  <g data-fragment="1">
+    <path d="M 100 115 L 275 115" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="110" cy="115" r="10" fill="#cba6f7"/>
+    <text x="110" y="119" class="num-badge" text-anchor="middle">1</text>
+    <text x="188" y="105" class="step-label" text-anchor="middle">grove register</text>
+  </g>
+
+  <!-- Fragment 2: Developer / Platform divider -->
+  <g data-fragment="2">
+    <line x1="20" y1="140" x2="1080" y2="140" stroke="#f9e2af" stroke-width="1.5" stroke-dasharray="10 5"/>
+    <rect x="420" y="127" width="260" height="26" rx="4" fill="#1e1e2e"/>
+    <text x="550" y="146" text-anchor="middle" fill="#f9e2af" font-size="13px" font-weight="600" letter-spacing="0.05em">▲ DEVELOPER  ·  PLATFORM ▼</text>
+  </g>
+
+  <!-- Fragment 3: Step 2 — grove → Forgejo -->
+  <g data-fragment="3">
+    <path d="M 280 175 L 455 175" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="290" cy="175" r="10" fill="#cba6f7"/>
+    <text x="290" y="179" class="num-badge" text-anchor="middle">2</text>
+    <text x="370" y="165" class="step-label" text-anchor="middle">create repo + push</text>
+  </g>
+
+  <!-- Fragment 4: Step 3 — grove → Operator -->
+  <g data-fragment="4">
+    <path d="M 280 230 L 635 230" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="290" cy="230" r="10" fill="#cba6f7"/>
+    <text x="290" y="234" class="num-badge" text-anchor="middle">3</text>
+    <text x="460" y="220" class="step-label" text-anchor="middle">kubectl apply App CR</text>
+    <text x="460" y="246" class="step-sub"   text-anchor="middle">declares desired app to platform</text>
+  </g>
+
+  <!-- Fragment 5: Step 4 — Operator → ArgoCD -->
+  <g data-fragment="5">
+    <path d="M 640 290 L 815 290" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="650" cy="290" r="10" fill="#cba6f7"/>
+    <text x="650" y="294" class="num-badge" text-anchor="middle">4</text>
+    <text x="730" y="280" class="step-label" text-anchor="middle">create Argo Application</text>
+  </g>
+
+  <!-- Fragment 6: Step 5 — ArgoCD → Cluster -->
+  <g data-fragment="6">
+    <path d="M 820 345 L 995 345" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="830" cy="345" r="10" fill="#cba6f7"/>
+    <text x="830" y="349" class="num-badge" text-anchor="middle">5</text>
+    <text x="910" y="335" class="step-label" text-anchor="middle">build + deploy</text>
+    <text x="910" y="361" class="step-sub"   text-anchor="middle">Dagger pipeline → image → rollout</text>
+  </g>
+
+  <!-- Fragment 7: Step 6 — Cluster → Developer -->
+  <g data-fragment="7">
+    <path d="M 1000 405 L 105 405" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
+    <circle cx="990" cy="405" r="10" fill="#cba6f7"/>
+    <text x="990" y="409" class="num-badge" text-anchor="middle">6</text>
+    <text x="545" y="395" class="step-label" text-anchor="middle">app URL — hello world is live</text>
+  </g>
+
+  <!-- Fragment 8: State tags -->
+  <g data-fragment="8">
+    <text x="100"  y="440" class="state-tag" text-anchor="middle">local code</text>
+    <text x="460"  y="440" class="state-tag" text-anchor="middle">git repo (source of truth)</text>
+    <text x="640"  y="440" class="state-tag" text-anchor="middle">App CR (desired)</text>
+    <text x="820"  y="440" class="state-tag" text-anchor="middle">Application + image</text>
+    <text x="1000" y="440" class="state-tag" text-anchor="middle">live workload</text>
+  </g>
+
+  <!-- Context legend (always visible) -->
+  <g transform="translate(30, 485)">
+    <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#cdd6f4" font-weight="600">Actors</tspan> columns   ·   <tspan fill="#cdd6f4" font-weight="600">State</tspan> tags below lifelines   ·   <tspan fill="#cdd6f4" font-weight="600">Surfaces</tspan> one CLI command → the rest is declarative + automated</text>
+  </g>
+</svg>

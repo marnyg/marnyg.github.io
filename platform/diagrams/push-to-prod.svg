@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 420"
+     font-family="Inter, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <style>
+      .actor-label  { fill: #cdd6f4; font-size: 17px; font-weight: 600; }
+      .sub-label    { fill: #a6adc8; font-size: 12px; }
+      .arrow-label  { fill: #cdd6f4; font-size: 13px; }
+      .arrow-sub    { fill: #a6adc8; font-size: 11px; font-style: italic; }
+      .state-title  { fill: #f9e2af; font-size: 11px; font-weight: 600; }
+      .note         { fill: #a6adc8; font-size: 14px; font-style: italic; }
+      .legend-title { fill: #cba6f7; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+      .legend-text  { fill: #a6adc8; font-size: 13px; }
+      .box          { fill: #313244; }
+    </style>
+    <marker id="flowArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <polygon points="0 0, 10 5, 0 10" fill="#cba6f7"/>
+    </marker>
+  </defs>
+
+  <!-- Developer / automatic divider (vertical, between Developer and Forgejo) -->
+  <line x1="210" y1="30" x2="210" y2="380" stroke="#f9e2af" stroke-width="1.5" stroke-dasharray="10 5"/>
+  <rect x="155" y="35" width="110" height="24" rx="4" fill="#1e1e2e"/>
+  <text x="210" y="52" text-anchor="middle" fill="#f9e2af" font-size="12px" font-weight="600" letter-spacing="0.05em">◀ DEV · AUTO ▶</text>
+
+  <!-- Flow row (5 boxes left to right) -->
+  <g transform="translate(30, 140)">
+    <rect width="160" height="80" rx="8" class="box" stroke="#89b4fa" stroke-width="2"/>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">Developer</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">edits · commits · pushes</text>
+    <text x="80" y="70" class="sub-label"  text-anchor="middle" fill="#89b4fa">surface: terminal</text>
+  </g>
+  <g transform="translate(230, 140)">
+    <rect width="160" height="80" rx="8" class="box" stroke="#a6e3a1" stroke-width="2"/>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">receives commit to main</text>
+    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: git ref</text>
+  </g>
+  <g transform="translate(430, 140)">
+    <rect width="160" height="80" rx="8" class="box" stroke="#fab387" stroke-width="2"/>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">ArgoCD</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">detects drift, syncs</text>
+    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: desired vs live</text>
+  </g>
+  <g transform="translate(630, 140)">
+    <rect width="160" height="80" rx="8" class="box" stroke="#f9e2af" stroke-width="2"/>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">Build (Dagger)</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">runs CI, pushes image</text>
+    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: container image</text>
+  </g>
+  <g transform="translate(830, 140)">
+    <rect width="180" height="80" rx="8" class="box" stroke="#89dceb" stroke-width="2"/>
+    <text x="90" y="32" class="actor-label" text-anchor="middle">Cluster</text>
+    <text x="90" y="52" class="sub-label"  text-anchor="middle">rolling update → live</text>
+    <text x="90" y="70" class="state-title" text-anchor="middle">STATE: running pods</text>
+  </g>
+
+  <!-- Arrows between boxes with labels -->
+  <path d="M 190 180 L 225 180" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+  <text x="207" y="125" class="arrow-label" text-anchor="middle">git push</text>
+
+  <path d="M 390 180 L 425 180" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+  <text x="407" y="125" class="arrow-label" text-anchor="middle">webhook</text>
+
+  <path d="M 590 180 L 625 180" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+  <text x="607" y="125" class="arrow-label" text-anchor="middle">triggers</text>
+
+  <path d="M 790 180 L 825 180" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+  <text x="807" y="125" class="arrow-label" text-anchor="middle">apply manifest</text>
+  <text x="807" y="140" class="arrow-sub"   text-anchor="middle">(new image tag)</text>
+
+  <!-- Title + narration -->
+  <text x="550" y="70"  class="note" text-anchor="middle" fill="#cdd6f4" font-size="16" font-weight="600">One push to main — the platform does the rest</text>
+  <text x="550" y="92"  class="note" text-anchor="middle">Developer never touches Argo, Forgejo, or the cluster directly</text>
+
+  <!-- Developer intent note -->
+  <text x="550" y="300" class="note" text-anchor="middle">Typical turnaround: seconds for the push · ~1–2 min for build · ~30 s for rollout</text>
+
+  <!-- Context legend -->
+  <g transform="translate(30, 400)">
+    <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#cdd6f4" font-weight="600">Actors</tspan> dev + 4 platform services   ·   <tspan fill="#cdd6f4" font-weight="600">State</tspan> lives at each stage — git, desired, image, pods   ·   <tspan fill="#cdd6f4" font-weight="600">Surface</tspan> a single git push</text>
+  </g>
+</svg>

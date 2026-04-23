@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440"
+     font-family="Inter, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <style>
+      .actor-label  { fill: #cdd6f4; font-size: 18px; font-weight: 600; }
+      .sub-label    { fill: #a6adc8; font-size: 12px; }
+      .arrow-label  { fill: #a6adc8; font-size: 14px; }
+      .state-title  { fill: #f9e2af; font-size: 13px; font-weight: 600; }
+      .state-label  { fill: #a6adc8; font-size: 13px; font-style: italic; }
+      .note         { fill: #a6adc8; font-size: 15px; }
+      .legend-title { fill: #cba6f7; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+      .legend-text  { fill: #a6adc8; font-size: 13px; }
+      .box          { fill: #313244; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <polygon points="0 0, 10 5, 0 10" fill="#a6adc8"/>
+    </marker>
+  </defs>
+
+  <!-- Admin -->
+  <g transform="translate(50, 50)">
+    <rect width="170" height="70" rx="8" class="box" stroke="#bac2de" stroke-width="2"/>
+    <text x="85" y="32" class="actor-label" text-anchor="middle">Admin</text>
+    <text x="85" y="52" class="sub-label"  text-anchor="middle">Zitadel console</text>
+  </g>
+
+  <!-- Zitadel (center) -->
+  <g transform="translate(440, 25)">
+    <rect width="220" height="160" rx="12" class="box" stroke="#f9e2af" stroke-width="3"/>
+    <text x="110" y="32" class="actor-label" text-anchor="middle">Zitadel</text>
+    <text x="110" y="56" class="state-title" text-anchor="middle">identity source of truth</text>
+    <line x1="24" y1="74" x2="196" y2="74" stroke="#45475a" stroke-width="1"/>
+    <text x="110" y="97"  class="state-label" text-anchor="middle">state: users</text>
+    <text x="110" y="117" class="state-label" text-anchor="middle">groups</text>
+    <text x="110" y="137" class="state-label" text-anchor="middle">policies</text>
+  </g>
+
+  <!-- Developer -->
+  <g transform="translate(880, 50)">
+    <rect width="170" height="70" rx="8" class="box" stroke="#89b4fa" stroke-width="2"/>
+    <text x="85" y="32" class="actor-label" text-anchor="middle">Developer</text>
+    <text x="85" y="52" class="sub-label"  text-anchor="middle">browser + Netbird client</text>
+  </g>
+
+  <!-- Admin -> Zitadel -->
+  <path d="M 225 85 L 435 100" stroke="#a6adc8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="330" y="75" class="arrow-label" text-anchor="middle">creates user + groups</text>
+
+  <!-- Developer -> Zitadel -->
+  <path d="M 875 85 L 665 100" stroke="#a6adc8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="770" y="75" class="arrow-label" text-anchor="middle">OIDC login (browser)</text>
+
+  <!-- Services row -->
+  <g transform="translate(60, 280)">
+    <rect width="160" height="65" rx="8" class="box" stroke="#a6e3a1" stroke-width="2"/>
+    <text x="80" y="30" class="actor-label" text-anchor="middle">Forgejo</text>
+    <text x="80" y="50" class="sub-label"  text-anchor="middle">git hosting</text>
+  </g>
+  <g transform="translate(260, 280)">
+    <rect width="160" height="65" rx="8" class="box" stroke="#fab387" stroke-width="2"/>
+    <text x="80" y="30" class="actor-label" text-anchor="middle">ArgoCD</text>
+    <text x="80" y="50" class="sub-label"  text-anchor="middle">CD / GitOps</text>
+  </g>
+  <g transform="translate(460, 280)">
+    <rect width="160" height="65" rx="8" class="box" stroke="#f5c2e7" stroke-width="2"/>
+    <text x="80" y="30" class="actor-label" text-anchor="middle">Netbird</text>
+    <text x="80" y="50" class="sub-label"  text-anchor="middle">VPN dashboard</text>
+  </g>
+  <g transform="translate(660, 280)">
+    <rect width="160" height="65" rx="8" class="box" stroke="#89dceb" stroke-width="2"/>
+    <text x="80" y="30" class="actor-label" text-anchor="middle">kubectl / k8s API</text>
+    <text x="80" y="50" class="sub-label"  text-anchor="middle">cluster access</text>
+  </g>
+  <g transform="translate(860, 280)">
+    <rect width="170" height="65" rx="8" class="box" stroke="#cba6f7" stroke-width="2"/>
+    <text x="85" y="30" class="actor-label" text-anchor="middle">Netbird VPN</text>
+    <text x="85" y="50" class="sub-label"  text-anchor="middle">overlay network</text>
+  </g>
+
+  <!-- SSO trust arrows (services → Zitadel bottom) -->
+  <path d="M 140 280 Q 140 230 460 185" stroke="#a6adc8" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+  <path d="M 340 280 Q 340 240 505 185" stroke="#a6adc8" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+  <path d="M 540 280 Q 540 245 555 185" stroke="#a6adc8" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+  <path d="M 740 280 Q 740 240 600 185" stroke="#a6adc8" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+  <path d="M 945 280 Q 945 230 640 185" stroke="#a6adc8" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+
+  <text x="550" y="245" class="arrow-label" text-anchor="middle">services trust Zitadel — SSO via OIDC</text>
+
+  <!-- Context legend bottom-left -->
+  <g transform="translate(30, 395)">
+    <text x="0" y="0" class="legend-title">CONTEXT</text>
+    <text x="0" y="20" class="legend-text"><tspan fill="#cdd6f4" font-weight="600">Actors</tspan> admin · developer · Zitadel · services   ·   <tspan fill="#cdd6f4" font-weight="600">State</tspan> lives in Zitadel   ·   <tspan fill="#cdd6f4" font-weight="600">Surfaces</tspan> admin console · VPN client · browser SSO</text>
+  </g>
+</svg>

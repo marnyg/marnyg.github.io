@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440"
+     font-family="Inter, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <style>
+      .actor-label  { fill: #cdd6f4; font-size: 16px; font-weight: 600; }
+      .sub-label    { fill: #a6adc8; font-size: 12px; }
+      .arrow-label  { fill: #cdd6f4; font-size: 13px; }
+      .arrow-sub    { fill: #a6adc8; font-size: 11px; font-style: italic; }
+      .state-title  { fill: #f9e2af; font-size: 11px; font-weight: 600; }
+      .note         { fill: #a6adc8; font-size: 14px; font-style: italic; }
+      .legend-title { fill: #cba6f7; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+      .legend-text  { fill: #a6adc8; font-size: 13px; }
+      .box          { fill: #313244; }
+    </style>
+    <marker id="flowArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <polygon points="0 0, 10 5, 0 10" fill="#cba6f7"/>
+    </marker>
+    <marker id="cleanupArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <polygon points="0 0, 10 5, 0 10" fill="#f38ba8"/>
+    </marker>
+  </defs>
+
+  <!-- Developer / automatic divider (vertical, between Developer and Forgejo) -->
+  <line x1="210" y1="30" x2="210" y2="400" stroke="#f9e2af" stroke-width="1.5" stroke-dasharray="10 5"/>
+  <rect x="155" y="35" width="110" height="24" rx="4" fill="#1e1e2e"/>
+  <text x="210" y="52" text-anchor="middle" fill="#f9e2af" font-size="12px" font-weight="600" letter-spacing="0.05em">◀ DEV · AUTO ▶</text>
+
+  <!-- Developer (left) -->
+  <g transform="translate(30, 170)">
+    <rect width="160" height="80" rx="8" class="box" stroke="#89b4fa" stroke-width="2"/>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">Developer</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">branch + open PR</text>
+    <text x="80" y="70" class="sub-label"  text-anchor="middle" fill="#89b4fa">surface: Forgejo UI</text>
+  </g>
+
+  <!-- Forgejo -->
+  <g transform="translate(230, 170)">
+    <rect width="160" height="80" rx="8" class="box" stroke="#a6e3a1" stroke-width="2"/>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">emits PR event</text>
+    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: PR ref</text>
+  </g>
+
+  <!-- Operator -->
+  <g transform="translate(430, 170)">
+    <rect width="160" height="80" rx="8" class="box" stroke="#cba6f7" stroke-width="3"/>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">Operator</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">creates preview App CR</text>
+    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: preview envs</text>
+  </g>
+
+  <!-- ArgoCD + Build -->
+  <g transform="translate(630, 170)">
+    <rect width="160" height="80" rx="8" class="box" stroke="#fab387" stroke-width="2"/>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">ArgoCD + Build</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">spins up preview</text>
+    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: preview-pr-123.*</text>
+  </g>
+
+  <!-- Preview env (cluster) -->
+  <g transform="translate(830, 170)">
+    <rect width="180" height="80" rx="8" class="box" stroke="#89dceb" stroke-width="2"/>
+    <text x="90" y="32" class="actor-label" text-anchor="middle">Preview URL</text>
+    <text x="90" y="52" class="sub-label"  text-anchor="middle">posted back to PR comment</text>
+    <text x="90" y="70" class="state-title" text-anchor="middle">ephemeral pods + ingress</text>
+  </g>
+
+  <!-- Arrows -->
+  <path d="M 190 210 L 225 210" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+  <text x="207" y="155" class="arrow-label" text-anchor="middle">push branch</text>
+
+  <path d="M 390 210 L 425 210" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+  <text x="407" y="155" class="arrow-label" text-anchor="middle">PR webhook</text>
+
+  <path d="M 590 210 L 625 210" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+  <text x="607" y="155" class="arrow-label" text-anchor="middle">reconcile</text>
+
+  <path d="M 790 210 L 825 210" stroke="#cba6f7" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+  <text x="807" y="155" class="arrow-label" text-anchor="middle">deploy preview</text>
+
+  <!-- Reviewer path -->
+  <g transform="translate(835, 320)">
+    <rect width="180" height="60" rx="8" class="box" stroke="#bac2de" stroke-width="2"/>
+    <text x="90" y="26" class="actor-label" text-anchor="middle">Reviewer</text>
+    <text x="90" y="46" class="sub-label"  text-anchor="middle">clicks link → sees change live</text>
+  </g>
+  <path d="M 920 320 L 920 255" stroke="#cba6f7" stroke-width="1.5" fill="none" stroke-dasharray="4 4" marker-end="url(#flowArrow)"/>
+
+  <!-- Cleanup arrow (red) -->
+  <path d="M 110 250 Q 110 390 820 360" stroke="#f38ba8" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#cleanupArrow)"/>
+  <text x="460" y="385" class="arrow-sub" text-anchor="middle" fill="#f38ba8">on merge / close: preview is cleaned up automatically</text>
+
+  <!-- Title -->
+  <text x="550" y="70"  class="note" text-anchor="middle" fill="#cdd6f4" font-size="16" font-weight="600">Every PR gets its own live environment</text>
+  <text x="550" y="92"  class="note" text-anchor="middle">reviewers see the change running before it hits main</text>
+
+  <!-- Context legend -->
+  <g transform="translate(30, 425)">
+    <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#cdd6f4" font-weight="600">Actors</tspan> dev · reviewer · 3 platform services   ·   <tspan fill="#cdd6f4" font-weight="600">State</tspan> ephemeral preview env per PR   ·   <tspan fill="#cdd6f4" font-weight="600">Surfaces</tspan> Forgejo PR + preview URL</text>
+  </g>
+</svg>
