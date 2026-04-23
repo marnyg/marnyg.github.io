@@ -12,8 +12,8 @@
       .legend-text  { fill: #A1A7AE; font-size: 13px; }
       .box          { fill: #000000; }
     </style>
-    <marker id="flowArrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-      <circle cx="5" cy="5" r="3.5" fill="#3366FF"/>
+    <marker id="flowArrow" markerWidth="7" markerHeight="7" refX="6.5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#3366FF"/>
     </marker>
   </defs>
 
@@ -26,26 +26,26 @@
   <g transform="translate(30, 140)">
     <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
     <text x="80" y="32" class="actor-label" text-anchor="middle">Developer</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">edits · commits · pushes</text>
-    <text x="80" y="70" class="sub-label"  text-anchor="middle">surface: terminal</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">clicks merge on the PR</text>
+    <text x="80" y="70" class="sub-label"  text-anchor="middle">surface: Forgejo UI</text>
   </g>
   <g transform="translate(230, 140)">
     <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
     <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">receives commit to main</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">main is updated</text>
     <text x="80" y="70" class="state-title" text-anchor="middle">STATE: git ref</text>
   </g>
   <g transform="translate(430, 140)">
     <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">ArgoCD</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">detects drift, syncs</text>
-    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: desired vs live</text>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo Actions</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">docker build + push image</text>
+    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: container image</text>
   </g>
   <g transform="translate(630, 140)">
     <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">Build (Dagger)</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">runs CI, pushes image</text>
-    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: container image</text>
+    <text x="80" y="32" class="actor-label" text-anchor="middle">ArgoCD</text>
+    <text x="80" y="52" class="sub-label"  text-anchor="middle">detects drift, syncs</text>
+    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: desired vs live</text>
   </g>
   <g transform="translate(830, 140)">
     <rect width="180" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
@@ -56,27 +56,26 @@
 
   <!-- Arrows between boxes with labels -->
   <path d="M 190 180 L 225 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="207" y="125" class="arrow-label" text-anchor="middle">git push</text>
+  <text x="207" y="125" class="arrow-label" text-anchor="middle">merge</text>
 
   <path d="M 390 180 L 425 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="407" y="125" class="arrow-label" text-anchor="middle">webhook</text>
+  <text x="407" y="125" class="arrow-label" text-anchor="middle">post-merge CI</text>
 
   <path d="M 590 180 L 625 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="607" y="125" class="arrow-label" text-anchor="middle">triggers</text>
+  <text x="607" y="125" class="arrow-label" text-anchor="middle">new image + manifest</text>
 
   <path d="M 790 180 L 825 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="807" y="125" class="arrow-label" text-anchor="middle">apply manifest</text>
-  <text x="807" y="140" class="arrow-sub"   text-anchor="middle">(new image tag)</text>
+  <text x="807" y="125" class="arrow-label" text-anchor="middle">apply + rollout</text>
 
   <!-- Title + narration -->
-  <text x="550" y="70"  class="note" text-anchor="middle" fill="#F0EEED" font-size="16" font-weight="600">One push to main — the platform does the rest</text>
-  <text x="550" y="92"  class="note" text-anchor="middle">Developer never touches Argo, Forgejo, or the cluster directly</text>
+  <text x="550" y="70"  class="note" text-anchor="middle" fill="#F0EEED" font-size="16" font-weight="600">Merge — and the platform does the rest</text>
+  <text x="550" y="92"  class="note" text-anchor="middle">Picks up where the PR preview left off: the merge is the only click</text>
 
   <!-- Developer intent note -->
-  <text x="550" y="300" class="note" text-anchor="middle">Typical turnaround: seconds for the push · ~1–2 min for build · ~30 s for rollout</text>
+  <text x="550" y="300" class="note" text-anchor="middle">Typical turnaround: ~1–2 min for build · ~30 s for rollout</text>
 
   <!-- Context legend -->
   <g transform="translate(30, 400)">
-    <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#F0EEED" font-weight="600">Actors</tspan> dev + 4 platform services   ·   <tspan fill="#F0EEED" font-weight="600">State</tspan> lives at each stage — git, desired, image, pods   ·   <tspan fill="#F0EEED" font-weight="600">Surface</tspan> a single git push</text>
+    <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#F0EEED" font-weight="600">Actors</tspan> dev + 4 platform services   ·   <tspan fill="#F0EEED" font-weight="600">State</tspan> lives at each stage — git, image, desired, pods   ·   <tspan fill="#F0EEED" font-weight="600">Surface</tspan> one click: merge</text>
   </g>
 </svg>

@@ -30,7 +30,7 @@ footer: "Internal Developer Platform — Live Demo"
 2. **Havard** showed the operator magic under the hood — the *how*
 3. **Me** — tying it all together with a live demo — the *what it feels like*
 
-> Today is all about the developer experience. No infra knowledge needed.
+> This presentation is all about the developer experience.
 
 ---
 
@@ -87,7 +87,7 @@ Kubernetes at the core. GitOps everything.
 
 ---
 
-<!-- _class: demo -->
+<!-- _class: demo dense -->
 
 ## `kubectl` — the steps
 
@@ -107,7 +107,7 @@ Kubernetes at the core. GitOps everything.
 
 ## Creating a new app
 
-<object class="fragment-svg" type="image/svg+xml" data="diagrams/grove-register.svg" style="width:1000px;height:454px;"></object>
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/grove-register.svg" style="width:1000px;height:491px;"></object>
 
 ---
 
@@ -143,6 +143,30 @@ Kubernetes at the core. GitOps everything.
 
 <!-- _class: demo -->
 
+## `grove register` — recording
+
+<video controls src="demos/grove-register.mp4" style="width:1000px;"></video>
+
+---
+
+<!-- _class: demo -->
+
+## PR preview environments
+
+![w:1000](diagrams/pr-preview.svg)
+
+---
+
+<!-- _class: demo -->
+
+## PR preview — recording
+
+<video controls src="demos/pr-preview.mp4" style="width:1000px;"></video>
+
+---
+
+<!-- _class: demo -->
+
 ## Pushing a feature to prod
 
 ![w:1000](diagrams/push-to-prod.svg)
@@ -153,20 +177,22 @@ Kubernetes at the core. GitOps everything.
 
 ## Push to prod — the steps
 
-1. Make a change to the app locally
-2. `git push` to main
-3. Build pipeline picks it up automatically
-4. New version gets built and deployed to prod
+Once the PR looks good on the preview env:
 
-> The developer just pushes code. The platform handles the rest.
+1. Merge the PR — that's the only click the developer makes
+2. Forgejo Actions runs post-merge — docker build + push image
+3. ArgoCD sees the manifest update, syncs to cluster
+4. Rolling update → new version live
+
+> One click to merge. The rest is automatic.
 
 ---
 
-<!-- _class: demo optional -->
+<!-- _class: demo -->
 
-## PR preview environments
+## Push to prod — recording
 
-![w:1000](diagrams/pr-preview.svg)
+<video controls src="demos/push-to-prod.mp4" style="width:1000px;"></video>
 
 ---
 
@@ -179,15 +205,16 @@ Kubernetes at the core. GitOps everything.
 
 ---
 
-## What we're offering
+## The relationship we're looking for
 
-We're not selling a product.
+We work as an **enabling team** — not a product vendor.
 
-We're selling ourselves as an **enabling team**.
+- We bring a reference platform, not a product
+- We pair with your existing or new internal platform team
+- Together we implement and tune it to your stack, policies, and specific needs
+- We transfer the reasoning, document the hard parts, and leave when your team owns it end-to-end
 
-- We've built this a few times now
-- We have a working platform we use as a starting point
-- We come in, help you kick-start your own platform, transfer knowledge, and leave you self-sufficient
+> Success: you end up with a platform that fits — and a team that doesn't need us.
 
 ---
 

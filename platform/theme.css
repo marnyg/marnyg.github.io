@@ -101,6 +101,18 @@ section.optional h2::after {
   font-weight: 400;
 }
 
+/* Dense slides — tighten type + spacing for content that barely fits */
+section.dense {
+  font-size: 24px;
+}
+section.dense li {
+  margin-bottom: 0.2em;
+}
+section.dense ul,
+section.dense ol {
+  line-height: 1.45;
+}
+
 /* Numbered steps */
 ol {
   line-height: 1.7;

@@ -12,11 +12,11 @@
       .legend-text  { fill: #A1A7AE; font-size: 13px; }
       .box          { fill: #000000; }
     </style>
-    <marker id="flowArrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-      <circle cx="5" cy="5" r="3.5" fill="#3366FF"/>
+    <marker id="flowArrow" markerWidth="7" markerHeight="7" refX="6.5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#3366FF"/>
     </marker>
-    <marker id="cleanupArrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-      <circle cx="5" cy="5" r="3.5" fill="#F7675E"/>
+    <marker id="cleanupArrow" markerWidth="7" markerHeight="7" refX="6.5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#F7675E"/>
     </marker>
   </defs>
 
@@ -41,9 +41,9 @@
     <text x="80" y="70" class="state-title" text-anchor="middle">STATE: PR ref</text>
   </g>
 
-  <!-- Operator (HIGHLIGHTED) -->
+  <!-- Operator -->
   <g transform="translate(430, 170)">
-    <rect width="160" height="80" rx="8" class="box" stroke="#B0A7FF" stroke-width="3"/>
+    <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
     <text x="80" y="32" class="actor-label" text-anchor="middle">Operator</text>
     <text x="80" y="52" class="sub-label"  text-anchor="middle">creates preview App CR</text>
     <text x="80" y="70" class="state-title" text-anchor="middle">STATE: preview envs</text>

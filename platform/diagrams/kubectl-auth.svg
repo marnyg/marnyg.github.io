@@ -18,8 +18,8 @@
       [data-fragment] { opacity: 0; transition: opacity 0.25s ease; }
       [data-fragment].shown { opacity: 1; }
     </style>
-    <marker id="seqArrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-      <circle cx="5" cy="5" r="3.5" fill="#3366FF"/>
+    <marker id="seqArrow" markerWidth="7" markerHeight="7" refX="6.5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#3366FF"/>
     </marker>
   </defs>
 
