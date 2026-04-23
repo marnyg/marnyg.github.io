@@ -58,52 +58,6 @@ Kubernetes at the core. GitOps everything.
 
 <!-- _class: demo -->
 
-## Onboarding a new developer
-
-![w:1000](diagrams/onboarding.svg)
-
----
-
-<!-- _class: demo -->
-
-## Onboarding — the steps
-
-1. Create a new user in Zitadel
-2. User installs the Netbird VPN client
-3. User logs in to the VPN
-4. User can access all internal services — Forgejo, ArgoCD, Netbird dashboard — **all with SSO**
-5. User can run `kubectl` against the cluster — same identity, one more command
-
-> One identity, access to everything. Let's zoom in on that last step.
-
----
-
-<!-- _class: demo -->
-
-## `kubectl` access — one command
-
-<object class="fragment-svg" type="image/svg+xml" data="diagrams/kubectl-auth.svg" style="width:950px;height:432px;"></object>
-
----
-
-<!-- _class: demo dense -->
-
-## `kubectl` — the steps
-
-1. Run: `grove kubeconfig --merge --context-name dev`
-   - Fetches the kubeconfig from the cluster over the VPN
-   - Merges it into your existing `~/.kube/config`
-2. Run `kubectl get ns`
-   - First call opens a browser → Zitadel login → token cached locally
-   - Subsequent calls are instant
-3. The user's Zitadel groups become Kubernetes groups — same RBAC across the whole platform
-
-> Nothing sensitive in shell history. Rotate the password in Zitadel and every kubectl session re-auths.
-
----
-
-<!-- _class: demo -->
-
 ## Creating a new app
 
 <object class="fragment-svg" type="image/svg+xml" data="diagrams/grove-register.svg" style="width:1000px;height:491px;"></object>
@@ -197,7 +151,6 @@ Once the PR looks good on the preview env:
 
 ## What we just saw
 
-- **Onboarding** — new developer productive in minutes, not days
 - **New app** — local repo to deployed app with one CLI command
 - **Ship a feature** — `git push` and the platform does the rest
 - Everything is GitOps. Everything is SSO. No tickets, no waiting.
@@ -253,17 +206,12 @@ We work as an **enabling team** — not a product vendor.
     fragmentsIn(obj).forEach(f => f.classList.remove('shown'));
   };
 
-  // When an <object> SVG loads, pre-hide its fragments (CSS already does this,
-  // but we also clear any .shown class in case of re-entry).
   document.querySelectorAll('object.fragment-svg').forEach(obj => {
     const init = () => resetFragments(obj);
     if (obj.contentDocument && obj.contentDocument.readyState === 'complete') init();
     obj.addEventListener('load', init);
   });
 
-  // Reset fragments in all SVGs whenever the active slide changes.
-  // Bespoke navigates via history.replaceState (no hashchange/popstate),
-  // so we watch for the `bespoke-marp-active` class toggling on slide roots.
   const slideObserver = new MutationObserver(() => {
     document.querySelectorAll('object.fragment-svg').forEach(resetFragments);
   });
@@ -276,12 +224,11 @@ We work as an **enabling team** — not a product vendor.
   else document.addEventListener('DOMContentLoaded', startObserving);
 
   window.addEventListener('keydown', (e) => {
-    // Ignore when typing into inputs (presenter notes etc)
     if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
     if (e.ctrlKey || e.metaKey || e.altKey) return;
 
     const frags = activeSvgFragments();
-    if (frags.length === 0) return; // no fragments on current slide — let Marp handle it
+    if (frags.length === 0) return;
 
     if (ADVANCE_KEYS.has(e.key)) {
       const next = frags.find(f => !f.classList.contains('shown'));
@@ -298,6 +245,6 @@ We work as an **enabling team** — not a product vendor.
         e.stopPropagation();
       }
     }
-  }, true); // capture phase, runs before bespoke
+  }, true);
 })();
 </script>
