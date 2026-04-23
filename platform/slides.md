@@ -10,7 +10,7 @@ footer: "Internal Developer Platform — Live Demo"
 <!-- _paginate: false -->
 <!-- _footer: "" -->
 
-# The Platform Experience
+# The platform experience
 
 ## From zero to production in minutes
 

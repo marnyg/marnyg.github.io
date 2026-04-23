@@ -1,41 +1,33 @@
 /* @theme platform */
-/* Platform presentation theme — Catppuccin Mocha */
-/* Keep in separate file so we can sync styles across the team later */
+/* Platform presentation theme — company brand palette (dark variant) */
 
-/* Catppuccin Mocha palette:
-   base:      #1e1e2e
-   mantle:    #181825
-   crust:     #11111b
-   surface0:  #313244
-   surface1:  #45475a
-   text:      #cdd6f4
-   subtext0:  #a6adc8
-   subtext1:  #bac2de
-   lavender:  #b4befe
-   blue:      #89b4fa
-   sapphire:  #74c7ec
-   teal:      #94e2d5
-   green:     #a6e3a1
-   yellow:    #f9e2af
-   peach:     #fab387
-   maroon:    #eba0ac
-   red:       #f38ba8
-   pink:      #f5c2e7
-   mauve:     #cba6f7
-   overlay0:  #6c7086
+/* Brand palette:
+   Frost White       #FFFFFF
+   Midnight Black    #000000
+   Dust Gray         #F0EEED  (body text)
+   Ash Gray          #A1A7AE  (sub-text, metadata, lifelines)
+   Granite Gray      #4D5056  (cards, surfaces, borders)
+   Graphite Gray     #1A1B1C  (slide background)
+   Powder Purple     #B0A7FF  (sub-heading / highlighted actor)
+   True Blue         #3366FF  (primary action / arrows / step badges)
+   Cool Cyan         #3366FF  (code, links)
+   Teal Green        #2C8F92  (reserve)
+   Cloudberry Red    #F7675E  (LIVE DEMO badge / developer-platform divider)
 */
 
 section {
-  background: #1e1e2e;
-  color: #cdd6f4;
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  background-color: #000000;
+  background-image: radial-gradient(circle, rgba(161, 167, 174, 0.18) 1px, transparent 1px);
+  background-size: 36px 36px;
+  color: #F0EEED;
+  font-family: 'Arial', 'Helvetica Neue', sans-serif;
   padding: 60px 80px;
   font-size: 28px;
   justify-content: center;
 }
 
 h1, h2, h3 {
-  color: #cba6f7;
+  color: #FFFFFF;
 }
 
 h1 {
@@ -44,21 +36,21 @@ h1 {
 
 h2 {
   font-size: 1.6em;
-  border-bottom: 2px solid #cba6f7;
+  border-bottom: 2px solid #4D5056;
   padding-bottom: 0.3em;
 }
 
 a {
-  color: #89b4fa;
+  color: #3366FF;
 }
 
 strong {
-  color: #cdd6f4;
+  color: #FFFFFF;
 }
 
 code {
-  background: #313244;
-  color: #94e2d5;
+  background: #4D5056;
+  color: #FFFFFF;
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.9em;
@@ -87,7 +79,7 @@ section.lead h1 {
 
 section.lead h2 {
   border: none;
-  color: #a6adc8;
+  color: #A1A7AE;
   font-weight: 400;
   font-size: 1.2em;
 }
@@ -96,7 +88,7 @@ section.lead h2 {
 section.demo h2::before {
   content: "LIVE DEMO  ";
   font-size: 0.5em;
-  color: #f38ba8;
+  color: #F7675E;
   vertical-align: middle;
   letter-spacing: 0.1em;
 }
@@ -105,7 +97,7 @@ section.demo h2::before {
 section.optional h2::after {
   content: "  (if time allows)";
   font-size: 0.5em;
-  color: #a6adc8;
+  color: #A1A7AE;
   font-weight: 400;
 }
 
@@ -120,8 +112,8 @@ ol li {
 
 /* Emphasis box for key takeaways */
 blockquote {
-  border-left: 4px solid #cba6f7;
-  background: #181825;
+  border-left: 4px solid #3366FF;
+  background: #000000;
   padding: 0.8em 1.2em;
   border-radius: 0 8px 8px 0;
   font-style: normal;
@@ -133,6 +125,6 @@ blockquote p {
 
 /* Footer styling */
 footer {
-  color: #6c7086;
+  color: #4D5056;
   font-size: 0.7em;
 }
