@@ -11,88 +11,86 @@
       .legend-title { fill: #B0A7FF; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
       .legend-text  { fill: #A1A7AE; font-size: 13px; }
       .box          { fill: #000000; }
+
+      /* Fragments — hidden by default, revealed by host script adding .shown */
+      [data-fragment] { opacity: 0; transition: opacity 0.25s ease; }
+      [data-fragment].shown { opacity: 1; }
     </style>
     <marker id="arrow" markerWidth="7" markerHeight="7" refX="6.5" refY="3.5" orient="auto">
       <polygon points="0 0, 7 3.5, 0 7" fill="#A1A7AE"/>
     </marker>
   </defs>
 
-  <!-- Admin -->
-  <g transform="translate(50, 50)">
-    <rect width="170" height="70" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="85" y="32" class="actor-label" text-anchor="middle">Admin</text>
-    <text x="85" y="52" class="sub-label"  text-anchor="middle">Zitadel console</text>
-  </g>
-
-  <!-- Zitadel (center, HIGHLIGHTED — identity source of truth) -->
+  <!-- Zitadel — always visible, the user already exists here -->
   <g transform="translate(440, 25)">
     <rect width="220" height="160" rx="12" class="box" stroke="#B0A7FF" stroke-width="3"/>
     <text x="110" y="34" class="actor-label" text-anchor="middle">Zitadel</text>
     <text x="110" y="58" class="state-title" text-anchor="middle">identity source of truth</text>
     <line x1="24" y1="74" x2="196" y2="74" stroke="#A1A7AE" stroke-width="1" opacity="0.4"/>
-    <text x="110" y="97"  class="state-label" text-anchor="middle">state: users</text>
-    <text x="110" y="117" class="state-label" text-anchor="middle">groups</text>
-    <text x="110" y="137" class="state-label" text-anchor="middle">policies</text>
+    <text x="110" y="97"  class="state-label" text-anchor="middle">user already provisioned</text>
+    <text x="110" y="117" class="state-label" text-anchor="middle">groups assigned</text>
+    <text x="110" y="137" class="state-label" text-anchor="middle">policies in place</text>
   </g>
 
-  <!-- Developer -->
-  <g transform="translate(870, 50)">
-    <rect width="170" height="70" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="85" y="32" class="actor-label" text-anchor="middle">Developer</text>
-    <text x="85" y="52" class="sub-label"  text-anchor="middle">browser + Netbird client</text>
+  <!-- Fragment 1: Developer logs in via OIDC -->
+  <g data-fragment="1">
+    <g transform="translate(870, 50)">
+      <rect width="170" height="70" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="85" y="32" class="actor-label" text-anchor="middle">Developer</text>
+      <text x="85" y="52" class="sub-label"  text-anchor="middle">browser + Netbird client</text>
+    </g>
+    <path d="M 875 85 L 665 100" stroke="#A1A7AE" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="770" y="75" class="arrow-label" text-anchor="middle">OIDC login (browser)</text>
   </g>
 
-  <!-- Admin -> Zitadel -->
-  <path d="M 225 85 L 435 100" stroke="#A1A7AE" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-  <text x="335" y="75" class="arrow-label" text-anchor="middle">creates user + groups</text>
-
-  <!-- Developer -> Zitadel -->
-  <path d="M 875 85 L 665 100" stroke="#A1A7AE" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-  <text x="770" y="75" class="arrow-label" text-anchor="middle">OIDC login (browser)</text>
-
-  <!-- Services row -->
-  <g transform="translate(60, 280)">
-    <rect width="160" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="30" class="actor-label" text-anchor="middle">Forgejo</text>
-    <text x="80" y="50" class="sub-label"  text-anchor="middle">git hosting</text>
-  </g>
-  <g transform="translate(260, 280)">
-    <rect width="160" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="30" class="actor-label" text-anchor="middle">ArgoCD</text>
-    <text x="80" y="50" class="sub-label"  text-anchor="middle">CD / GitOps</text>
-  </g>
-  <g transform="translate(460, 280)">
-    <rect width="160" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="30" class="actor-label" text-anchor="middle">Netbird</text>
-    <text x="80" y="50" class="sub-label"  text-anchor="middle">VPN dashboard</text>
-  </g>
-  <g transform="translate(660, 280)">
-    <rect width="160" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="30" class="actor-label" text-anchor="middle">kubectl / k8s API</text>
-    <text x="80" y="50" class="sub-label"  text-anchor="middle">cluster access</text>
-  </g>
-  <g transform="translate(860, 280)">
-    <rect width="170" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="85" y="30" class="actor-label" text-anchor="middle">Netbird VPN</text>
-    <text x="85" y="50" class="sub-label"  text-anchor="middle">overlay network</text>
+  <!-- Fragment 2: Services row -->
+  <g data-fragment="2">
+    <g transform="translate(60, 280)">
+      <rect width="160" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="30" class="actor-label" text-anchor="middle">Forgejo</text>
+      <text x="80" y="50" class="sub-label"  text-anchor="middle">git hosting</text>
+    </g>
+    <g transform="translate(260, 280)">
+      <rect width="160" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="30" class="actor-label" text-anchor="middle">ArgoCD</text>
+      <text x="80" y="50" class="sub-label"  text-anchor="middle">CD / GitOps</text>
+    </g>
+    <g transform="translate(460, 280)">
+      <rect width="160" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="30" class="actor-label" text-anchor="middle">Netbird</text>
+      <text x="80" y="50" class="sub-label"  text-anchor="middle">VPN dashboard</text>
+    </g>
+    <g transform="translate(660, 280)">
+      <rect width="160" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="30" class="actor-label" text-anchor="middle">kubectl / k8s API</text>
+      <text x="80" y="50" class="sub-label"  text-anchor="middle">cluster access</text>
+    </g>
+    <g transform="translate(860, 280)">
+      <rect width="170" height="65" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="85" y="30" class="actor-label" text-anchor="middle">Netbird VPN</text>
+      <text x="85" y="50" class="sub-label"  text-anchor="middle">overlay network</text>
+    </g>
   </g>
 
-  <!-- SSO trust arrows (services → Zitadel bottom) -->
-  <path d="M 140 280 Q 140 230 460 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
-  <path d="M 340 280 Q 340 240 505 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
-  <path d="M 540 280 Q 540 245 555 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
-  <path d="M 740 280 Q 740 240 600 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
-  <path d="M 945 280 Q 945 230 640 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+  <!-- Fragment 3: SSO trust arrows -->
+  <g data-fragment="3">
+    <path d="M 140 280 Q 140 230 460 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+    <path d="M 340 280 Q 340 240 505 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+    <path d="M 540 280 Q 540 245 555 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+    <path d="M 740 280 Q 740 240 600 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+    <path d="M 945 280 Q 945 230 640 185" stroke="#A1A7AE" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+    <text x="550" y="245" class="arrow-label" text-anchor="middle">services trust Zitadel — SSO via OIDC</text>
+  </g>
 
-  <text x="550" y="245" class="arrow-label" text-anchor="middle">services trust Zitadel — SSO via OIDC</text>
+  <!-- Fragment 4: Footer takeaway -->
+  <g data-fragment="4">
+    <text x="550" y="395" class="note" text-anchor="middle">
+      Dev installs Netbird client → joins VPN → every service above becomes reachable, all with the same identity
+    </text>
+  </g>
 
-  <!-- Footer note -->
-  <text x="550" y="395" class="note" text-anchor="middle">
-    Dev installs Netbird client → joins VPN → every service above becomes reachable, all with the same identity
-  </text>
-
-  <!-- Context legend bottom -->
+  <!-- Context legend bottom (always visible) -->
   <g transform="translate(30, 425)">
-    <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#F0EEED" font-weight="600">Actors</tspan> admin · developer · Zitadel · services   ·   <tspan fill="#F0EEED" font-weight="600">State</tspan> lives in Zitadel   ·   <tspan fill="#F0EEED" font-weight="600">Surfaces</tspan> admin console · VPN client · browser SSO</text>
+    <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#F0EEED" font-weight="600">Actors</tspan> developer · Zitadel · services   ·   <tspan fill="#F0EEED" font-weight="600">State</tspan> user already in Zitadel   ·   <tspan fill="#F0EEED" font-weight="600">Surfaces</tspan> VPN client · browser SSO</text>
   </g>
 </svg>

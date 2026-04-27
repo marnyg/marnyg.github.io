@@ -52,13 +52,13 @@ Kubernetes at the core. GitOps everything.
 - One identity provider (Zitadel) handles SSO across all services
 - One VPN (Netbird) handles all internal access
 
-> Coming soon: observability (Grafana), Kargo, Netbird/sso)
+> Coming soon: observability (Grafana), Kargo
 
 ---
 
 ## The tools, in one picture
 
-![w:1000](diagrams/platform-overview.svg)
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/platform-overview.svg" style="width:1000px;height:436px;"></object>
 
 ---
 
@@ -67,14 +67,6 @@ Kubernetes at the core. GitOps everything.
 1. **New app** — from scratch or existing repo, one CLI command
 2. **PR preview environments** — a live environment for every branch
 3. **Push to prod** — `git push`, the platform takes it from there
-
----
-
-<!-- _class: demo -->
-
-## Creating a new app
-
-<object class="fragment-svg" type="image/svg+xml" data="diagrams/grove-register.svg" style="width:1000px;height:491px;"></object>
 
 ---
 
@@ -95,9 +87,17 @@ Kubernetes at the core. GitOps everything.
 
 <!-- _class: demo -->
 
+## Creating a new app
+
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/grove-register.svg" style="width:1000px;height:491px;"></object>
+
+---
+
+<!-- _class: demo -->
+
 ## New app — existing repo
 
-1. Developer already has a local git repo with some code
+1. Repo needs the right shape: `Dockerfile`, `config/` manifests, `.forgejo/workflows/build.yml` — copy from a `grove init` scaffold if missing
 2. Run the CLI: `grove register`
 3. The operator kicks in:
    - Creates repo in Forgejo
@@ -112,7 +112,7 @@ Kubernetes at the core. GitOps everything.
 
 ## `grove register` — recording
 
-<video controls src="demos/grove-register.mp4" style="max-width:1000px;max-height:500px;"></video>
+<video controls src="demos/register-new-app.mov" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -120,7 +120,7 @@ Kubernetes at the core. GitOps everything.
 
 ## PR preview environments
 
-![w:1000](diagrams/pr-preview.svg)
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/pr-preview.svg" style="width:1000px;height:400px;"></object>
 
 ---
 
@@ -128,15 +128,7 @@ Kubernetes at the core. GitOps everything.
 
 ## PR preview — recording
 
-<video controls src="demos/pr-preview.mp4" style="max-width:1000px;max-height:500px;"></video>
-
----
-
-<!-- _class: demo -->
-
-## Pushing a feature to prod
-
-![w:1000](diagrams/push-to-prod.svg)
+<video controls src="demos/pr-env.mov" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -152,9 +144,17 @@ Kubernetes at the core. GitOps everything.
 
 <!-- _class: demo -->
 
+## Pushing a feature to prod
+
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/push-to-prod.svg" style="width:1000px;height:382px;"></object>
+
+---
+
+<!-- _class: demo -->
+
 ## Push to prod — recording
 
-<video controls src="demos/push-to-prod.mp4" style="max-width:1000px;max-height:500px;"></video>
+<video controls src="demos/merge-pr-to-prod.mov" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -163,6 +163,20 @@ Kubernetes at the core. GitOps everything.
 - **New app** — local repo to deployed app with one CLI command
 - **Ship a feature** — `git push` and the platform does the rest
 - Everything is GitOps. Everything is SSO. No tickets, no waiting.
+
+---
+
+## Possible expansions
+
+- **OpenTelemetry** — traces + metrics out of the box
+- **Kargo** — promotion pipelines (tst → prd, gated)
+- **Better golden paths** — more scaffold templates, more languages
+- **OPA Gatekeeper** — policy guardrails for tenants
+- **External Secrets** — OpenBAO-backed secret injection per app
+- **Self-service OIDC** — `OAuthClient` CRD for app-owned clients
+- **FinOps** — cost attribution per team / app
+
+> The platform is a starting point — these are the next obvious moves.
 
 ---
 

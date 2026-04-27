@@ -52,13 +52,13 @@ Kubernetes at the core. GitOps everything.
 - One identity provider (Zitadel) handles SSO across all services
 - One VPN (Netbird) handles all internal access
 
-> Coming soon: observability (Grafana), Kargo, Netbird/sso)
+> Coming soon: observability (Grafana), Kargo
 
 ---
 
 ## The tools, in one picture
 
-![w:1000](diagrams/platform-overview.svg)
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/platform-overview.svg" style="width:1000px;height:436px;"></object>
 
 ---
 
@@ -75,7 +75,7 @@ Kubernetes at the core. GitOps everything.
 
 ## Onboarding a new developer
 
-![w:1000](diagrams/onboarding.svg)
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/onboarding.svg" style="width:1000px;height:400px;"></object>
 
 ---
 
@@ -83,11 +83,11 @@ Kubernetes at the core. GitOps everything.
 
 ## Onboarding — the steps
 
-1. Create a new user in Zitadel
-2. User installs the Netbird VPN client
-3. User logs in to the VPN
-4. User can access all internal services — Forgejo, ArgoCD, Netbird dashboard — **all with SSO**
-5. User can run `kubectl` against the cluster — same identity, one more command
+> Starting point: the user already exists in Zitadel.
+
+1. User installs the Netbird VPN client and logs into the VPN
+2. User opens Forgejo / ArgoCD / Netbird dashboard — single sign-on via Zitadel
+3. User runs `kubectl` against the cluster — same identity, one more command
 
 > One identity, access to everything. Let's zoom in on that last step.
 
@@ -105,9 +105,9 @@ Kubernetes at the core. GitOps everything.
 
 ## `kubectl` — the steps
 
-1. Run: `grove kubeconfig --merge --context-name dev`
-   - Fetches the kubeconfig from the cluster over the VPN
-   - Merges it into your existing `~/.kube/config`
+1. Run: `grove targets add dev --domain <your-cluster.example.com>`
+   - Fetches the kubeconfig from `kubeconfig.<domain>` over the VPN
+   - Merges it into your existing `~/.kube/config` and switches the active target
 2. Run `kubectl get ns`
    - First call opens a browser → Zitadel login → token cached locally
    - Subsequent calls are instant
@@ -119,9 +119,9 @@ Kubernetes at the core. GitOps everything.
 
 <!-- _class: demo -->
 
-## Creating a new app
+## `kubectl` — recording
 
-<object class="fragment-svg" type="image/svg+xml" data="diagrams/grove-register.svg" style="width:1000px;height:491px;"></object>
+<video controls src="demos/kubeconfig-over-netbird-sso.mov" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -142,9 +142,17 @@ Kubernetes at the core. GitOps everything.
 
 <!-- _class: demo -->
 
+## Creating a new app
+
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/grove-register.svg" style="width:1000px;height:491px;"></object>
+
+---
+
+<!-- _class: demo -->
+
 ## New app — existing repo
 
-1. Developer already has a local git repo with some code
+1. Repo needs the right shape: `Dockerfile`, `config/` manifests, `.forgejo/workflows/build.yml` — copy from a `grove init` scaffold if missing
 2. Run the CLI: `grove register`
 3. The operator kicks in:
    - Creates repo in Forgejo
@@ -159,7 +167,7 @@ Kubernetes at the core. GitOps everything.
 
 ## `grove register` — recording
 
-<video controls src="demos/grove-register.mp4" style="max-width:1000px;max-height:500px;"></video>
+<video controls src="demos/register-new-app.mov" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -167,7 +175,7 @@ Kubernetes at the core. GitOps everything.
 
 ## PR preview environments
 
-![w:1000](diagrams/pr-preview.svg)
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/pr-preview.svg" style="width:1000px;height:400px;"></object>
 
 ---
 
@@ -175,15 +183,7 @@ Kubernetes at the core. GitOps everything.
 
 ## PR preview — recording
 
-<video controls src="demos/pr-preview.mp4" style="max-width:1000px;max-height:500px;"></video>
-
----
-
-<!-- _class: demo -->
-
-## Pushing a feature to prod
-
-![w:1000](diagrams/push-to-prod.svg)
+<video controls src="demos/pr-env.mov" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -199,9 +199,17 @@ Kubernetes at the core. GitOps everything.
 
 <!-- _class: demo -->
 
+## Pushing a feature to prod
+
+<object class="fragment-svg" type="image/svg+xml" data="diagrams/push-to-prod.svg" style="width:1000px;height:382px;"></object>
+
+---
+
+<!-- _class: demo -->
+
 ## Push to prod — recording
 
-<video controls src="demos/push-to-prod.mp4" style="max-width:1000px;max-height:500px;"></video>
+<video controls src="demos/merge-pr-to-prod.mov" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -211,6 +219,20 @@ Kubernetes at the core. GitOps everything.
 - **New app** — local repo to deployed app with one CLI command
 - **Ship a feature** — `git push` and the platform does the rest
 - Everything is GitOps. Everything is SSO. No tickets, no waiting.
+
+---
+
+## Possible expansions
+
+- **OpenTelemetry** — traces + metrics out of the box
+- **Kargo** — promotion pipelines (tst → prd, gated)
+- **Better golden paths** — more scaffold templates, more languages
+- **OPA Gatekeeper** — policy guardrails for tenants
+- **External Secrets** — OpenBAO-backed secret injection per app
+- **Self-service OIDC** — `OAuthClient` CRD for app-owned clients
+- **FinOps** — cost attribution per team / app
+
+> The platform is a starting point — these are the next obvious moves.
 
 ---
 

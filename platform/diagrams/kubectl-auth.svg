@@ -62,7 +62,7 @@
     <path d="M 120 120 L 315 120" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#seqArrow)"/>
     <circle cx="130" cy="120" r="10" fill="#3366FF"/>
     <text x="130" y="124" class="num-badge" text-anchor="middle">1</text>
-    <text x="220" y="110" class="step-label" text-anchor="middle">grove kubeconfig --merge</text>
+    <text x="220" y="110" class="step-label" text-anchor="middle">grove targets add dev --domain ...</text>
     <text x="220" y="136" class="step-sub"   text-anchor="middle">fetches kubeconfig over VPN, merges into ~/.kube/config</text>
   </g>
 

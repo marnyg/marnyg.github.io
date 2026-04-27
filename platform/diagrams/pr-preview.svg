@@ -11,6 +11,10 @@
       .legend-title { fill: #B0A7FF; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
       .legend-text  { fill: #A1A7AE; font-size: 13px; }
       .box          { fill: #000000; }
+
+      /* Fragments — hidden by default, revealed by host script adding .shown */
+      [data-fragment] { opacity: 0; transition: opacity 0.25s ease; }
+      [data-fragment].shown { opacity: 1; }
     </style>
     <marker id="flowArrow" markerWidth="7" markerHeight="7" refX="6.5" refY="3.5" orient="auto">
       <polygon points="0 0, 7 3.5, 0 7" fill="#3366FF"/>
@@ -20,81 +24,86 @@
     </marker>
   </defs>
 
-  <!-- Developer / automatic divider (vertical, between Developer and Forgejo) -->
+  <!-- Title (always visible) -->
+  <text x="550" y="70"  class="note" text-anchor="middle" fill="#F0EEED" font-size="16" font-weight="600">Every PR gets its own live environment</text>
+  <text x="550" y="92"  class="note" text-anchor="middle">reviewers see the change running before it hits main</text>
+
+  <!-- Developer / automatic divider (always visible) -->
   <line x1="210" y1="30" x2="210" y2="400" stroke="#F7675E" stroke-width="1.5" stroke-dasharray="10 5"/>
   <rect x="155" y="35" width="110" height="24" rx="4" fill="#000000"/>
   <text x="210" y="52" text-anchor="middle" fill="#F7675E" font-size="12px" font-weight="600" letter-spacing="0.05em">◀ DEV · AUTO ▶</text>
 
-  <!-- Developer (left) -->
-  <g transform="translate(30, 170)">
-    <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">Developer</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">branch + open PR</text>
-    <text x="80" y="70" class="sub-label"  text-anchor="middle">surface: Forgejo UI</text>
+  <!-- Fragment 1: Developer pushes a branch — Developer + Forgejo + push arrow -->
+  <g data-fragment="1">
+    <g transform="translate(30, 170)">
+      <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="32" class="actor-label" text-anchor="middle">Developer</text>
+      <text x="80" y="52" class="sub-label"  text-anchor="middle">branch + open PR</text>
+      <text x="80" y="70" class="sub-label"  text-anchor="middle">surface: Forgejo UI</text>
+    </g>
+    <g transform="translate(230, 170)">
+      <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo</text>
+      <text x="80" y="52" class="sub-label"  text-anchor="middle">emits PR event</text>
+      <text x="80" y="70" class="state-title" text-anchor="middle">STATE: PR ref</text>
+    </g>
+    <path d="M 190 210 L 225 210" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+    <text x="207" y="155" class="arrow-label" text-anchor="middle">push branch</text>
   </g>
 
-  <!-- Forgejo -->
-  <g transform="translate(230, 170)">
-    <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">emits PR event</text>
-    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: PR ref</text>
+  <!-- Fragment 2: Operator picks up the PR webhook -->
+  <g data-fragment="2">
+    <g transform="translate(430, 170)">
+      <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="32" class="actor-label" text-anchor="middle">Operator</text>
+      <text x="80" y="52" class="sub-label"  text-anchor="middle">creates preview App CR</text>
+      <text x="80" y="70" class="state-title" text-anchor="middle">STATE: preview envs</text>
+    </g>
+    <path d="M 390 210 L 425 210" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+    <text x="407" y="155" class="arrow-label" text-anchor="middle">PR webhook</text>
   </g>
 
-  <!-- Operator -->
-  <g transform="translate(430, 170)">
-    <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">Operator</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">creates preview App CR</text>
-    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: preview envs</text>
+  <!-- Fragment 3: ArgoCD + build reconciles the App CR -->
+  <g data-fragment="3">
+    <g transform="translate(630, 170)">
+      <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="32" class="actor-label" text-anchor="middle">ArgoCD + Build</text>
+      <text x="80" y="52" class="sub-label"  text-anchor="middle">spins up preview</text>
+      <text x="80" y="70" class="state-title" text-anchor="middle">STATE: preview-pr-123.*</text>
+    </g>
+    <path d="M 590 210 L 625 210" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+    <text x="607" y="155" class="arrow-label" text-anchor="middle">reconcile</text>
   </g>
 
-  <!-- ArgoCD + Build -->
-  <g transform="translate(630, 170)">
-    <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">ArgoCD + Build</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">spins up preview</text>
-    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: preview-pr-123.*</text>
+  <!-- Fragment 4: Preview URL goes live -->
+  <g data-fragment="4">
+    <g transform="translate(830, 170)">
+      <rect width="180" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="90" y="32" class="actor-label" text-anchor="middle">Preview URL</text>
+      <text x="90" y="52" class="sub-label"  text-anchor="middle">pr-N.&lt;app&gt;.&lt;domain&gt;</text>
+      <text x="90" y="70" class="state-title" text-anchor="middle">ephemeral pods + ingress</text>
+    </g>
+    <path d="M 790 210 L 825 210" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+    <text x="807" y="155" class="arrow-label" text-anchor="middle">deploy preview</text>
   </g>
 
-  <!-- Preview env (cluster) -->
-  <g transform="translate(830, 170)">
-    <rect width="180" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="90" y="32" class="actor-label" text-anchor="middle">Preview URL</text>
-    <text x="90" y="52" class="sub-label"  text-anchor="middle">posted back to PR comment</text>
-    <text x="90" y="70" class="state-title" text-anchor="middle">ephemeral pods + ingress</text>
+  <!-- Fragment 5: Reviewer opens the live preview -->
+  <g data-fragment="5">
+    <g transform="translate(835, 320)">
+      <rect width="180" height="60" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="90" y="26" class="actor-label" text-anchor="middle">Reviewer</text>
+      <text x="90" y="46" class="sub-label"  text-anchor="middle">clicks link → sees change live</text>
+    </g>
+    <path d="M 920 320 L 920 255" stroke="#3366FF" stroke-width="1.5" fill="none" stroke-dasharray="4 4" marker-end="url(#flowArrow)"/>
   </g>
 
-  <!-- Arrows -->
-  <path d="M 190 210 L 225 210" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="207" y="155" class="arrow-label" text-anchor="middle">push branch</text>
-
-  <path d="M 390 210 L 425 210" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="407" y="155" class="arrow-label" text-anchor="middle">PR webhook</text>
-
-  <path d="M 590 210 L 625 210" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="607" y="155" class="arrow-label" text-anchor="middle">reconcile</text>
-
-  <path d="M 790 210 L 825 210" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="807" y="155" class="arrow-label" text-anchor="middle">deploy preview</text>
-
-  <!-- Reviewer path -->
-  <g transform="translate(835, 320)">
-    <rect width="180" height="60" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="90" y="26" class="actor-label" text-anchor="middle">Reviewer</text>
-    <text x="90" y="46" class="sub-label"  text-anchor="middle">clicks link → sees change live</text>
+  <!-- Fragment 6: Cleanup on merge / close -->
+  <g data-fragment="6">
+    <path d="M 110 250 Q 110 390 820 360" stroke="#F7675E" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#cleanupArrow)"/>
+    <text x="460" y="385" class="arrow-sub" text-anchor="middle" fill="#F7675E">on merge / close: preview is cleaned up automatically</text>
   </g>
-  <path d="M 920 320 L 920 255" stroke="#3366FF" stroke-width="1.5" fill="none" stroke-dasharray="4 4" marker-end="url(#flowArrow)"/>
 
-  <!-- Cleanup arrow (Cloudberry Red) -->
-  <path d="M 110 250 Q 110 390 820 360" stroke="#F7675E" stroke-width="1.5" fill="none" stroke-dasharray="5 5" marker-end="url(#cleanupArrow)"/>
-  <text x="460" y="385" class="arrow-sub" text-anchor="middle" fill="#F7675E">on merge / close: preview is cleaned up automatically</text>
-
-  <!-- Title -->
-  <text x="550" y="70"  class="note" text-anchor="middle" fill="#F0EEED" font-size="16" font-weight="600">Every PR gets its own live environment</text>
-  <text x="550" y="92"  class="note" text-anchor="middle">reviewers see the change running before it hits main</text>
-
-  <!-- Context legend -->
+  <!-- Context legend (always visible) -->
   <g transform="translate(30, 425)">
     <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#F0EEED" font-weight="600">Actors</tspan> dev · reviewer · 3 platform services   ·   <tspan fill="#F0EEED" font-weight="600">State</tspan> ephemeral preview env per PR   ·   <tspan fill="#F0EEED" font-weight="600">Surfaces</tspan> Forgejo PR + preview URL</text>
   </g>

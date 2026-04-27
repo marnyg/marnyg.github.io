@@ -11,70 +11,85 @@
       .legend-title { fill: #B0A7FF; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
       .legend-text  { fill: #A1A7AE; font-size: 13px; }
       .box          { fill: #000000; }
+
+      /* Fragments — hidden by default, revealed by host script adding .shown */
+      [data-fragment] { opacity: 0; transition: opacity 0.25s ease; }
+      [data-fragment].shown { opacity: 1; }
     </style>
     <marker id="flowArrow" markerWidth="7" markerHeight="7" refX="6.5" refY="3.5" orient="auto">
       <polygon points="0 0, 7 3.5, 0 7" fill="#3366FF"/>
     </marker>
   </defs>
 
-  <!-- Developer / automatic divider (vertical, between Developer and Forgejo) -->
+  <!-- Title (always visible) -->
+  <text x="550" y="70"  class="note" text-anchor="middle" fill="#F0EEED" font-size="16" font-weight="600">Merge — and the platform does the rest</text>
+  <text x="550" y="92"  class="note" text-anchor="middle">Picks up where the PR preview left off: the merge is the only click</text>
+
+  <!-- Developer / automatic divider (always visible) -->
   <line x1="210" y1="30" x2="210" y2="380" stroke="#F7675E" stroke-width="1.5" stroke-dasharray="10 5"/>
   <rect x="155" y="35" width="110" height="24" rx="4" fill="#000000"/>
   <text x="210" y="52" text-anchor="middle" fill="#F7675E" font-size="12px" font-weight="600" letter-spacing="0.05em">◀ DEV · AUTO ▶</text>
 
-  <!-- Flow row (5 boxes left to right) -->
-  <g transform="translate(30, 140)">
-    <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">Developer</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">clicks merge on the PR</text>
-    <text x="80" y="70" class="sub-label"  text-anchor="middle">surface: Forgejo UI</text>
-  </g>
-  <g transform="translate(230, 140)">
-    <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">main is updated</text>
-    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: git ref</text>
-  </g>
-  <g transform="translate(430, 140)">
-    <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo Actions</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">docker build + push image</text>
-    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: container image</text>
-  </g>
-  <g transform="translate(630, 140)">
-    <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="80" y="32" class="actor-label" text-anchor="middle">ArgoCD</text>
-    <text x="80" y="52" class="sub-label"  text-anchor="middle">detects drift, syncs</text>
-    <text x="80" y="70" class="state-title" text-anchor="middle">STATE: desired vs live</text>
-  </g>
-  <g transform="translate(830, 140)">
-    <rect width="180" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
-    <text x="90" y="32" class="actor-label" text-anchor="middle">Cluster</text>
-    <text x="90" y="52" class="sub-label"  text-anchor="middle">rolling update → live</text>
-    <text x="90" y="70" class="state-title" text-anchor="middle">STATE: running pods</text>
+  <!-- Fragment 1: Developer clicks merge — Developer + Forgejo + merge arrow -->
+  <g data-fragment="1">
+    <g transform="translate(30, 140)">
+      <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="32" class="actor-label" text-anchor="middle">Developer</text>
+      <text x="80" y="52" class="sub-label"  text-anchor="middle">clicks merge on the PR</text>
+      <text x="80" y="70" class="sub-label"  text-anchor="middle">surface: Forgejo UI</text>
+    </g>
+    <g transform="translate(230, 140)">
+      <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo</text>
+      <text x="80" y="52" class="sub-label"  text-anchor="middle">main is updated</text>
+      <text x="80" y="70" class="state-title" text-anchor="middle">STATE: git ref</text>
+    </g>
+    <path d="M 190 180 L 225 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+    <text x="207" y="125" class="arrow-label" text-anchor="middle">merge</text>
   </g>
 
-  <!-- Arrows between boxes with labels -->
-  <path d="M 190 180 L 225 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="207" y="125" class="arrow-label" text-anchor="middle">merge</text>
+  <!-- Fragment 2: Forgejo Actions builds image -->
+  <g data-fragment="2">
+    <g transform="translate(430, 140)">
+      <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="32" class="actor-label" text-anchor="middle">Forgejo Actions</text>
+      <text x="80" y="52" class="sub-label"  text-anchor="middle">docker build + push image</text>
+      <text x="80" y="70" class="state-title" text-anchor="middle">STATE: container image</text>
+    </g>
+    <path d="M 390 180 L 425 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+    <text x="407" y="125" class="arrow-label" text-anchor="middle">post-merge CI</text>
+  </g>
 
-  <path d="M 390 180 L 425 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="407" y="125" class="arrow-label" text-anchor="middle">post-merge CI</text>
+  <!-- Fragment 3: ArgoCD detects drift and syncs -->
+  <g data-fragment="3">
+    <g transform="translate(630, 140)">
+      <rect width="160" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="80" y="32" class="actor-label" text-anchor="middle">ArgoCD</text>
+      <text x="80" y="52" class="sub-label"  text-anchor="middle">detects drift, syncs</text>
+      <text x="80" y="70" class="state-title" text-anchor="middle">STATE: desired vs live</text>
+    </g>
+    <path d="M 590 180 L 625 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+    <text x="607" y="125" class="arrow-label" text-anchor="middle">new image + manifest</text>
+  </g>
 
-  <path d="M 590 180 L 625 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="607" y="125" class="arrow-label" text-anchor="middle">new image + manifest</text>
+  <!-- Fragment 4: Cluster rollout -->
+  <g data-fragment="4">
+    <g transform="translate(830, 140)">
+      <rect width="180" height="80" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="90" y="32" class="actor-label" text-anchor="middle">Cluster</text>
+      <text x="90" y="52" class="sub-label"  text-anchor="middle">rolling update → live</text>
+      <text x="90" y="70" class="state-title" text-anchor="middle">STATE: running pods</text>
+    </g>
+    <path d="M 790 180 L 825 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
+    <text x="807" y="125" class="arrow-label" text-anchor="middle">apply + rollout</text>
+  </g>
 
-  <path d="M 790 180 L 825 180" stroke="#3366FF" stroke-width="2" fill="none" marker-end="url(#flowArrow)"/>
-  <text x="807" y="125" class="arrow-label" text-anchor="middle">apply + rollout</text>
+  <!-- Fragment 5: Turnaround note -->
+  <g data-fragment="5">
+    <text x="550" y="300" class="note" text-anchor="middle">Typical turnaround: ~1–2 min for build · ~30 s for rollout</text>
+  </g>
 
-  <!-- Title + narration -->
-  <text x="550" y="70"  class="note" text-anchor="middle" fill="#F0EEED" font-size="16" font-weight="600">Merge — and the platform does the rest</text>
-  <text x="550" y="92"  class="note" text-anchor="middle">Picks up where the PR preview left off: the merge is the only click</text>
-
-  <!-- Developer intent note -->
-  <text x="550" y="300" class="note" text-anchor="middle">Typical turnaround: ~1–2 min for build · ~30 s for rollout</text>
-
-  <!-- Context legend -->
+  <!-- Context legend (always visible) -->
   <g transform="translate(30, 400)">
     <text x="0" y="0" class="legend-text"><tspan class="legend-title">CONTEXT</tspan>   <tspan fill="#F0EEED" font-weight="600">Actors</tspan> dev + 4 platform services   ·   <tspan fill="#F0EEED" font-weight="600">State</tspan> lives at each stage — git, image, desired, pods   ·   <tspan fill="#F0EEED" font-weight="600">Surface</tspan> one click: merge</text>
   </g>
