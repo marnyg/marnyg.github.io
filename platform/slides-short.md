@@ -56,6 +56,20 @@ Kubernetes at the core. GitOps everything.
 
 ---
 
+## The tools, in one picture
+
+![w:1000](diagrams/platform-overview.svg)
+
+---
+
+## What we'll demo
+
+1. **New app** — from scratch or existing repo, one CLI command
+2. **PR preview environments** — a live environment for every branch
+3. **Push to prod** — `git push`, the platform takes it from there
+
+---
+
 <!-- _class: demo -->
 
 ## Creating a new app
@@ -130,14 +144,9 @@ Kubernetes at the core. GitOps everything.
 
 ## Push to prod — the steps
 
-Once the PR looks good on the preview env:
+1. Merge to main
 
-1. Merge the PR — that's the only click the developer makes
-2. Forgejo Actions runs post-merge — docker build + push image
-3. ArgoCD sees the manifest update, syncs to cluster
-4. Rolling update → new version live
-
-> One click to merge. The rest is automatic.
+> That's it. The rest is automatic.
 
 ---
 

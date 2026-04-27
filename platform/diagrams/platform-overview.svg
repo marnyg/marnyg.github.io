@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 480"
+     font-family="Arial, 'Helvetica Neue', sans-serif">
+  <defs>
+    <style>
+      .actor-label   { fill: #F0EEED; font-size: 18px; font-weight: 600; }
+      .sub-label     { fill: #A1A7AE; font-size: 12px; }
+      .arrow-label   { fill: #A1A7AE; font-size: 12px; }
+      .state-title   { fill: #B0A7FF; font-size: 13px; font-weight: 600; }
+      .cluster-title { fill: #A1A7AE; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; }
+      .support-name  { fill: #F0EEED; font-size: 13px; font-weight: 600; }
+      .support-sub   { fill: #A1A7AE; font-size: 11px; }
+      .box           { fill: #000000; }
+    </style>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="6.5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#A1A7AE"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="7" markerHeight="7" refX="6.5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#B0A7FF"/>
+    </marker>
+  </defs>
+
+  <!-- Developer -->
+  <g transform="translate(30, 200)">
+    <rect width="140" height="70" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="70" y="32" class="actor-label" text-anchor="middle">Developer</text>
+    <text x="70" y="52" class="sub-label"  text-anchor="middle">laptop + browser</text>
+  </g>
+
+  <!-- Netbird VPN -->
+  <g transform="translate(210, 200)">
+    <rect width="130" height="70" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="65" y="32" class="actor-label" text-anchor="middle">Netbird</text>
+    <text x="65" y="52" class="sub-label"  text-anchor="middle">VPN gateway</text>
+  </g>
+
+  <!-- Developer -> Netbird -->
+  <path d="M 175 235 L 205 235" stroke="#A1A7AE" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Netbird -> Cluster boundary -->
+  <path d="M 345 235 L 378 235" stroke="#A1A7AE" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Kubernetes cluster boundary -->
+  <rect x="380" y="30" width="690" height="420" rx="16" fill="none" stroke="#4D5056" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="725" y="22" class="cluster-title" text-anchor="middle">KUBERNETES CLUSTER</text>
+
+  <!-- Zitadel (top, highlighted purple — identity source) -->
+  <g transform="translate(530, 50)">
+    <rect width="200" height="90" rx="12" class="box" stroke="#B0A7FF" stroke-width="3"/>
+    <text x="100" y="34" class="actor-label" text-anchor="middle">Zitadel</text>
+    <text x="100" y="58" class="state-title" text-anchor="middle">identity / SSO</text>
+    <text x="100" y="78" class="sub-label"  text-anchor="middle">users + groups</text>
+  </g>
+
+  <!-- Forgejo -->
+  <g transform="translate(410, 200)">
+    <rect width="150" height="70" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="75" y="32" class="actor-label" text-anchor="middle">Forgejo</text>
+    <text x="75" y="52" class="sub-label"  text-anchor="middle">git hosting</text>
+  </g>
+
+  <!-- ArgoCD -->
+  <g transform="translate(610, 200)">
+    <rect width="150" height="70" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="75" y="32" class="actor-label" text-anchor="middle">ArgoCD</text>
+    <text x="75" y="52" class="sub-label"  text-anchor="middle">GitOps / deploy</text>
+  </g>
+
+  <!-- Workloads -->
+  <g transform="translate(810, 200)">
+    <rect width="200" height="70" rx="8" class="box" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="100" y="32" class="actor-label" text-anchor="middle">Workloads</text>
+    <text x="100" y="52" class="sub-label"  text-anchor="middle">your apps</text>
+  </g>
+
+  <!-- Zitadel -> Forgejo (SSO) -->
+  <path d="M 560 140 L 485 195" stroke="#B0A7FF" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)" opacity="0.75"/>
+
+  <!-- Zitadel -> ArgoCD (SSO) -->
+  <path d="M 650 140 L 680 195" stroke="#B0A7FF" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)" opacity="0.75"/>
+
+  <!-- Zitadel -> Workloads (SSO) -->
+  <path d="M 700 140 L 895 195" stroke="#B0A7FF" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)" opacity="0.75"/>
+
+  <!-- Single "SSO" label for the fan -->
+  <text x="770" y="170" class="state-title" text-anchor="start">SSO</text>
+
+  <!-- Forgejo -> ArgoCD (git sync) -->
+  <path d="M 565 235 L 605 235" stroke="#A1A7AE" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="585" y="225" class="arrow-label" text-anchor="middle">git</text>
+
+  <!-- ArgoCD -> Workloads (apply manifests) -->
+  <path d="M 765 235 L 805 235" stroke="#A1A7AE" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="785" y="225" class="arrow-label" text-anchor="middle">apply</text>
+
+  <!-- Supporting cast -->
+  <g transform="translate(400, 310)">
+    <rect width="650" height="125" rx="10" fill="none" stroke="#4D5056" stroke-width="1"/>
+    <text x="325" y="22" class="cluster-title" text-anchor="middle">SUPPORTING CAST</text>
+
+    <text x="30"  y="55" class="support-name">Vault</text>
+    <text x="30"  y="71" class="support-sub">secrets</text>
+
+    <text x="180" y="55" class="support-name">Postgres operator</text>
+    <text x="180" y="71" class="support-sub">managed databases</text>
+
+    <text x="410" y="55" class="support-name">Cert-manager</text>
+    <text x="410" y="71" class="support-sub">TLS certs</text>
+
+    <text x="30"  y="100" class="support-name">External DNS</text>
+    <text x="30"  y="116" class="support-sub">public records</text>
+
+    <text x="180" y="100" class="support-name">Dagger</text>
+    <text x="180" y="116" class="support-sub">build pipelines</text>
+
+    <text x="410" y="100" class="support-name">Karpenter</text>
+    <text x="410" y="116" class="support-sub">node autoscale</text>
+  </g>
+</svg>
