@@ -86,7 +86,7 @@ section.lead h2 {
 
 /* Demo slides */
 section.demo h2::before {
-  content: "LIVE DEMO  ";
+  content: "DEMO  ";
   font-size: 0.5em;
   color: #F7675E;
   vertical-align: middle;
