@@ -189,17 +189,20 @@ Kubernetes at the core. GitOps everything.
 
 <!-- _class: demo -->
 
-## Push to prod — the steps
+## PR into prod — the steps
 
 1. Merge to main
+2. **Kargo** picks it up and drives promotion: `tst → prd`, with a gate in between
+3. Each stage is GitOps — Kargo writes the promotion, ArgoCD reconciles
+4. Nothing reaches prod without passing the gate
 
-> That's it. The rest is automatic.
+> You merge. The pipeline does the rest — safely.
 
 ---
 
 <!-- _class: demo -->
 
-## Pushing a feature to prod
+## Getting a PR into prod
 
 <object class="fragment-svg" type="image/svg+xml" data="diagrams/push-to-prod.svg" style="width:1000px;height:382px;"></object>
 
@@ -207,9 +210,65 @@ Kubernetes at the core. GitOps everything.
 
 <!-- _class: demo -->
 
-## Push to prod — recording
+## PR into prod — recording
 
-<video controls src="demos/merge-pr-to-prod.mov" style="max-width:1000px;max-height:500px;"></video>
+<video controls src="demos/gated-release-pipeline.mov" style="max-width:1000px;max-height:500px;"></video>
+
+---
+
+<!-- _class: dense -->
+
+## Under the hood — Kargo × ArgoCD × Image Updater
+
+<object type="image/svg+xml" data="diagrams/kargo-release-flow.svg" style="width:880px;height:479px;"></object>
+
+---
+
+<!-- _class: dense -->
+
+## Why this shape
+
+- Every commit on the release branch is a **release candidate** — Kargo's Warehouse turns it into freight
+- **tst** auto-promotes to HEAD; **stg** and **prd** are manual promotions through the gate
+- Each Stage pins its ArgoCD App to a **specific SHA** — never tracking a moving branch HEAD
+- **Image Updater** (cluster singleton) commits image-tag bumps back to git — release branch + every PR branch
+- Feature branches with no open PR are invisible to the deploy stack — no App, no Image Updater
+
+---
+
+<!-- _class: demo -->
+
+## Self-service Grafana dashboards
+
+- Define a dashboard as a Kubernetes resource via the **Grafana operator**
+- Commit it with your app — dashboards are versioned alongside the code
+- The operator reconciles it into Grafana, no clicking through the UI
+
+---
+
+<!-- _class: demo -->
+
+## Self-service Grafana — recording
+
+<video controls src="demos/self-service-grafana-dashboard.mov" style="max-width:1000px;max-height:500px;"></video>
+
+---
+
+<!-- _class: demo -->
+
+## Self-service OIDC
+
+- App owners request an OIDC client through our **OIDC CRD**
+- The operator provisions the client in **Zitadel** and wires up SSO
+- Your app gets SSO without a ticket — same identity as the rest of the platform
+
+---
+
+<!-- _class: demo -->
+
+## Self-service OIDC — recording
+
+<video controls src="demos/self-service-oidc.mov" style="max-width:1000px;max-height:500px;"></video>
 
 ---
 
@@ -218,6 +277,7 @@ Kubernetes at the core. GitOps everything.
 - **Onboarding** — new developer productive in minutes, not days
 - **New app** — local repo to deployed app with one CLI command
 - **Ship a feature** — `git push` and the platform does the rest
+- **Gated releases, dashboards, SSO** — all self-service, all GitOps
 - Everything is GitOps. Everything is SSO. No tickets, no waiting.
 
 ---
@@ -225,11 +285,9 @@ Kubernetes at the core. GitOps everything.
 ## Possible expansions
 
 - **OpenTelemetry** — traces + metrics out of the box
-- **Kargo** — promotion pipelines (tst → prd, gated)
 - **Better golden paths** — more scaffold templates, more languages
 - **OPA Gatekeeper** — policy guardrails for tenants
 - **External Secrets** — OpenBAO-backed secret injection per app
-- **Self-service OIDC** — `OAuthClient` CRD for app-owned clients
 - **FinOps** — cost attribution per team / app
 
 > The platform is a starting point — these are the next obvious moves.
